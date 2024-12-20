@@ -1,29 +1,36 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
-  "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
-  },
+  "name": "Cepta",
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#000000",
+    "light": "#B7EF34",
+    "dark": "#000000",
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#B7EF34",
+      "to": "#B7EF34"
     }
   },
+  "theme": "quill",
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "info@cepta.co"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://dev.twpay.io/home"
+  },
+  "search": {
+    "location": "top"
+  },
+  "versions": [
+    "v1.0"
+  ],
+  "rounded": "default",
+  "codeBlock": {
+    "mode": "auto"
   },
   "tabs": [
     {
@@ -35,17 +42,12 @@
     {
       "name": "Documentation",
       "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
+      "url": "api-reference"
     },
     {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
+      "name": "Guide",
       "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "url": "https://www.cepta.co/#"
     }
   ],
   "navigation": [
@@ -85,7 +87,6 @@
   ],
   "footerSocials": {
     "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
     "linkedin": "https://linkedin.com/company/mintlify"
   }
 }
