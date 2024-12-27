@@ -55,19 +55,49 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "quickstart",
-        "development"
+        "quickstart"
       ]
     },
     {
-      "group": "Essentials",
+      "group": "Setup Cepta",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+            {
+                "group": "Create account",
+                "pages": [
+                  "setup-cepta/create-account/overview",
+                  "setup-cepta/create-account/activate-your-account",
+                  "setup-cepta/create-account/acceptable-document"
+                ]
+            },
+            {
+              "group": "Authenticate",
+              "pages": [
+                "Overview",
+                "Activate your account"
+              ]
+            }
+        ]
+    },
+    {
+      "group": "Product",
+      "pages": [
+        {
+          "group": "Merchant",
+          "pages": [
+            "product/merchant/overview",
+            "product/merchant/create-payment",
+            "product/merchant/verify-payment"
+          ]
+        },
+        {
+          "group": "Aggregator",
+          "pages": [
+            "product/aggregator/overview",
+            "product/aggregator/purchase",
+            "product/aggregator/validate-otp",
+            "product/aggregator/confirm-purchase-status"
+          ]
+        }
       ]
     },
     {
@@ -77,11 +107,26 @@
       ]
     },
     {
-      "group": "Endpoint Examples",
+      
+      "group": "Authentication",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/auth/secure-secret-key"
+      ]
+    },
+    {
+      
+      "group": "Merchant",
+      "pages": [
+        "api-reference/merchant/create-payment",
+        "api-reference/merchant/verify-payment"
+      ]
+    },
+    {
+      "group": "Aggregator",
+      "pages": [
+        "api-reference/aggregator/purchase",
+        "api-reference/aggregator/validate-otp",
+        "api-reference/aggregator/confirm-purchase-status"
       ]
     }
   ],

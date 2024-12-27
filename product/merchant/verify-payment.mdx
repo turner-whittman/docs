@@ -1,0 +1,116 @@
+---
+title: 'Verify Payment'
+description: 'Learn how to confirm that a payment is legitimate'
+---
+
+# `POST /v1/pay`
+
+#### Request body
+
+<ParamField body="order" type="object" required>
+    Account reference
+    <Expandable title="object" defaultOpen="true">
+        <ParamField body="TransactionRef" type="string" required>
+           Unique reference for the transaction.
+        </ParamField>
+    </Expandable>
+</ParamField>
+
+#### Response body
+
+<ResponseField name="status" type="boolean">
+  Indicates if the request was successful.
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Descriptive message about the request result.
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  <Expandable title="object"  defaultOpen="true">
+    <ResponseField name="amount" type="number">
+      Original payment amount
+    </ResponseField>
+    <ResponseField name="chargedAmount" type="number">
+      Amount charged to the customer
+    </ResponseField>
+    <ResponseField name="currency" type="string">
+      Currency of the transaction (e.g., "USD").
+    </ResponseField>
+    <ResponseField name="customerEmail" type="string">
+      Email of the customer who made the payment
+    </ResponseField>
+    <ResponseField name="narration" type="string">
+      Description or narrative of the payment   
+    </ResponseField>
+    <ResponseField name="status" type="string">
+      Current status of the transaction (e.g., "Paid")
+    </ResponseField>
+    <ResponseField name="responseCode" type="string">
+      Reference for the created transaction.
+    </ResponseField>
+    
+    <ResponseField name="processorResponse" type="string">
+      Reference for the created transaction.
+    </ResponseField>
+    
+    <ResponseField name="createdAt" type="string">
+      Reference for the created transaction.
+    </ResponseField>
+    
+    <ResponseField name="paidAt" type="string (ISO 8601)">
+      Reference for the created transaction.
+    </ResponseField>
+    <ResponseField name="ip" type="string">
+      IP address from which the payment was made.
+    </ResponseField>
+    <ResponseField name="paymentType" type="string">
+      Type of payment method used (e.g., "Card").
+    </ResponseField>
+    <ResponseField name="fees" type="string">
+      Fees charged for the transaction
+    </ResponseField>
+    <ResponseField name="meta" type="Object">
+      Additional metadata associated with the payment
+    </ResponseField>
+    <ResponseField name="message" type="string">
+      Additional messages related to the payment
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<RequestExample>
+```bash Request
+curl --request GET \
+  --url https://dev-adapter.cepta.co/api/v1/pay/verify-payment?TransactionRef={ TransactionRef } \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+```
+</RequestExample>
+
+<ResponseExample>
+```json Success response
+{
+  "status": true,
+  "message": "Transaction verified successfully.",
+  "data": {
+    "amount": 100,
+    "chargedAmount": 105,
+    "currency": "USD",
+    "customerEmail": "customer@example.com",
+    "narration": "Payment for order #12345",
+    "status": "Paid",
+    "responseCode": "00",
+    "transactionRef": "ada",
+    "processorResponse": "Payment completed successfully.",
+    "createdAt": "2024-11-29T12:22:27.891Z",
+    "paidAt": "2024-11-29T12:22:27.891Z",
+    "ip": "192.168.1.1",
+    "paymentType": "Card",
+    "fees": 5,
+    "meta": "{}",
+    "message": "Payment processed."
+  }
+}
+```
+</ResponseExample>
