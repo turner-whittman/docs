@@ -1,0 +1,168 @@
+---
+title: 'Purchase'
+description: 'Learn how to create a p to accept payments'
+---
+
+# `POST /v1/pay/purchase`
+
+#### Request body
+
+<ParamField body="transactionRef" type="string" required>
+    Unique reference for the transaction.
+</ParamField>
+<ParamField body="customerEmail" type="string" required>
+    Email of the customer making the purchase.
+</ParamField>
+<ParamField body="amount" type="number" required>
+    Amount to be charged
+</ParamField>
+<ParamField body="currency" type="string" required>
+    Currency of the transaction (e.g., "USD").
+</ParamField>
+<ParamField body="ipAddress" type="string" required>
+    IP address of the customer.
+</ParamField>
+<ParamField body="callbackUrl" type="string" required>
+    URL to redirect the customer after processing.
+</ParamField>
+<ParamField body="cardDetails" type="string" required>
+    Encrypted card details for the payment.
+</ParamField>
+<ParamField body="deviceInformation" type="object">
+    Device information for 3D Secure validation.
+    <Expandable title="object" defaultOpen="true">
+        <ParamField body="httpBrowserLanguage" type="string" required>
+            Language of the browser.
+        </ParamField>
+        <ParamField body="httpBrowserJavaEnabled" type="boolean" required>
+            Indicates if Java is enabled in the browser.
+        </ParamField>
+        <ParamField body="httpBrowserJavaScriptEnabled" type="boolean" required>
+            Indicates if JavaScript is enabled in the browser.
+        </ParamField>
+        <ParamField body="httpBrowserColorDepth" type="string" required>
+            Color depth of the browser display.
+        </ParamField>
+        <ParamField body="httpBrowserScreenHeight" type="string" required>
+            Screen height of the browser.
+        </ParamField>
+        <ParamField body="httpBrowserScreenWidth" type="string" required>
+            Screen width of the browser.
+        </ParamField>
+        <ParamField body="httpBrowserTimeDifference" type="string" required>
+            Time difference from UTC in the browser.
+        </ParamField>
+        <ParamField body="userAgentBrowserValue" type="string" required>
+            Browser user-agent string.
+        </ParamField>
+        <ParamField body="deviceChannel" type="string" required>
+            Channel of the device (e.g., "Web").
+        </ParamField>
+    </Expandable>
+</ParamField>
+
+#### Response body
+
+<ResponseField name="status" type="boolean">
+  Indicates if the request was successful.
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Descriptive message about the request result.
+</ResponseField>
+
+<ResponseField name="data" type="object">
+    Contains detailed transaction data.
+    <Expandable title="object"  defaultOpen="true">
+        <ResponseField name="referenceInformationCode" type="string">
+           Reference information for the transaction
+        </ResponseField>
+        <ResponseField name="responseCode" type="string">
+           Response code from the payment processor.
+        </ResponseField>
+        <ResponseField name="amount" type="string">
+        Amount that was charged.
+        </ResponseField>
+        <ResponseField name="transactionRef" type="string">
+            Transaction reference.
+        </ResponseField>
+        <ResponseField name="status" type="string">
+            Status of the transaction (e.g., "Pending").
+        </ResponseField>
+        <ResponseField name="submitTimeUtc" type="string">
+            UTC time when the transaction was submitted.
+        </ResponseField>
+        <ResponseField name="transactionId" type="string">
+            Unique ID for the transaction.
+        </ResponseField>
+        <ResponseField name="transactionId3DSecure" type="string">
+            ID for 3D Secure transaction, if applicable.
+        </ResponseField>
+        <ResponseField name="eciFlag" type="string">
+            Electronic Commerce Indicator flag.
+        </ResponseField>
+        <ResponseField name="md" type="string">
+            Merchant data for 3D Secure authentication.
+        </ResponseField>
+        <ResponseField name="accessToken" type="string">
+            Access token for subsequent operations.
+        </ResponseField>
+        <ResponseField name="threedSecureUrl" type="string">
+            URL for 3D Secure authentication.
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+
+<RequestExample>
+```bash Request
+curl --request POST \
+  --url https://dev-adapter.cepta.co/api/v1/pay/purchase \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '
+    {
+        "transactionRef": "TX12345ABC",
+        "customerEmail": "customer@example.com",
+        "amount": 100,
+        "currency": "USD",
+        "ipAddress": "192.168.1.1",
+        "callbackUrl": "https://example.com/callback",
+        "cardDetails": "encrypted_card_info",
+        "deviceInformation": {
+            "httpBrowserLanguage": "en-US",
+            "httpBrowserJavaEnabled": true,
+            "httpBrowserJavaScriptEnabled": true,
+            "httpBrowserColorDepth": "24",
+            "httpBrowserScreenHeight": "1080",
+            "httpBrowserScreenWidth": "1920",
+            "httpBrowserTimeDifference": "-60",
+            "userAgentBrowserValue": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+            "deviceChannel": "Web"
+        }
+    }
+  '
+```
+</RequestExample>
+
+<ResponseExample>
+```json Success response
+{
+  "status": true,
+  "message": "Transaction initiated successfully.",
+  "data": {
+    "referenceInformationCode": "REF12345",
+    "responseCode": "00",
+    "amount": "100.00",
+    "transactionRef": "TX12345ABC",
+    "status": "Pending",
+    "submitTimeUtc": "2024-11-29T12:22:27.891Z",
+    "transactionId": "TRX56789",
+    "transactionId3DSecure": "3DS12345",
+    "eciFlag": "05",
+    "md": "merchant_data",
+    "accessToken": "access_token_string",
+    "threedSecureUrl": "https://secure.paymentgateway.com/3ds"
+  }
+}
+```
+</ResponseExample>

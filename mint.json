@@ -48,6 +48,11 @@
       "name": "Guide",
       "icon": "newspaper",
       "url": "https://www.cepta.co/#"
+    },
+    {
+      "name": "Knowledge base",
+      "icon": "book",
+      "url": "https://www.cepta.co/#"
     }
   ],
   "navigation": [
