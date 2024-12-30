@@ -3,10 +3,52 @@ title: 'Purchase'
 description: 'Learn how to create a p to accept payments'
 ---
 
-# `POST /v1/pay/purchase`
+# Purchase API
 
-#### Request body
+<Info>
+   This endpoint is perfect for securely processing payments on online stores, subscription services, and mobile/web apps. It handles everything from customer details to encrypted card information. It also supports 3D Secure for extra security against fraud.
+</Info>
 
+### Request Parameters
+
+```bash Request
+curl --request POST \
+  --url https://dev-adapter.cepta.co/api/v1/pay/purchase \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '
+    {
+        "transactionRef": "TX12345ABC",
+        "customerEmail": "customer@example.com",
+        "amount": 100,
+        "currency": "USD",
+        "ipAddress": "192.168.1.1",
+        "callbackUrl": "https://example.com/callback",
+        "cardDetails": "encrypted_card_info",
+        "deviceInformation": {
+            "httpBrowserLanguage": "en-US",
+            "httpBrowserJavaEnabled": true,
+            "httpBrowserJavaScriptEnabled": true,
+            "httpBrowserColorDepth": "24",
+            "httpBrowserScreenHeight": "1080",
+            "httpBrowserScreenWidth": "1920",
+            "httpBrowserTimeDifference": "-60",
+            "userAgentBrowserValue": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+            "deviceChannel": "Web"
+        }
+    }
+  '
+```
+
+To get started with the purchase API, you can initialize the transaction just like the example request described above. You will be required to pass in some parameters as part of the request. `Amount`, `transactionRef`, `currency`, and `callbackUrl` are some of the required parameters accepted. When a transaction is initialized and processed, ideally you want to redirect customers based on the status of the payment. The `callbackUrl` passed will be used for this purpose.
+
+You can choose to pass your `callbackUrl` as a request parameter here or set it from within your Cepta dashboard [settings page](https://dev.twpay.io/settings/api-credentials). We allow you to set test and production `callbackUrl`, to learn more [check here](www.f).
+
+<Note>
+   Ensure transactionRef is unique for every transaction. Unique references are crucial for reconciling transactions with bank statements or payment processors.
+</Note>
+
+Below is a list of request parameters accepted for the purchase API.
 <ParamField body="transactionRef" type="string" required>
     Unique reference for the transaction.
 </ParamField>
@@ -61,16 +103,58 @@ description: 'Learn how to create a p to accept payments'
     </Expandable>
 </ParamField>
 
-#### Response body
+<Note> 
+   Device information is important for 3D Secure verification   
+</Note>
 
+Implementing 3D Secure verification helps us to verify that the transaction is being made by the rightful customer, adding an extra layer of security. This information includes details about the customer's browser and device, such as whether JavaScript is enabled or the screen size.
+
+If the 3D Secure authentication URL `threedSecureUrl` is provided, it should be shown to the customer, directing them to a secure page where they can complete the verification process. This ensures the payment is legitimate and helps prevent fraud.
+
+### List of expected errors
+
+When making a call to the purchase API, here are the errors that you may encounter and what they mean. This gives you an insight on how to resolve and move forward quickly.
+| HTTP Status Code             | Message                               | Description                          |
+| ---------------------------- | ------------------------------------- |------------------------------------- |
+| `400  INVALID_REQUEST`       | Invalid request parameters            | Missing or invalid input fields.     |
+| `401  UNAUTHORIZED`          | Authentication failed                 | Invalid or expired access token.     |
+| `500  INTERNAL_SERVER_ERROR` | An error occurred                     | A server-side error occurred.        |
+
+
+## Purchase API Response
+A sample response of what to expect when a call is made to the API
+```json Success response
+{
+  "status": true,
+  "message": "Transaction initiated successfully.",
+  "data": {
+    "referenceInformationCode": "REF12345",
+    "responseCode": "00",
+    "amount": "100.00",
+    "transactionRef": "TX12345ABC",
+    "status": "Pending",
+    "submitTimeUtc": "2024-11-29T12:22:27.891Z",
+    "transactionId": "TRX56789",
+    "transactionId3DSecure": "3DS12345",
+    "eciFlag": "05",
+    "md": "merchant_data",
+    "accessToken": "access_token_string",
+    "threedSecureUrl": "https://secure.paymentgateway.com/3ds"
+  }
+}
+```
+
+### Handling purchase response body
+When a transaction has been initiated successfully, there is response data that is returned. This can be in turn to update the customer about the current stage of their transaction.
+
+Below is the list of responses to expect and the usage.
+### Response body
 <ResponseField name="status" type="boolean">
   Indicates if the request was successful.
 </ResponseField>
-
 <ResponseField name="message" type="string">
   Descriptive message about the request result.
 </ResponseField>
-
 <ResponseField name="data" type="object">
     Contains detailed transaction data.
     <Expandable title="object"  defaultOpen="true">
@@ -87,7 +171,7 @@ description: 'Learn how to create a p to accept payments'
             Transaction reference.
         </ResponseField>
         <ResponseField name="status" type="string">
-            Status of the transaction (e.g., "Pending").
+            Status of the transaction.
         </ResponseField>
         <ResponseField name="submitTimeUtc" type="string">
             UTC time when the transaction was submitted.
@@ -112,57 +196,3 @@ description: 'Learn how to create a p to accept payments'
         </ResponseField>
     </Expandable>
 </ResponseField>
-
-<RequestExample>
-```bash Request
-curl --request POST \
-  --url https://dev-adapter.cepta.co/api/v1/pay/purchase \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '
-    {
-        "transactionRef": "TX12345ABC",
-        "customerEmail": "customer@example.com",
-        "amount": 100,
-        "currency": "USD",
-        "ipAddress": "192.168.1.1",
-        "callbackUrl": "https://example.com/callback",
-        "cardDetails": "encrypted_card_info",
-        "deviceInformation": {
-            "httpBrowserLanguage": "en-US",
-            "httpBrowserJavaEnabled": true,
-            "httpBrowserJavaScriptEnabled": true,
-            "httpBrowserColorDepth": "24",
-            "httpBrowserScreenHeight": "1080",
-            "httpBrowserScreenWidth": "1920",
-            "httpBrowserTimeDifference": "-60",
-            "userAgentBrowserValue": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-            "deviceChannel": "Web"
-        }
-    }
-  '
-```
-</RequestExample>
-
-<ResponseExample>
-```json Success response
-{
-  "status": true,
-  "message": "Transaction initiated successfully.",
-  "data": {
-    "referenceInformationCode": "REF12345",
-    "responseCode": "00",
-    "amount": "100.00",
-    "transactionRef": "TX12345ABC",
-    "status": "Pending",
-    "submitTimeUtc": "2024-11-29T12:22:27.891Z",
-    "transactionId": "TRX56789",
-    "transactionId3DSecure": "3DS12345",
-    "eciFlag": "05",
-    "md": "merchant_data",
-    "accessToken": "access_token_string",
-    "threedSecureUrl": "https://secure.paymentgateway.com/3ds"
-  }
-}
-```
-</ResponseExample>
