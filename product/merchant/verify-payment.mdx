@@ -3,6 +3,17 @@ title: 'Verify Payment'
 description: 'Learn how to confirm that a payment is legitimate'
 ---
 
+# Transaction statuses
+
+
+|  Transaction Status Type  | Description                                                                                                                                                     |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `pending`                 | The transaction is awaiting processing or validation. This could indicate invalid request parameters or that the transaction is in a holding state.             |
+| `successful`              | The transaction was successfully processed, The payment has been completed without issues.                                                                      |
+| `failed`                  | The transaction encountered an error during processing, possibly due to insufficient funds, incorrect details, or a technical failure.                          |
+| `reversed`                | The transaction was reversed due to an error, which could include issues like a duplicate payment, invalid card details, or a technical failure in processing.  |
+
+
 # `POST /v1/pay`
 
 #### Request body

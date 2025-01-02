@@ -1,6 +1,6 @@
 ---
 title: 'Validate OTP'
-description: 'Learn how to validate a customer via OTP'
+description: 'Learn how to validate a customer purchase via OTP'
 ---
 
 # Validate OTP API
@@ -43,17 +43,6 @@ Below is a list of request parameters accepted for validating an API.
 <ParamField body="md" type="string" required>
     Merchant data, used for 3D Secure transactions.
 </ParamField>
-
-
-### List of expected errors
-
-It's possible you encounter an error while making a call to the validate OTP API, here are the errors that you may encounter and what they mean.
-| HTTP Status Code             | Message                               | Description                          |
-| ---------------------------- | ------------------------------------- |------------------------------------- |
-| `400  INVALID_REQUEST`       | Invalid request parameters            | Missing or invalid input fields.     |
-| `401  UNAUTHORIZED`          | Authentication failed                 | Invalid or expired credentials.     |
-| `403  INVALID_OTP`           | The provided OTP is incorrect         | OTP provided does not match.        |
-| `500  INTERNAL_SERVER_ERROR` | An error occurred                     | A server-side error occurred.        |
 
 ## Validate OTP API Response
 A sample response of what to expect when a call is made to the API
@@ -154,3 +143,14 @@ Below is a sample failed response data.
   }
 }
 ```
+
+
+## List of expected errors
+
+It's possible you encounter an error while making a call to the validate OTP API, here are the errors that you may encounter and what they mean.
+| HTTP Status Code             | Message                               | Description                          |
+| ---------------------------- | ------------------------------------- |------------------------------------- |
+| `400  INVALID_REQUEST`       | Invalid request parameters            | Missing or invalid input fields.     |
+| `401  UNAUTHORIZED`          | Authentication failed                 | Invalid or expired credentials.     |
+| `403  INVALID_OTP`           | The provided OTP is incorrect         | OTP provided does not match.        |
+| `500  INTERNAL_SERVER_ERROR` | An error occurred                     | A server-side error occurred.        |
