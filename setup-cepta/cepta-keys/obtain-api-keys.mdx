@@ -1,0 +1,27 @@
+---
+title: 'Obtain API keys'
+description: 'Learn how to get your API keys'
+---
+
+## API Keys
+
+<Warning>
+  Your API secret is used as secure access to authenticate with Cepta, failure to protect it might lead to unauthorized access to your project. 
+</Warning>
+
+We provide a test API key for development and a live API key for production. To get any of the keys after setting up an account, navigate to your **dashboard** > **settings** page. 
+
+image
+
+Copy the key and ensure you protect it by using it as an `environment variable` 
+
+## Platform webhook URL and callback URL
+Aside from getting your API keys on this page, there is also a live and development empty box for setting a callback URL and a webhook URL. 
+
+To set a callback URL, you can choose to set it from here or pass it as part of your request body when you initialize a payment.
+
+image
+
+<Note>
+  When you initialize a payment and you didn't pass a callback URL, our system defaults to the one set on your dashboard. If nothing is there, we will prompt you to add a callback URL.
+<Note>
