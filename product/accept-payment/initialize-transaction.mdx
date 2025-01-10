@@ -1,0 +1,122 @@
+---
+title: 'Initialize Transaction'
+description: 'Learn how to initialize a transaction with our API'
+---
+
+<Info> 
+  To create a payment link, start by initializing a payment with our API. You will have to complete this transaction with the link created. 
+</Info>
+
+There are 3 steps to ensure that you have successfully initiated and complete an transaction.
+
+1. initialize transaction
+2. complete transaction
+3. verify transaction status
+
+To initialize a transaction, when you make a `POST` request to the endpoint `/v1/pay`. you will be required to pass the required request parameters listed below.  
+
+## Initialize transaction
+
+```bash Request
+curl --request POST \
+  --url https://dev-adapter.cepta.co/api/v1/pay \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '
+    {
+        "amount": 100,
+        "currency": "NGN",
+        "description": "Purchase of goods",
+        "pageName": "Checkout Page",
+        "transactionReference": "ABC123XYZ",
+        "customerEmail": "customer@example.com",
+        "customUrl": "https://example.com/thank-you",
+        "expiryDate": "2024-11-29T12:03:11.391Z"
+    }
+  '
+```
+
+<Note>
+  ExpiryDate must be in a valid ISO 8601 format and should not be in the past. If you do not pass a expiryDate as part of your request parameters, we automatically set a 24hrs expiration hours to all initialize transaction.
+</Note>
+
+<ParamField body="order" type="object" required>
+    Account reference
+    <Expandable title="object" defaultOpen="true">
+        <ParamField body="amount" type="number" required>
+            The payment amount to be paid by customer (must be greater than 0)
+        </ParamField>
+        <ParamField body="currency" type="string" required>
+            The currency code (e.g., "USD", "NGN")
+        </ParamField>
+        <ParamField body="description" type="string" required>
+            Description of the transaction
+        </ParamField>
+        <ParamField body="pageName" type="string" required>
+            Name of the payment page
+        </ParamField>
+        <ParamField body="transactionReference" type="string" required>
+            Unique identifier for the transaction
+        </ParamField>
+        <ParamField body="customerEmail" type="string" required>
+            The customer email address.
+        </ParamField>
+        <ParamField body="customUrl" type="string">
+            URL to redirect after payment
+        </ParamField>
+        <ParamField body="expiryDate" type="string (ISO 8601)" required>
+            Expiry date for the payment link.
+        </ParamField>
+    </Expandable>
+</ParamField>
+
+## Complete transaction 
+
+An example response body of a transaction.
+```json Success response
+{
+  "status": true,
+  "message": "Payment link created successfully.",
+  "data": {
+    "transactionRef": "ABC123XYZ",
+    "paymentUrl": " https://dev.twpay.io/payment?paymentRef=861b1cb7-c9ec-4d5b-82ef-c60bb67a51f0&Mode=0"
+  }
+}
+```
+
+When you successfully initialize a transaction, the response returned will include a `data` object that contains `transactionRef` and `paymentUrl`. This URL will serve as a link to an external page to complete the transaction.
+
+##  Handling Initialize Transaction response body
+ 
+<ResponseField name="status" type="boolean">
+  Indicates if the request was successful.
+</ResponseField>
+<ResponseField name="message" type="string">
+  Descriptive message about the request result.
+</ResponseField>
+<ResponseField name="data" type="object">
+  <Expandable title="object"  defaultOpen="true">
+    <ResponseField name="transactionRef" type="string">
+      Reference for the created transaction.
+    </ResponseField>
+    <ResponseField name="paymentUrl" type="string">
+      URL to the payment page
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Verify transaction status
+
+When you complete a payment, you will be redirect to the `customUrl` you set when initializing a transaction. Then can then proceed to learn how to verify a transaction status [here]('/product/accept-payment/verify-transaction-status') 
+
+<Note>
+  CustomUrl is optional but recommended to improve user experience post-payment.
+</Note>
+
+## List of expected errors
+
+| HTTP Status Code             | Message                               | Description                           |
+| ---------------------------- | ------------------------------------- |-------------------------------------- |
+| `400  INVALID_REQUEST`       | Invalid request parameters            | Missing or invalid input fields.      |
+| `404  NOT FOUND`             | Endpoint not found                    | The specified endpoint does not exist.|
+| `500  INTERNAL_SERVER_ERROR` | An error occurred                     | A server-side error occurred.         |

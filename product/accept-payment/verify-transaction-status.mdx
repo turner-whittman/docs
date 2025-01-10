@@ -1,10 +1,11 @@
 ---
-title: 'Verify Payment'
-description: 'Learn how to confirm that a payment is legitimate'
+title: 'Verify Transaction Status'
+description: 'Learn how to confirm a transaction status'
 ---
 
-# Transaction statuses
+## Transaction statuses
 
+When verifying a transaction status, we have a defined status type that you can expect to see here.
 
 |  Transaction Status Type  | Description                                                                                                                                                     |
 | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -13,10 +14,18 @@ description: 'Learn how to confirm that a payment is legitimate'
 | `failed`                  | The transaction encountered an error during processing, possibly due to insufficient funds, incorrect details, or a technical failure.                          |
 | `reversed`                | The transaction was reversed due to an error, which could include issues like a duplicate payment, invalid card details, or a technical failure in processing.  |
 
+## Verify transaction endpoint
 
-# `POST /v1/pay`
+Make an API call to this endpoint to verify `pay/verify-payment?TransactionRef`. pass a `transactionRef` as a query string to the endpoint.
 
-#### Request body
+```bash Request
+curl --request GET \
+  --url https://dev-adapter.cepta.co/api/v1/pay/verify-payment?TransactionRef={ TransactionRef } \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+```
+
+## Request body
 
 <ParamField body="order" type="object" required>
     Account reference
@@ -27,7 +36,34 @@ description: 'Learn how to confirm that a payment is legitimate'
     </Expandable>
 </ParamField>
 
-#### Response body
+##  Verify transaction status response
+
+```json Success response
+{
+  "status": true,
+  "message": "Transaction verified successfully.",
+  "data": {
+    "amount": 100,
+    "chargedAmount": 105,
+    "currency": "USD",
+    "customerEmail": "customer@example.com",
+    "narration": "Payment for order #12345",
+    "status": "Paid",
+    "responseCode": "00",
+    "transactionRef": "ada",
+    "processorResponse": "Payment completed successfully.",
+    "createdAt": "2024-11-29T12:22:27.891Z",
+    "paidAt": "2024-11-29T12:22:27.891Z",
+    "ip": "192.168.1.1",
+    "paymentType": "Card",
+    "fees": 5,
+    "meta": "{}",
+    "message": "Payment processed."
+  }
+}
+```
+
+## Handling Verify transaction status response
 
 <ResponseField name="status" type="boolean">
   Indicates if the request was successful.
@@ -60,15 +96,12 @@ description: 'Learn how to confirm that a payment is legitimate'
     <ResponseField name="responseCode" type="string">
       Reference for the created transaction.
     </ResponseField>
-    
     <ResponseField name="processorResponse" type="string">
       Reference for the created transaction.
     </ResponseField>
-    
     <ResponseField name="createdAt" type="string">
       Reference for the created transaction.
     </ResponseField>
-    
     <ResponseField name="paidAt" type="string (ISO 8601)">
       Reference for the created transaction.
     </ResponseField>
@@ -89,39 +122,3 @@ description: 'Learn how to confirm that a payment is legitimate'
     </ResponseField>
   </Expandable>
 </ResponseField>
-
-<RequestExample>
-```bash Request
-curl --request GET \
-  --url https://dev-adapter.cepta.co/api/v1/pay/verify-payment?TransactionRef={ TransactionRef } \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-```
-</RequestExample>
-
-<ResponseExample>
-```json Success response
-{
-  "status": true,
-  "message": "Transaction verified successfully.",
-  "data": {
-    "amount": 100,
-    "chargedAmount": 105,
-    "currency": "USD",
-    "customerEmail": "customer@example.com",
-    "narration": "Payment for order #12345",
-    "status": "Paid",
-    "responseCode": "00",
-    "transactionRef": "ada",
-    "processorResponse": "Payment completed successfully.",
-    "createdAt": "2024-11-29T12:22:27.891Z",
-    "paidAt": "2024-11-29T12:22:27.891Z",
-    "ip": "192.168.1.1",
-    "paymentType": "Card",
-    "fees": 5,
-    "meta": "{}",
-    "message": "Payment processed."
-  }
-}
-```
-</ResponseExample>

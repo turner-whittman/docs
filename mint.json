@@ -79,11 +79,11 @@
       "icon": "product-hunt",
       "pages": [
         {
-          "group": "Merchant",
+          "group": "Accept Payment",
           "pages": [
-            "product/merchant/overview",
-            "product/merchant/create-payment",
-            "product/merchant/verify-payment"
+            "product/accept-payment/overview",
+            "product/accept-payment/initialize-transaction",
+            "product/accept-payment/verify-transaction-status"
           ]
         },
         {
@@ -105,17 +105,10 @@
     },
     {
       
-      "group": "Authentication",
+      "group": "Accept Payment",
       "pages": [
-        "api-reference/auth/secure-secret-key"
-      ]
-    },
-    {
-      
-      "group": "Merchant",
-      "pages": [
-        "api-reference/merchant/create-payment",
-        "api-reference/merchant/verify-payment"
+        "api-reference/accept-payment/initialize-transaction",
+        "api-reference/accept-payment/confirm-transaction-status"
       ]
     },
     {
