@@ -1,0 +1,54 @@
+---
+title: 'Overview'
+description: 'Learn how to build a customize payment experience for your business'
+---
+
+Developers have the option to switch away from [Cepta checkout](product/accept-payment/overview). Sometimes you want to build a custom gateway that resonates with your brand in terms of UI or UX. Our Charge API allows you to take control of the payment experience by building a tailored gateway for your business. However, we still process the payment under the hood. This gives you some form of control over how you accept payment rather than using our accept payment method, where we have provided a link for you to complete the payment.
+
+## How it works
+
+To initialize and complete a transaction using our **Charge API**, we expect that you follow this three steps. 
+
+1. Initialize transaction
+2. Validate Transaction OTP
+3. Confirm Transaction
+
+**Initialize Transaction**
+The first step is to create and initiate a payment request for your customer. This step typically involves sending a request to our API to initiate the transaction by providing necessary details like the payment amount, currency, customer information, and other relevant data.
+
+**Verify Transaction OTP**
+After the transaction is initialized, the customer will be prompted to verify their payment by entering an OTP (One-Time Password) sent to their registered contact (e.g., phone number or email). This step ensures that the person initiating the transaction is the authorized user.
+
+**Confirm Transaction**
+Once the OTP is verified, the final step is to confirm the transaction status to know if the payment was successfully completed. To learn more about our transaction status, [check here](). 
+
+<Note>
+We recommended that you set up a webhook to verify transaction status; check here to explore how to use a webhook to verify a transaction.
+</Note>
+
+
+## Dive straight into the usage
+
+<CardGroup cols={3}>
+  <Card
+    title="Initialize Transaction"
+    icon="pen-to-square"
+    href="/product/charge-api/initialize-transaction"
+  >
+     Learn how to initialize a charge transaction.
+  </Card>
+  <Card
+    title="Validate Transaction OTP"
+    icon="pen-to-square"
+    href="/product/charge-api/validate-transaction-otp"
+  >
+    Learn how to validate transaction via OTP.
+  </Card>
+  <Card
+    title="Confirm Transaction"
+    icon="pen-to-square"
+    href="/product/charge-api/confirm-transaction"
+  >
+    Learn how to confirm transaction status.
+  </Card>
+</CardGroup>

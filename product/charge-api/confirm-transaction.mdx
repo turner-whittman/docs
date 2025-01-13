@@ -1,15 +1,15 @@
 ---
-title: 'Confirm Purchase'
-description: 'Learn how to confirm payment with the Confirm Purchase API.'
+title: 'Confirm Transaction'
+description: 'Learn how to confirm payment with the Confirm transaction API.'
 ---
 
-# Confirm purchase status
+# Confirm Transaction Status
 
 <Info> 
-   This API is used to verify payment status. It’s important to verify all transactions before updating your customer about the status of their payment to ensure accurate and timely information.
+  This API is used to verify payment status. It’s important to verify all transactions before updating your customer about the status of their payment to ensure accurate and timely information.
 </Info>
 
-### Request parameter
+## Request parameter
 
 ```bash Request
 curl --request GET \
@@ -22,7 +22,7 @@ curl --request GET \
 	Ensure secure handling of md (merchant data) and token to maintain transaction integrity.
 </Note>
 
-## Confirm purchase API Response
+## Confirm transaction API Response
 
 A sample response of what to expect when a call is made to confirm API status
 ```json Success response
@@ -51,7 +51,7 @@ A sample response of what to expect when a call is made to confirm API status
 }
 ```
 
-### Handling successful API response.
+## Handling successful API response.
 
 When a transaction has been initiated successfully, the API returns response data that can be used to update the customer about the current stage of their transaction.
 
@@ -133,7 +133,7 @@ Below is the list of responses you can expect and their usage:
     </Expandable>
 </ResponseField>
 
-### Handling failed API response
+## Handling failed API response
 When your response message is returned as a failed response, the response.data will return an array containing details of the error. You can show this to your customer to notify them of what went wrong.
 
 Below is a sample failed response data:

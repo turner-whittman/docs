@@ -87,12 +87,12 @@
           ]
         },
         {
-          "group": "Aggregator",
+          "group": "Charge API",
           "pages": [
-            "product/aggregator/overview",
-            "product/aggregator/purchase",
-            "product/aggregator/validate-otp",
-            "product/aggregator/confirm-purchase"
+            "product/charge-api/overview",
+            "product/charge-api/initialize-transaction",
+            "product/charge-api/validate-transaction-otp",
+            "product/charge-api/confirm-transaction"
           ]
         }
       ]

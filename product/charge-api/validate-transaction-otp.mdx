@@ -1,15 +1,15 @@
 ---
-title: 'Validate OTP'
+title: 'Validate Charge OTP'
 description: 'Learn how to validate a customer purchase via OTP'
 ---
 
-# Validate OTP API
+# Validate  Transaction OTP API
 
 <Info>
-   This endpoint is used to validate the OTP (One-Time Password) for transaction authentication. It ensures that the customer is authorized to complete the payment by verifying the OTP entered during the process. 
+  This endpoint is used to validate the OTP (One-Time Password) for transaction authentication. It ensures that the customer is authorized to complete the payment by verifying the OTP entered during the process. 
 </Info>
 
-### Request Parameters
+## Request Parameters
 
 ```bash Request
 curl --request POST \
@@ -65,7 +65,7 @@ A sample response of what to expect when a call is made to the API
 }
 ```
 
-### Handling successful API response body
+## Handling successful API response body
 When a transaction has been initiated successfully, there is response data that is returned. This can be in turn to update the customer about the current stage of their transaction.
 
 Below is the list of responses to expect and the usage.
@@ -116,7 +116,7 @@ Below is the list of responses to expect and the usage.
     </Expandable>
 </ResponseField>
 
-### Handling failed API response body
+## Handling failed API response body
 When your response message is returned as a failed response, the `response.data` will return an array containing details of the error. You can show this to your customer to notify them of what is wrong.
 
 Below is a sample failed response data.
