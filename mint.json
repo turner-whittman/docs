@@ -130,7 +130,7 @@
       "group": "Advanced Concepts",
       "icon": "arrows-to-circle",
       "pages": [
-        "advance-concept/security-and-authentication",
+        "advance-concept/security",
         "advance-concept/webhooks"
       ]
     }

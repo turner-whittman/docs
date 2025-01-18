@@ -1,5 +1,163 @@
 ---
 title: 'Webhook'
-description: 'Learn how to use webhook to accept notification'
+description: 'Learn how webhook can be used to receive transaction notifications'
 ---
 
+## Overview
+
+A webhook is an event-driven communication system that allows one system to send real-time data to another system via HTTP when a specific event occurs.
+
+<Info>
+  When a transaction happens on your system, be it card, USSD or payout. Your system will not be aware of this. However, when you set up a webhook, we will notify you of the type of event and the status.
+</Info>
+
+# How It works
+ 
+1. **Set up a URL**: First, you create a special URL on your server so that Cepta can send a `POST` request of transaction status. 
+2. **Payment Event Trigger**: When a payment event happens, Cepta will automatically "call" your URL to notify your system of the event.
+3. **Your System Responds**: Your server receives the webhook, processes the information , and sends back a simple acknowledgment like a `200 OK` to let us know that the data was received successfully.
+
+<Note>
+  It's important that you query transaction status before you give value to your customer.
+</Note>
+
+## Set up a URL
+
+To set a webhook URL, head over to your Cepta dashboard > **Settings** > **API Credentials**. Add your URL and click Set URLs.
+
+<Frame caption="Set webhook URL">
+  <img src="/images/webhook.png" style={{ borderRadius: '0.5rem' }} loading="lazy" />
+</Frame>
+
+## Validate Event Source
+To ensure the webhook events are coming from us, we will send a signature hash as part of the  `header`, this hash will come in this format `` you will have to validate it before making use of the response data.
+
+<Warning>   
+  Always validate the signature hash before proceeding with business logic.
+</Warning>
+
+
+## Payment Event Trigger
+
+When a transaction happens, we will send information regarding this transaction to your system via a dedicated URL that you have created. Below is a list of event types that we supported.
+
+### Supported Webhook Event Types
+
+| Event Types                                | Description                                        |
+| -------------------------------------------|----------------------------------------------------|
+| `card.collection.status`                   |  Event triggered when a card transaction occurred  |
+| `bank.transfer.collection.status`          |  Event triggered when a bank transfer transaction occurred  |
+| `ussd.collection.status`                   |  Event triggered when a USSD transaction occurred  |
+
+### Event types structure
+
+The data we send across to you for all event type are of similar structure, only the  `eventType` and the `data` object will varies based on what type of event information we send.
+
+<Tabs>
+  <Tab title="Card transaction status">
+    ```json
+        {
+            "data": {
+                "merchantId": "TW201325608238020",
+                "transactionAmount": 1000.0000,
+                "cardExpirationDate": "",
+                "cardholderName": "testing lee",
+                "currency": "NGN",
+                "destinationCountry": "Nigeria",
+                "feeDeductionAmount": 5.0000,
+                "maskedPan": "23409857****3353",
+                "netAmount": 995.0000,
+                "payerEmail": "test@gmail.com",
+                "payerFirstName": "John",
+                "paymentDescription": "Payment tests",
+                "status": "SUCCESSFUL",
+                "sourceCountry": "Nigeria",
+                "transactionDate": "2025-01-17T01:09:00",
+                "transactionReference": "bdknnnndfbbbvvbbnnndgdgvgoedgd",
+                "ipAddress": "10.110.0.1"
+            },
+            "eventType": "card.collection.status",
+            "sentAt": "2025-01-17T03:10:06.5031934"
+        }     
+    ```
+  </Tab>
+  <Tab title="Bank transaction status">
+  ```json
+    {
+        "data": {
+            "merchantId": "TW201325608238020",
+            "transactionAmount": 1000.0000,
+            "currency": "NGN",
+            "destinationBank": "First Bank of Nigeria",
+            "destinationAccountName": "Test Lee",
+            "destinationAccountNo": "8053660290",
+            "destinationCountry": "Nigeria",
+            "feeDeductionAmount": 200.0000,
+            "netAmount": 800.0000,
+            "payerEmail": "ataiwo84@gmail.com",
+            "payerFirstName": "John",
+            "paymentDescription": "Payment tests",
+            "status": "SUCCESSFUL",
+            "sourceAccountName": "John Sarah",
+            "sourceAccountNumber": "3039323401",
+            "sourceBank": "First Bank of Nigeria",
+            "sourceCountry": "Nigeria",
+            "transactionDate": "2025-01-17T01:09:00",
+            "transactionReference": "trfknnnndfbbbvvbbnnndgddggvgoedgd"
+        },
+        "eventType": "bank.transfer.collection.status",
+        "sentAt": "2025-01-17T03:22:58.7117494"
+    }
+  ```
+  </Tab>
+  <Tab title="USSD transaction status">
+  ```json
+    {
+        "data": {
+            "merchantId": "TW201325608238020",
+            "transactionAmount": 1000.0000,
+            "currency": "NGN",
+            "destinationBank": "First Bank of Nigeria",
+            "destinationAccountName": "Test Lee",
+            "destinationAccountNo": "8053660290",
+            "destinationCountry": "Nigeria",
+            "feeDeductionAmount": 200.0000,
+            "netAmount": 800.0000,
+            "payerEmail": "ataiwo84@gmail.com",
+            "payerFirstName": "John",
+            "paymentDescription": "Payment tests",
+            "status": "SUCCESSFUL",
+            "sourceAccountName": "John Sarah",
+            "sourceAccountNumber": "3039323401",
+            "sourceBank": "First Bank of Nigeria",
+            "sourceCountry": "Nigeria",
+            "transactionDate": "2025-01-17T01:09:00",
+            "transactionReference": "trfknnnndfbbbvvbbnnndgddggvgoedgd"
+        },
+        "eventType": "ussd.collection.status",
+        "sentAt": "2025-01-17T03:22:58.7117494"
+    }
+  ```
+  </Tab>
+</Tabs>
+
+
+### Best Practices
+
+1.**Ensure Secure URLs**: Use HTTPS for your webhook URL to ensure the communication between systems is encrypted and secure.
+
+2.**Validate Webhook Signatures**: Always validate the signature hash from the request header to confirm that the webhook is genuinely coming from Cepta and not from a malicious third party.
+
+3.**Check Event Data Before Processing**: Before using the event data in your business logic, verify that the status is successful to avoid processing failed transactions.
+
+4.**Avoid Re-Processing**: If your system has already processed a webhook event, ensure you don't reprocess the same event. This can be done by checking the transaction reference or using idempotency keys.
+
+5.**Handle Failures Gracefully**: If your server doesn't respond with `200 OK`, Cepta will retry the webhook a few times. Make sure your server handles these retries gracefully.
+
+6.**Monitor Webhook Deliveries**: Set up logging to monitor the incoming webhook requests and responses. This helps to identify and debug issues quickly.
+
+7.**Respond Quickly**: Send a response as soon as possible (ideally within a few milliseconds) to acknowledge receipt of the webhook. If processing the data takes longer, do it asynchronously.
+
+8.**Ensure Idempotency**: Your webhook endpoint should handle duplicate notifications without adverse effects. This is especially important in case of retries.
+
+9.**Test Webhooks**: Before going live, use sandbox or test environments to verify that your webhook integration is correctly processing the events.
