@@ -144,20 +144,20 @@ The data we send across to you for all event type are of similar structure, only
 
 ### Best Practices
 
-1.**Ensure Secure URLs**: Use HTTPS for your webhook URL to ensure the communication between systems is encrypted and secure.
+**1.Ensure Secure URLs**: Use HTTPS for your webhook URL to ensure the communication between systems is encrypted and secure.
 
-2.**Validate Webhook Signatures**: Always validate the signature hash from the request header to confirm that the webhook is genuinely coming from Cepta and not from a malicious third party.
+**2.Validate Webhook Signatures**: Always validate the signature hash from the request header to confirm that the webhook is genuinely coming from Cepta and not from a malicious third party.
 
-3.**Check Event Data Before Processing**: Before using the event data in your business logic, verify that the status is successful to avoid processing failed transactions.
+**3.Check Event Data Before Processing**: Before using the event data in your business logic, verify that the status is successful to avoid processing failed transactions.
 
-4.**Avoid Re-Processing**: If your system has already processed a webhook event, ensure you don't reprocess the same event. This can be done by checking the transaction reference or using idempotency keys.
+**4.Avoid Re-Processing**: If your system has already processed a webhook event, ensure you don't reprocess the same event. This can be done by checking the transaction reference or using idempotency keys.
 
-5.**Handle Failures Gracefully**: If your server doesn't respond with `200 OK`, Cepta will retry the webhook a few times. Make sure your server handles these retries gracefully.
+**5.Handle Failures Gracefully**: If your server doesn't respond with `200 OK`, Cepta will retry the webhook a few times. Make sure your server handles these retries gracefully.
 
-6.**Monitor Webhook Deliveries**: Set up logging to monitor the incoming webhook requests and responses. This helps to identify and debug issues quickly.
+**6.Monitor Webhook Deliveries**: Set up logging to monitor the incoming webhook requests and responses. This helps to identify and debug issues quickly.
 
-7.**Respond Quickly**: Send a response as soon as possible (ideally within a few milliseconds) to acknowledge receipt of the webhook. If processing the data takes longer, do it asynchronously.
+**7.Respond Quickly**: Send a response as soon as possible (ideally within a few milliseconds) to acknowledge receipt of the webhook. If processing the data takes longer, do it asynchronously.
 
-8.**Ensure Idempotency**: Your webhook endpoint should handle duplicate notifications without adverse effects. This is especially important in case of retries.
+**8.Ensure Idempotency**: Your webhook endpoint should handle duplicate notifications without adverse effects. This is especially important in case of retries.
 
-9.**Test Webhooks**: Before going live, use sandbox or test environments to verify that your webhook integration is correctly processing the events.
+**9.Test Webhooks**: Before going live, use sandbox or test environments to verify that your webhook integration is correctly processing the events.
