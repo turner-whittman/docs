@@ -1,33 +1,26 @@
 ---
 title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+description: 'Learn how to integrate our products'
 ---
-
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
 
 ## Welcome
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+This API reference will introduce you to all the basic information you need to integrate Cepta's product quickly.
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+Cepta APIs provide robust payment solutions for your application. If you're unsure where to begin, check out our [Quick Start]('/quickstart') guide to get started.
 
-## Authentication
+<Note>
+  we recommend testing your API requests directly within the API Reference page. It supports a test environment that lets you simulate API calls in a safe, sandboxed environment before going live. This helps you verify your requests and debug in real-time, without affecting actual data or transactions.
+</Note>
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+## API Protocols
 
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
-```
+Our APIs follow standard RESTful principles.
+
+1. We use standard `GET`, `POST`, and `PUT` methods for communication.
+2. HTTP response codes are used to indicate status and errors.
+3. All responses are returned in JSON format.
+4. The API request should have a Content-Type of `application/json`.
+5. All endpoints require authentication using your API Keys.
+
+
