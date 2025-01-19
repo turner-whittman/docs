@@ -3,12 +3,19 @@
   "name": "Cepta",
   "favicon": "/favicon.png",
   "colors": {
-    "primary": "#000000",
+    "primary": "#088725",
     "light": "#B7EF34",
     "dark": "#000000",
     "anchors": {
       "from": "#B7EF34",
       "to": "#B7EF34"
+    }
+  },
+  "font": {
+    "body": {
+      "family": "Raleway, sans-serif",
+      "url":"https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap",
+      "format": "woff"
     }
   },
   "theme": "quill",
