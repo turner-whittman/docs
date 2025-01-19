@@ -1,209 +1,208 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Cepta API",
+    "title": "MerchnatIntegration.Service",
     "version": "v1"
   },
   "servers": [
     {
       "description": "Production",
-      "url": "https://api.example-cepta.com"
+      "url": "https://dev-adapter.cepta.co"
     },
     {
       "description": "Sandbox",
-      "url": "https://sandbox.cepta.com"
+      "url": "https://dev-adapter.cepta.co"
     }
   ],
-  "security": [
-    {
-      "bearerAuth": []
-    }
-  ],
-  "path": {
-    "/api/v1/merchant/purchase": {
-      "post": {
-        "tags": [
-          "Merchant"
-        ],
-        "summary": "Aggregator Purchase",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AggregatorPurchaseRequestDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AggregatorPurchaseRequestDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AggregatorPurchaseRequestDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDtoBaseResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDtoBaseResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDtoBaseResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDtoBaseResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDtoBaseResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDtoBaseResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/merchant/validate-otp": {
-      "post": {
-        "tags": [
-          "Merchant"
-        ],
-        "summary": "Aggregator Validate Otp",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AggregatorValidateOtpRequestDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AggregatorValidateOtpRequestDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AggregatorValidateOtpRequestDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDtoBaseResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDtoBaseResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDtoBaseResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDtoBaseResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDtoBaseResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDtoBaseResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/merchant/confirm-status": {
+  "paths": {
+    "/": {
       "get": {
         "tags": [
-          "Merchant"
+          "Home"
         ],
-        "summary": "Aggregator Confirm Status",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/pay": {
+      "post": {
+        "tags": [
+          "Accept Payment"
+        ],
+        "summary": "Create payment link",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InitiatePaymentLinkDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InitiatePaymentLinkDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InitiatePaymentLinkDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePaymentResponseDtoBaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePaymentResponseDtoBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePaymentResponseDtoBaseResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePaymentResponseDtoBaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePaymentResponseDtoBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePaymentResponseDtoBaseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pay/verify-payment": {
+      "get": {
+        "tags": [
+          "Accept Payment"
+        ],
+        "summary": "Verify payment link",
+        "parameters": [
+          {
+            "name": "TransactionRef",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the transaction"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDtoBaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDtoBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDtoBaseResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDtoBaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDtoBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDtoBaseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pay/confirm-status": {
+      "get": {
+        "tags": [
+          "Charge API"
+        ],
+        "summary": "Aggregator Verify payment link",
         "parameters": [
           {
             "name": "TransactionRef",
@@ -278,27 +277,27 @@
         }
       }
     },
-    "/api/v1/merchant/initiate-payment": {
+    "/api/v1/pay/validate-otp": {
       "post": {
         "tags": [
-          "Merchant"
+          "Charge API"
         ],
-        "summary": "Initiate Payment",
+        "summary": "Validate transaction OTP",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/InitiatePaymentLinkDto"
+                "$ref": "#/components/schemas/AggregatorValidateOtpRequestDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/InitiatePaymentLinkDto"
+                "$ref": "#/components/schemas/AggregatorValidateOtpRequestDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/InitiatePaymentLinkDto"
+                "$ref": "#/components/schemas/AggregatorValidateOtpRequestDto"
               }
             }
           }
@@ -309,17 +308,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreatePaymentResponseDtoBaseResponse"
+                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDtoBaseResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreatePaymentResponseDtoBaseResponse"
+                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDtoBaseResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreatePaymentResponseDtoBaseResponse"
+                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDtoBaseResponse"
                 }
               }
             }
@@ -349,17 +348,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreatePaymentResponseDtoBaseResponse"
+                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDtoBaseResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreatePaymentResponseDtoBaseResponse"
+                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDtoBaseResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreatePaymentResponseDtoBaseResponse"
+                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDtoBaseResponse"
                 }
               }
             }
@@ -367,39 +366,48 @@
         }
       }
     },
-    "/api/v1/merchant/confirm-payment": {
-      "get": {
+    "/api/v1/pay/purchase": {
+      "post": {
         "tags": [
-          "Merchant"
+          "Charge API"
         ],
-        "summary": "Confirm Payment",
-        "parameters": [
-          {
-            "name": "TransactionRef",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
+        "summary": "Initialize a transaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorPurchaseRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorPurchaseRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorPurchaseRequestDto"
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "Success",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDtoBaseResponse"
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDtoBaseResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDtoBaseResponse"
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDtoBaseResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDtoBaseResponse"
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDtoBaseResponse"
                 }
               }
             }
@@ -429,17 +437,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDtoBaseResponse"
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDtoBaseResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDtoBaseResponse"
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDtoBaseResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDtoBaseResponse"
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDtoBaseResponse"
                 }
               }
             }
@@ -748,185 +756,6 @@
         },
         "additionalProperties": false
       },
-      "ApprovalBulkRequest": {
-        "type": "object",
-        "properties": {
-          "batchId": {
-            "type": "string",
-            "nullable": true
-          },
-          "merchantId": {
-            "type": "string",
-            "nullable": true
-          },
-          "approver": {
-            "type": "string",
-            "nullable": true
-          },
-          "pin": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ApproveBulkRefundRequestDto": {
-        "type": "object",
-        "properties": {
-          "bulkId": {
-            "type": "string",
-            "nullable": true
-          },
-          "merchantId": {
-            "type": "string",
-            "nullable": true
-          },
-          "isApproved": {
-            "type": "boolean"
-          },
-          "approver": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "BankTransferBeneficiary": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "isDeleted": {
-            "type": "boolean"
-          },
-          "bankAccount": {
-            "type": "string",
-            "nullable": true
-          },
-          "bankAlias": {
-            "type": "string",
-            "nullable": true
-          },
-          "accountNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "accountName": {
-            "type": "string",
-            "nullable": true
-          },
-          "merchantId": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "BankTransferStandardRequest": {
-        "required": [
-          "amount"
-        ],
-        "type": "object",
-        "properties": {
-          "transactionId": {
-            "type": "string",
-            "nullable": true
-          },
-          "amount": {
-            "minimum": 100,
-            "type": "number",
-            "format": "double"
-          },
-          "currency": {
-            "type": "string",
-            "nullable": true
-          },
-          "customerEmail": {
-            "type": "string",
-            "nullable": true
-          },
-          "checkoutMode": {
-            "$ref": "#/components/schemas/Mode"
-          }
-        },
-        "additionalProperties": false
-      },
-      "BankTransferStandardResponse": {
-        "type": "object",
-        "properties": {
-          "transactionRef": {
-            "type": "string",
-            "nullable": true
-          },
-          "virtualAccount": {
-            "type": "string",
-            "nullable": true
-          },
-          "virtualAccountName": {
-            "type": "string",
-            "nullable": true
-          },
-          "virtualBank": {
-            "type": "string",
-            "nullable": true
-          },
-          "accountExpiration": {
-            "type": "string",
-            "nullable": true
-          },
-          "note": {
-            "type": "string",
-            "nullable": true
-          },
-          "transferAmount": {
-            "type": "number",
-            "format": "double"
-          },
-          "responseCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "processorResponse": {
-            "type": "string",
-            "nullable": true
-          },
-          "providerId": {
-            "type": "string",
-            "nullable": true
-          },
-          "paymentId": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "BankTransferStandardResponseBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/BankTransferStandardResponse"
-          }
-        },
-        "additionalProperties": false
-      },
       "BaseResponse": {
         "type": "object",
         "properties": {
@@ -940,971 +769,88 @@
         },
         "additionalProperties": false
       },
-      "BulkCollectionDto": {
-        "type": "object",
-        "properties": {
-          "paymentLinkId": {
-            "type": "string",
-            "nullable": true
-          },
-          "amount": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "pageName": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "customerEmail": {
-            "type": "string",
-            "nullable": true
-          },
-          "customerPhone": {
-            "type": "string",
-            "nullable": true
-          },
-          "paymentUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "image": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/PaymentStatus"
-          }
-        },
-        "additionalProperties": false
-      },
-      "BulkCollectionDtoBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/BulkCollectionDto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "BulkPaymentLink": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "isDeleted": {
-            "type": "boolean"
-          },
-          "bulkId": {
-            "type": "string",
-            "nullable": true
-          },
-          "merchantId": {
-            "type": "string",
-            "nullable": true
-          },
-          "numberofRecipient": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "amount": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/PaymentLinkStatus"
-          }
-        },
-        "additionalProperties": false
-      },
-      "BulkPaymentLinkPagedList": {
-        "type": "object",
-        "properties": {
-          "currentPage": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "totalCount": {
-            "type": "integer",
-            "format": "int64",
-            "readOnly": true
-          },
-          "hasPrevious": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "hasNext": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BulkPaymentLink"
-            },
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "BulkPaymentLinkPagedListBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/BulkPaymentLinkPagedList"
-          }
-        },
-        "additionalProperties": false
-      },
-      "BulkPaymentLinkResponseDto": {
-        "type": "object",
-        "properties": {
-          "bulkId": {
-            "type": "string",
-            "nullable": true
-          },
-          "bulkPaymentLinks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BulkCollectionDto"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "BulkPaymentLinkResponseDtoBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/BulkPaymentLinkResponseDto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "BulkPayout": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "isDeleted": {
-            "type": "boolean"
-          },
-          "bulkId": {
-            "type": "string",
-            "nullable": true
-          },
-          "merchantId": {
-            "type": "string",
-            "nullable": true
-          },
-          "currency": {
-            "type": "string",
-            "nullable": true
-          },
-          "numberofRecipient": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "amount": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/PaymentStatus"
-          }
-        },
-        "additionalProperties": false
-      },
-      "BulkPayoutPagedList": {
-        "type": "object",
-        "properties": {
-          "currentPage": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "totalCount": {
-            "type": "integer",
-            "format": "int64",
-            "readOnly": true
-          },
-          "hasPrevious": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "hasNext": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BulkPayout"
-            },
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "BulkPayoutPagedListBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/BulkPayoutPagedList"
-          }
-        },
-        "additionalProperties": false
-      },
-      "BulkRefund": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "isDeleted": {
-            "type": "boolean"
-          },
-          "bulkId": {
-            "type": "string",
-            "nullable": true
-          },
-          "merchantId": {
-            "type": "string",
-            "nullable": true
-          },
-          "currency": {
-            "type": "string",
-            "nullable": true
-          },
-          "numberofRefunds": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "amount": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/PaymentStatus"
-          }
-        },
-        "additionalProperties": false
-      },
-      "BulkRefundPagedList": {
-        "type": "object",
-        "properties": {
-          "currentPage": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "totalCount": {
-            "type": "integer",
-            "format": "int64",
-            "readOnly": true
-          },
-          "hasPrevious": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "hasNext": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BulkRefund"
-            },
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "BulkRefundPagedListBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/BulkRefundPagedList"
-          }
-        },
-        "additionalProperties": false
-      },
-      "BulkTransferStandardRequest": {
-        "required": [
-          "expiryDate",
-          "file",
-          "merchantId"
-        ],
-        "type": "object",
-        "properties": {
-          "merchantId": {
-            "type": "string"
-          },
-          "expiryDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "linkType": {
-            "$ref": "#/components/schemas/PaymentLinkType"
-          },
-          "initiator": {
-            "type": "string",
-            "nullable": true
-          },
-          "file": {
-            "type": "string",
-            "format": "binary"
-          }
-        },
-        "additionalProperties": false
-      },
-      "BulkTransferStandardRequestBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/BulkTransferStandardRequest"
-          }
-        },
-        "additionalProperties": false
-      },
-      "BulkTransferStandardResponse": {
-        "type": "object",
-        "properties": {
-          "providerId": {
-            "type": "string",
-            "nullable": true
-          },
-          "providerResponse": {
-            "type": "string",
-            "nullable": true
-          },
-          "batchId": {
-            "type": "string",
-            "nullable": true
-          },
-          "isApproved": {
-            "type": "boolean"
-          },
-          "transactionDate": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "additionalProperties": false
-      },
-      "BulkTransferStandardResponseBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/BulkTransferStandardResponse"
-          }
-        },
-        "additionalProperties": false
-      },
-      "CardChargeStandardRequest": {
-        "required": [
-          "amount",
-          "cardNumber",
-          "cvv",
-          "expiryMonth",
-          "expiryYear"
-        ],
-        "type": "object",
-        "properties": {
-          "transactionId": {
-            "type": "string",
-            "nullable": true
-          },
-          "cardNumber": {
-            "type": "string"
-          },
-          "cvv": {
-            "type": "string"
-          },
-          "expiryMonth": {
-            "type": "string"
-          },
-          "expiryYear": {
-            "type": "string"
-          },
-          "currency": {
-            "type": "string",
-            "nullable": true
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "ref": {
-            "type": "string",
-            "nullable": true
-          },
-          "redirectUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "pin": {
-            "type": "string",
-            "nullable": true
-          },
-          "city": {
-            "type": "string",
-            "nullable": true
-          },
-          "address": {
-            "type": "string",
-            "nullable": true
-          },
-          "state": {
-            "type": "string",
-            "nullable": true
-          },
-          "country": {
-            "type": "string",
-            "nullable": true
-          },
-          "zipCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "checkoutMode": {
-            "$ref": "#/components/schemas/Mode"
-          }
-        },
-        "additionalProperties": false
-      },
-      "CardChargeStandardResponse": {
-        "type": "object",
-        "properties": {
-          "providerId": {
-            "type": "string",
-            "nullable": true
-          },
-          "responseCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "amount": {
-            "type": "string",
-            "nullable": true
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "paymentId": {
-            "type": "string",
-            "nullable": true
-          },
-          "transactionRef": {
-            "type": "string",
-            "nullable": true
-          },
-          "cardType": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "string",
-            "nullable": true
-          },
-          "submitTimeUtc": {
-            "type": "string",
-            "nullable": true
-          },
-          "approvalCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "supportMessage": {
-            "type": "string",
-            "nullable": true
-          },
-          "transactionId": {
-            "type": "string",
-            "nullable": true
-          },
-          "md": {
-            "type": "string",
-            "nullable": true
-          },
-          "eciFlag": {
-            "type": "string",
-            "nullable": true
-          },
-          "referenceId": {
-            "type": "string",
-            "nullable": true
-          },
-          "accessToken": {
-            "type": "string",
-            "nullable": true
-          },
-          "nextActionUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "authenticationTransactionId": {
-            "type": "string",
-            "nullable": true
-          },
-          "processorResponse": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CardChargeStandardResponseBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/CardChargeStandardResponse"
-          }
-        },
-        "additionalProperties": false
-      },
-      "CollectionTransaction": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "isDeleted": {
-            "type": "boolean"
-          },
-          "paymentLinkId": {
-            "type": "string",
-            "nullable": true
-          },
-          "amount": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "pageName": {
-            "type": "string",
-            "nullable": true
-          },
-          "firstName": {
-            "type": "string",
-            "nullable": true
-          },
-          "lastName": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "customerEmail": {
-            "type": "string",
-            "nullable": true
-          },
-          "customerPhone": {
-            "type": "string",
-            "nullable": true
-          },
-          "image": {
-            "type": "string",
-            "nullable": true
-          },
-          "paymentId": {
-            "type": "string",
-            "nullable": true
-          },
-          "reconciliationId": {
-            "type": "string",
-            "nullable": true
-          },
-          "currency": {
-            "type": "string",
-            "nullable": true
-          },
-          "meta": {
-            "type": "string",
-            "nullable": true
-          },
-          "merchantId": {
-            "type": "string",
-            "nullable": true
-          },
-          "subMerchantId": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/PaymentStatus"
-          },
-          "lastOperation": {
-            "$ref": "#/components/schemas/Operation"
-          },
-          "type": {
-            "$ref": "#/components/schemas/TransactionType"
-          },
-          "source": {
-            "$ref": "#/components/schemas/TransactionSource"
-          },
-          "providerId": {
-            "type": "string",
-            "nullable": true
-          },
-          "ipAddress": {
-            "type": "string",
-            "nullable": true
-          },
-          "transactionRef": {
-            "type": "string",
-            "nullable": true
-          },
-          "clnxTransactionRef": {
-            "type": "string",
-            "nullable": true
-          },
-          "narration": {
-            "type": "string",
-            "nullable": true
-          },
-          "callBackUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "isCardSaved": {
-            "type": "boolean"
-          },
-          "isRecurring": {
-            "type": "boolean"
-          },
-          "isAggregator": {
-            "type": "boolean"
-          },
-          "providerAmount": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "fee": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "transactionExpiryDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "transactionTimeoutDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "lifecycle": {
-            "type": "string",
-            "nullable": true
-          },
-          "field1": {
-            "type": "string",
-            "nullable": true
-          },
-          "field2": {
-            "type": "string",
-            "nullable": true
-          },
-          "field3": {
-            "type": "string",
-            "nullable": true
-          },
-          "customUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "isTransactionReconfirmed": {
-            "type": "boolean"
-          },
-          "isPushedtoSettlement": {
-            "type": "boolean"
-          },
-          "paymentDetail": {
-            "$ref": "#/components/schemas/PaymentDetail"
-          },
-          "paymentAttempt": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PaymentAttempt"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CollectionTransactionPagedList": {
-        "type": "object",
-        "properties": {
-          "currentPage": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "totalCount": {
-            "type": "integer",
-            "format": "int64",
-            "readOnly": true
-          },
-          "hasPrevious": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "hasNext": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CollectionTransaction"
-            },
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CollectionTransactionPagedListBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/CollectionTransactionPagedList"
-          }
-        },
-        "additionalProperties": false
-      },
       "ConfirmMerchantPaymentDto": {
         "type": "object",
         "properties": {
           "amount": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "description": "Original payment amount"
           },
           "chargedAmount": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "description": "Amount charged to the customer"
           },
           "currency": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Currency of the transaction (e.g., “USD”)."
           },
           "customerEmail": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Email of the customer who made the payment"
           },
           "narration": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Description or narrative of the payment"
           },
           "status": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Current status of the transaction (e.g., “Paid”)"
           },
           "responseCode": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Response code from the payment processor"
           },
           "transactionRef": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Unique identifier for the created transaction"
           },
           "processorResponse": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Response from the payment processor"
           },
           "createdAt": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Time the transaction was created."
           },
           "paidAt": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Reference for the created transaction."
           },
           "ip": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "IP address from which the payment was made."
           },
           "paymentType": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Type of payment method used (e.g., “Card”)."
           },
           "fees": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "description": "Fees charged for the transaction"
           },
           "meta": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Additional metadata associated with the payment"
           },
           "message": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Additional metadata associated with the payment"
           }
         },
         "additionalProperties": false
@@ -1913,47 +859,16 @@
         "type": "object",
         "properties": {
           "status": {
-            "type": "boolean"
+            "type": "boolean",
+            "description":"Indicates if the request was successful."
           },
           "message": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description":"Descriptive message about the request result."
           },
           "data": {
             "$ref": "#/components/schemas/ConfirmMerchantPaymentDto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "CreateBulkRefundResponseDto": {
-        "type": "object",
-        "properties": {
-          "bulkId": {
-            "type": "string",
-            "nullable": true
-          },
-          "refunds": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Refund"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CreateBulkRefundResponseDtoBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/CreateBulkRefundResponseDto"
           }
         },
         "additionalProperties": false
@@ -1963,11 +878,13 @@
         "properties": {
           "transactionRef": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Unique identifier for the created transaction"
           },
           "paymentUrl": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "URL to the payment page"
           }
         },
         "additionalProperties": false
@@ -1976,290 +893,16 @@
         "type": "object",
         "properties": {
           "status": {
-            "type": "boolean"
+            "type": "boolean",
+            "description":"Indicates if the request was successful."
           },
           "message": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description":"Descriptive message about the request result."
           },
           "data": {
             "$ref": "#/components/schemas/CreatePaymentResponseDto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "CreateRefundDto": {
-        "required": [
-          "email",
-          "initiator",
-          "merchantId",
-          "pin",
-          "refundAmount",
-          "refundReason",
-          "refundType",
-          "transactionRef"
-        ],
-        "type": "object",
-        "properties": {
-          "transactionRef": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "customerName": {
-            "type": "string",
-            "nullable": true
-          },
-          "refundAmount": {
-            "type": "number",
-            "format": "double"
-          },
-          "refundReason": {
-            "type": "string"
-          },
-          "currency": {
-            "type": "string",
-            "nullable": true
-          },
-          "pin": {
-            "type": "string"
-          },
-          "initiator": {
-            "type": "string"
-          },
-          "merchantId": {
-            "type": "string"
-          },
-          "refundType": {
-            "$ref": "#/components/schemas/RefundType"
-          }
-        },
-        "additionalProperties": false
-      },
-      "Customer": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "isDeleted": {
-            "type": "boolean"
-          },
-          "firstName": {
-            "type": "string",
-            "nullable": true
-          },
-          "lastName": {
-            "type": "string",
-            "nullable": true
-          },
-          "merchantId": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "phoneNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "callingCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "isActive": {
-            "type": "boolean"
-          },
-          "customerId": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CustomerBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/Customer"
-          }
-        },
-        "additionalProperties": false
-      },
-      "CustomerDto": {
-        "required": [
-          "email",
-          "merchantId"
-        ],
-        "type": "object",
-        "properties": {
-          "merchantId": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "firstName": {
-            "type": "string",
-            "nullable": true
-          },
-          "lastName": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string"
-          },
-          "phone": {
-            "$ref": "#/components/schemas/PhoneData"
-          },
-          "isActive": {
-            "type": "boolean"
-          },
-          "customerId": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CustomerFilterEnum": {
-        "enum": [
-          0,
-          1,
-          2
-        ],
-        "type": "integer",
-        "format": "int32"
-      },
-      "CustomerPaymentDto": {
-        "type": "object",
-        "properties": {
-          "customer": {
-            "$ref": "#/components/schemas/CustomerDto"
-          },
-          "dateCreated": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "transactionCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "transactionValue": {
-            "type": "number",
-            "format": "double"
-          },
-          "transactionCommision": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "additionalProperties": false
-      },
-      "CustomerPaymentDtoBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/CustomerPaymentDto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DeleteRefundRequest": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "merchantId": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "DeleteStandardRequest": {
-        "required": [
-          "id"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "merchantId": {
-            "type": "string",
-            "nullable": true
-          },
-          "providerId": {
-            "type": "string",
-            "nullable": true
-          },
-          "operation": {
-            "$ref": "#/components/schemas/Operation"
-          },
-          "batchId": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "DetailTransactionDto": {
-        "type": "object",
-        "properties": {
-          "amount": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "customerName": {
-            "type": "string",
-            "nullable": true
-          },
-          "customerEmail": {
-            "type": "string",
-            "nullable": true
-          },
-          "customerPhone": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "status": {
-            "$ref": "#/components/schemas/PaymentStatus"
           }
         },
         "additionalProperties": false
@@ -2310,22 +953,6 @@
         },
         "additionalProperties": false
       },
-      "DisableCustomerDto": {
-        "required": [
-          "id",
-          "merchantId"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "merchantId": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
       "ErrorModel": {
         "type": "object",
         "properties": {
@@ -2340,10 +967,6 @@
         },
         "additionalProperties": false
       },
-      "File": {
-        "type": "object",
-        "additionalProperties": false
-      },
       "InitiatePaymentLinkDto": {
         "required": [
           "amount",
@@ -2355,1980 +978,45 @@
           "amount": {
             "pattern": "^[1-9]\\d*(\\.\\d+)?$",
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "description": "The payment amount to be paid by customer (must be greater than 0)"
           },
           "currency": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "The currency code (e.g., “USD”, “NGN”)"
+
           },
           "description": {
             "pattern": "^[a-zA-Z0-9\\s]*$",
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Description of the transaction"
           },
           "pageName": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Name of the payment page"
           },
           "transactionReference": {
             "maxLength": 50,
             "minLength": 5,
-            "type": "string"
+            "type": "string",
+            "description": "Unique identifier for the transaction"
           },
           "customerEmail": {
-            "type": "string"
+            "type": "string",
+            "description": "URL to redirect after payment"
           },
           "customUrl": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "URL to redirect after payment"
           },
           "expiryDate": {
             "type": "string",
-            "format": "date-time"
-          }
-        },
-        "additionalProperties": false
-      },
-      "Mode": {
-        "enum": [
-          0,
-          1
-        ],
-        "type": "integer",
-        "format": "int32"
-      },
-      "Operation": {
-        "enum": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ],
-        "type": "integer",
-        "format": "int32"
-      },
-      "PaymentAttempt": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "isDeleted": {
-            "type": "boolean"
-          },
-          "maskedPan": {
-            "type": "string",
-            "nullable": true
-          },
-          "cardExpiryMonth": {
-            "type": "string",
-            "nullable": true
-          },
-          "cardExpiryYear": {
-            "type": "string",
-            "nullable": true
-          },
-          "virtualBankName": {
-            "type": "string",
-            "nullable": true
-          },
-          "sourceBankName": {
-            "type": "string",
-            "nullable": true
-          },
-          "virtualAccountName": {
-            "type": "string",
-            "nullable": true
-          },
-          "sourceAccountName": {
-            "type": "string",
-            "nullable": true
-          },
-          "virtualAccountNo": {
-            "type": "string",
-            "nullable": true
-          },
-          "sourceAccountNo": {
-            "type": "string",
-            "nullable": true
-          },
-          "transactionId": {
-            "type": "string",
-            "nullable": true
-          },
-          "operation": {
-            "$ref": "#/components/schemas/Operation"
-          },
-          "transactionRef": {
-            "type": "string",
-            "nullable": true
-          },
-          "otpCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "processorResponse": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "PaymentDetail": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "isDeleted": {
-            "type": "boolean"
-          },
-          "maskedPan": {
-            "type": "string",
-            "nullable": true
-          },
-          "cardExpiryMonth": {
-            "type": "string",
-            "nullable": true
-          },
-          "cardExpiryYear": {
-            "type": "string",
-            "nullable": true
-          },
-          "virtualBankName": {
-            "type": "string",
-            "nullable": true
-          },
-          "sourceBankName": {
-            "type": "string",
-            "nullable": true
-          },
-          "virtualAccountName": {
-            "type": "string",
-            "nullable": true
-          },
-          "sourceAccountName": {
-            "type": "string",
-            "nullable": true
-          },
-          "virtualAccountNo": {
-            "type": "string",
-            "nullable": true
-          },
-          "sourceAccountNo": {
-            "type": "string",
-            "nullable": true
-          },
-          "transactionId": {
-            "type": "string",
-            "nullable": true
-          },
-          "isTransactionReconfirmed": {
-            "type": "boolean"
-          },
-          "isPushedtoSettlement": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PaymentDetailDto": {
-        "type": "object",
-        "properties": {
-          "amount": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "pageName": {
-            "type": "string",
-            "nullable": true
-          },
-          "customerName": {
-            "type": "string",
-            "nullable": true
-          },
-          "customerEmail": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "currency": {
-            "type": "string",
-            "nullable": true
-          },
-          "merchantId": {
-            "type": "string",
-            "nullable": true
-          },
-          "customUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "image": {
-            "type": "string",
-            "nullable": true
-          },
-          "expiryDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "paymentCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "paymentStatus": {
-            "$ref": "#/components/schemas/PaymentLinkStatus"
-          },
-          "linkType": {
-            "$ref": "#/components/schemas/PaymentLinkType"
-          },
-          "detailTransactions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DetailTransactionDto"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "PaymentDetailDtoBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/PaymentDetailDto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PaymentLink": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "isDeleted": {
-            "type": "boolean"
-          },
-          "amount": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "pageName": {
-            "type": "string",
-            "nullable": true
-          },
-          "image": {
-            "type": "string",
-            "nullable": true
-          },
-          "bulkId": {
-            "type": "string",
-            "nullable": true
-          },
-          "customerName": {
-            "type": "string",
-            "nullable": true
-          },
-          "customerEmail": {
-            "type": "string",
-            "nullable": true
-          },
-          "transactionReference": {
-            "type": "string",
-            "nullable": true
-          },
-          "count": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "isBulk": {
-            "type": "boolean"
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "merchantId": {
-            "type": "string",
-            "nullable": true
-          },
-          "currency": {
-            "type": "string",
-            "nullable": true
-          },
-          "customUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "paymentUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "isApproved": {
-            "type": "boolean"
-          },
-          "approver": {
-            "type": "string",
-            "nullable": true
-          },
-          "isEmailSent": {
-            "type": "boolean"
-          },
-          "isAggregator": {
-            "type": "boolean"
-          },
-          "paymentStatus": {
-            "$ref": "#/components/schemas/PaymentLinkStatus"
-          },
-          "linkType": {
-            "$ref": "#/components/schemas/PaymentLinkType"
-          },
-          "expiryDate": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PaymentLinkApprovalDto": {
-        "required": [
-          "approver",
-          "bulkId",
-          "merchantId",
-          "pin"
-        ],
-        "type": "object",
-        "properties": {
-          "bulkId": {
-            "type": "string"
-          },
-          "merchantId": {
-            "type": "string"
-          },
-          "approver": {
-            "type": "string"
-          },
-          "pin": {
-            "type": "string"
-          },
-          "rejectLink": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PaymentLinkBulkIdDto": {
-        "type": "object",
-        "properties": {
-          "bulkId": {
-            "type": "string",
-            "nullable": true
-          },
-          "merchantId": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "PaymentLinkListBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PaymentLink"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "PaymentLinkPagedList": {
-        "type": "object",
-        "properties": {
-          "currentPage": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "totalCount": {
-            "type": "integer",
-            "format": "int64",
-            "readOnly": true
-          },
-          "hasPrevious": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "hasNext": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PaymentLink"
-            },
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "PaymentLinkPagedListBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/PaymentLinkPagedList"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PaymentLinkStatus": {
-        "enum": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8
-        ],
-        "type": "integer",
-        "format": "int32"
-      },
-      "PaymentLinkType": {
-        "enum": [
-          0,
-          1
-        ],
-        "type": "integer",
-        "format": "int32"
-      },
-      "PaymentMethod": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "isDeleted": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "image": {
-            "type": "string",
-            "nullable": true
-          },
-          "isActive": {
-            "type": "boolean"
-          },
-          "type": {
-            "$ref": "#/components/schemas/TransactionType"
-          },
-          "displayOrder": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PaymentMethodListBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PaymentMethod"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "PaymentStatus": {
-        "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11
-        ],
-        "type": "integer",
-        "format": "int32"
-      },
-      "PayoutCountResponseDto": {
-        "type": "object",
-        "properties": {
-          "completed": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "failed": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pending": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "total": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PayoutCountResponseDtoBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/PayoutCountResponseDto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PayoutTransaction": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "isDeleted": {
-            "type": "boolean"
-          },
-          "providerId": {
-            "type": "string",
-            "nullable": true
-          },
-          "batchId": {
-            "type": "string",
-            "nullable": true
-          },
-          "processorBatchId": {
-            "type": "string",
-            "nullable": true
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "currency": {
-            "type": "string",
-            "nullable": true
-          },
-          "reference": {
-            "type": "string",
-            "nullable": true
-          },
-          "processorResponse": {
-            "type": "string",
-            "nullable": true
-          },
-          "requestId": {
-            "type": "string",
-            "nullable": true
-          },
-          "ipAddress": {
-            "type": "string",
-            "nullable": true
-          },
-          "merchantId": {
-            "type": "string",
-            "nullable": true
-          },
-          "initiator": {
-            "type": "string",
-            "nullable": true
-          },
-          "sessionId": {
-            "type": "string",
-            "nullable": true
-          },
-          "retryCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "bankTransferBeneficiary": {
-            "$ref": "#/components/schemas/BankTransferBeneficiary"
-          },
-          "transferStatus": {
-            "$ref": "#/components/schemas/PaymentStatus"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PayoutTransactionBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/PayoutTransaction"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PayoutTransactionPagedList": {
-        "type": "object",
-        "properties": {
-          "currentPage": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "totalCount": {
-            "type": "integer",
-            "format": "int64",
-            "readOnly": true
-          },
-          "hasPrevious": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "hasNext": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PayoutTransaction"
-            },
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "PayoutTransactionPagedListBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/PayoutTransactionPagedList"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PhoneData": {
-        "type": "object",
-        "properties": {
-          "phoneNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "callingCode": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Refund": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "isDeleted": {
-            "type": "boolean"
-          },
-          "transactionId": {
-            "type": "string",
-            "nullable": true
-          },
-          "transactionRef": {
-            "type": "string",
-            "nullable": true
-          },
-          "requestId": {
-            "type": "string",
-            "nullable": true
-          },
-          "sessionId": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "refundAmount": {
-            "type": "number",
-            "format": "double"
-          },
-          "initiator": {
-            "type": "string",
-            "nullable": true
-          },
-          "refundReason": {
-            "type": "string",
-            "nullable": true
-          },
-          "paymentType": {
-            "type": "string",
-            "nullable": true
-          },
-          "processorResponse": {
-            "type": "string",
-            "nullable": true
-          },
-          "currency": {
-            "type": "string",
-            "nullable": true
-          },
-          "customerName": {
-            "type": "string",
-            "nullable": true
-          },
-          "merchantId": {
-            "type": "string",
-            "nullable": true
-          },
-          "providerId": {
-            "type": "string",
-            "nullable": true
-          },
-          "merchantName": {
-            "type": "string",
-            "nullable": true
-          },
-          "batchId": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/PaymentStatus"
-          },
-          "refundType": {
-            "$ref": "#/components/schemas/RefundType"
-          }
-        },
-        "additionalProperties": false
-      },
-      "RefundBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/Refund"
-          }
-        },
-        "additionalProperties": false
-      },
-      "RefundListBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Refund"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "RefundPagedList": {
-        "type": "object",
-        "properties": {
-          "currentPage": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "totalCount": {
-            "type": "integer",
-            "format": "int64",
-            "readOnly": true
-          },
-          "hasPrevious": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "hasNext": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Refund"
-            },
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "RefundPagedListBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/RefundPagedList"
-          }
-        },
-        "additionalProperties": false
-      },
-      "RefundStatsDto": {
-        "type": "object",
-        "properties": {
-          "refundCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "successfulRefunds": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "failedRefunds": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totalRefunds": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "additionalProperties": false
-      },
-      "RefundStatsDtoBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/RefundStatsDto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "RefundTransaction": {
-        "type": "object",
-        "properties": {
-          "transactionId": {
-            "type": "string",
-            "nullable": true
-          },
-          "transactionRef": {
-            "type": "string",
-            "nullable": true
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "requestedAmount": {
-            "type": "number",
-            "format": "double"
-          },
-          "customerEmail": {
-            "type": "string",
-            "nullable": true
-          },
-          "customerName": {
-            "type": "string",
-            "nullable": true
-          },
-          "fees": {
-            "type": "number",
-            "format": "double"
-          },
-          "ipAddress": {
-            "type": "string",
-            "nullable": true
-          },
-          "transactionDate": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "additionalProperties": false
-      },
-      "RefundTransactionBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/RefundTransaction"
-          }
-        },
-        "additionalProperties": false
-      },
-      "RefundType": {
-        "enum": [
-          1,
-          2
-        ],
-        "type": "integer",
-        "format": "int32"
-      },
-      "SingleTransferStandardRequest": {
-        "required": [
-          "accountName",
-          "accountNumber",
-          "amount",
-          "bankAccount",
-          "currency",
-          "description",
-          "initiator",
-          "ipAddress",
-          "merchantId",
-          "pin"
-        ],
-        "type": "object",
-        "properties": {
-          "merchantId": {
-            "type": "string"
-          },
-          "bankAccount": {
-            "type": "string"
-          },
-          "accountNumber": {
-            "type": "string"
-          },
-          "sourceAccountNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "sourceAccountName": {
-            "type": "string",
-            "nullable": true
-          },
-          "narration": {
-            "type": "string",
-            "nullable": true
-          },
-          "accountName": {
-            "type": "string"
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "description": {
-            "type": "string"
-          },
-          "currency": {
-            "type": "string"
-          },
-          "pin": {
-            "type": "string"
-          },
-          "initiator": {
-            "type": "string"
-          },
-          "ipAddress": {
-            "type": "string"
-          },
-          "reference": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "SingleTransferStandardRequestBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/SingleTransferStandardRequest"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SingleTransferStandardRequestv1": {
-        "required": [
-          "accountName",
-          "accountNumber",
-          "amount",
-          "bankAccount",
-          "currency",
-          "description",
-          "initiator",
-          "ipAddress",
-          "merchantId",
-          "pin"
-        ],
-        "type": "object",
-        "properties": {
-          "merchantId": {
-            "type": "string"
-          },
-          "bankAccount": {
-            "type": "string"
-          },
-          "accountNumber": {
-            "type": "string"
-          },
-          "sourceAccountNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "sourceAccountName": {
-            "type": "string",
-            "nullable": true
-          },
-          "narration": {
-            "type": "string",
-            "nullable": true
-          },
-          "accountName": {
-            "type": "string"
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "description": {
-            "type": "string"
-          },
-          "currency": {
-            "type": "string"
-          },
-          "pin": {
-            "type": "string"
-          },
-          "initiator": {
-            "type": "string"
-          },
-          "ipAddress": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SingleTransferStandardResponse": {
-        "required": [
-          "accountName",
-          "accountNumber",
-          "amount",
-          "bankAccount",
-          "currency",
-          "description",
-          "initiator",
-          "ipAddress",
-          "merchantId",
-          "pin"
-        ],
-        "type": "object",
-        "properties": {
-          "merchantId": {
-            "type": "string"
-          },
-          "bankAccount": {
-            "type": "string"
-          },
-          "accountNumber": {
-            "type": "string"
-          },
-          "sourceAccountNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "sourceAccountName": {
-            "type": "string",
-            "nullable": true
-          },
-          "narration": {
-            "type": "string",
-            "nullable": true
-          },
-          "accountName": {
-            "type": "string"
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "description": {
-            "type": "string"
-          },
-          "currency": {
-            "type": "string"
-          },
-          "pin": {
-            "type": "string"
-          },
-          "initiator": {
-            "type": "string"
-          },
-          "ipAddress": {
-            "type": "string"
-          },
-          "reference": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "string",
-            "nullable": true
-          },
-          "providerId": {
-            "type": "string",
-            "nullable": true
-          },
-          "providerResponse": {
-            "type": "string",
-            "nullable": true
-          },
-          "transactionId": {
-            "type": "string",
-            "nullable": true
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "transactionDate": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SingleTransferStandardResponseBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/SingleTransferStandardResponse"
-          }
-        },
-        "additionalProperties": false
-      },
-      "StringBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "SubmitBulkRefundRequestDto": {
-        "type": "object",
-        "properties": {
-          "bulkId": {
-            "type": "string",
-            "nullable": true
-          },
-          "merchantId": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "TransactionInformationDto": {
-        "type": "object",
-        "properties": {
-          "customerInformation": {
-            "$ref": "#/components/schemas/Customer"
-          },
-          "refundInformation": {
-            "$ref": "#/components/schemas/Refund"
-          },
-          "transactionInformation": {
-            "$ref": "#/components/schemas/RefundTransaction"
-          }
-        },
-        "additionalProperties": false
-      },
-      "TransactionInformationDtoBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/TransactionInformationDto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "TransactionSource": {
-        "enum": [
-          1,
-          2
-        ],
-        "type": "integer",
-        "format": "int32"
-      },
-      "TransactionType": {
-        "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5
-        ],
-        "type": "integer",
-        "format": "int32"
-      },
-      "UpdateCheckoutInfoDto": {
-        "required": [
-          "checkoutMode",
-          "email",
-          "paymentLinkId"
-        ],
-        "type": "object",
-        "properties": {
-          "paymentLinkId": {
-            "type": "string"
-          },
-          "firstName": {
-            "type": "string",
-            "nullable": true
-          },
-          "lastName": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string"
-          },
-          "ipAddress": {
-            "type": "string",
-            "nullable": true
-          },
-          "amount": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "checkoutMode": {
-            "$ref": "#/components/schemas/Mode"
-          }
-        },
-        "additionalProperties": false
-      },
-      "UpdateRefundRequest": {
-        "required": [
-          "id",
-          "merchantId",
-          "refundAmount",
-          "refundReason",
-          "transactionRef"
-        ],
-        "type": "object",
-        "properties": {
-          "transactionRef": {
-            "type": "string"
-          },
-          "refundAmount": {
-            "type": "number",
-            "format": "double"
-          },
-          "refundReason": {
-            "type": "string"
-          },
-          "merchantId": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "UpdateSingleTransferRequest": {
-        "required": [
-          "id",
-          "merchantId"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "merchantId": {
-            "type": "string"
-          },
-          "accountName": {
-            "type": "string",
-            "nullable": true
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "bankAccount": {
-            "type": "string",
-            "nullable": true
-          },
-          "accountNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "UssdStandardRequest": {
-        "type": "object",
-        "properties": {
-          "transactionId": {
-            "type": "string",
-            "nullable": true
-          },
-          "bankAccount": {
-            "type": "string",
-            "nullable": true
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "currency": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "phoneNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "fullName": {
-            "type": "string",
-            "nullable": true
-          },
-          "checkoutMode": {
-            "$ref": "#/components/schemas/Mode"
-          }
-        },
-        "additionalProperties": false
-      },
-      "UssdStandardResponse": {
-        "type": "object",
-        "properties": {
-          "mode": {
-            "type": "string",
-            "nullable": true
-          },
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
-          "transactionRef": {
-            "type": "string",
-            "nullable": true
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "responseCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "processorResponse": {
-            "type": "string",
-            "nullable": true
-          },
-          "providerId": {
-            "type": "string",
-            "nullable": true
-          },
-          "paymentId": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "UssdStandardResponseBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/UssdStandardResponse"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ValidateBulkDto": {
-        "type": "object",
-        "properties": {
-          "bulkId": {
-            "type": "string",
-            "nullable": true
-          },
-          "bulkTransfers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ValidateBulkTransferResponse"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ValidateBulkDtoBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/ValidateBulkDto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ValidateBulkTransferResponse": {
-        "required": [
-          "accountName",
-          "accountNumber",
-          "amount",
-          "bankAccount",
-          "currency",
-          "description",
-          "initiator",
-          "ipAddress",
-          "merchantId",
-          "pin"
-        ],
-        "type": "object",
-        "properties": {
-          "merchantId": {
-            "type": "string"
-          },
-          "bankAccount": {
-            "type": "string"
-          },
-          "accountNumber": {
-            "type": "string"
-          },
-          "sourceAccountNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "sourceAccountName": {
-            "type": "string",
-            "nullable": true
-          },
-          "narration": {
-            "type": "string",
-            "nullable": true
-          },
-          "accountName": {
-            "type": "string"
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "description": {
-            "type": "string"
-          },
-          "currency": {
-            "type": "string"
-          },
-          "pin": {
-            "type": "string"
-          },
-          "initiator": {
-            "type": "string"
-          },
-          "ipAddress": {
-            "type": "string"
-          },
-          "reference": {
-            "type": "string",
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/PaymentStatus"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ValidateOtpStandardRequest": {
-        "type": "object",
-        "properties": {
-          "transactionId": {
-            "type": "string",
-            "nullable": true
-          },
-          "providerId": {
-            "type": "string",
-            "nullable": true
-          },
-          "paymentId": {
-            "type": "string",
-            "nullable": true
-          },
-          "otp": {
-            "type": "string",
-            "nullable": true
-          },
-          "transactionRef": {
-            "type": "string",
-            "nullable": true
-          },
-          "checkoutMode": {
-            "$ref": "#/components/schemas/Mode"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ValidateOtpStandardResponse": {
-        "type": "object",
-        "properties": {
-          "amount": {
-            "type": "string",
-            "nullable": true
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "providerId": {
-            "type": "string",
-            "nullable": true
-          },
-          "transactionRef": {
-            "type": "string",
-            "nullable": true
-          },
-          "responseCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "transactionId": {
-            "type": "string",
-            "nullable": true
-          },
-          "processorResponse": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ValidateOtpStandardResponseBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/ValidateOtpStandardResponse"
-          }
-        },
-        "additionalProperties": false
-      },
-      "VerifyDto": {
-        "required": [
-          "id"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "merchantId": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "VerifyPaymentDto": {
-        "required": [
-          "transactionRef"
-        ],
-        "type": "object",
-        "properties": {
-          "transactionRef": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "VerifyStandardRequest": {
-        "required": [
-          "id"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "merchantId": {
-            "type": "string",
-            "nullable": true
-          },
-          "providerId": {
-            "type": "string",
-            "nullable": true
-          },
-          "operation": {
-            "$ref": "#/components/schemas/Operation"
-          }
-        },
-        "additionalProperties": false
-      },
-      "VerifyStandardRequestBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/VerifyStandardRequest"
-          }
-        },
-        "additionalProperties": false
-      },
-      "VerifyTransactionStandardResponse": {
-        "type": "object",
-        "properties": {
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "chargedAmount": {
-            "type": "number",
-            "format": "double"
-          },
-          "currency": {
-            "type": "string",
-            "nullable": true
-          },
-          "customerEmail": {
-            "type": "string",
-            "nullable": true
-          },
-          "narration": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "string",
-            "nullable": true
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "responseCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "transactionRef": {
-            "type": "string",
-            "nullable": true
-          },
-          "processorResponse": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "paidAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "ip": {
-            "type": "string",
-            "nullable": true
-          },
-          "paymentType": {
-            "type": "string",
-            "nullable": true
-          },
-          "fees": {
-            "type": "number",
-            "format": "double"
-          },
-          "meta": {
-            "type": "string",
-            "nullable": true
-          },
-          "recurringCardToken": {
-            "type": "string",
-            "nullable": true
-          },
-          "providerId": {
-            "type": "string",
-            "nullable": true
-          },
-          "accountNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "bankName": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "VerifyTransactionStandardResponseBaseResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/VerifyTransactionStandardResponse"
+            "format": "date-time",
+            "description": "Expiry date for the payment link."
           }
         },
         "additionalProperties": false
@@ -4342,5 +1030,10 @@
         "in": "header"
       }
     }
-  }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ]
 }
