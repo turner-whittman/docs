@@ -210,7 +210,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "Unique identifier for the transaction"
           }
         ],
         "responses": {
@@ -463,74 +464,91 @@
         "properties": {
           "responseCode": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Response code from the payment processor"
           },
           "responseDescription": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Response description from the payment processor"
           },
           "transactionReference": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Unique identifier for the transaction"
           },
           "amount": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "description": "Amount of the transaction"
           },
           "remittanceAmount": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "description": "Amount to be remitted to the merchant"
           },
           "customerName": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Name of the customer who made the payment"
           },
           "bank": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Bank of the customer who made the payment"
           },
           "status": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Current status of the transaction"
           },
           "submitTimeUtc": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Time the transaction was submitted"
           },
           "clientReferenceInformation": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Client reference information"
           },
           "accountName": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Name of the account holder"
           },
           "accountNo": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Account number used, partially masked"
           },
           "maskedPan": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Masked card number (PAN)"
           },
           "cardExpiry": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Card expiry date"
           },
           "transactionId": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Unique identifier for the transaction"
           },
           "completedTimeUtc": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Time the transaction was completed"
           },
           "errors": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ErrorModel"
             },
-            "nullable": true
+            "nullable": true,
+            "description": "List of errors encountered during the transaction"
           }
         },
         "additionalProperties": false
@@ -539,11 +557,13 @@
         "type": "object",
         "properties": {
           "status": {
-            "type": "boolean"
+            "type": "boolean",
+            "description":"Indicates if the request was successful."
           },
           "message": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description":"Descriptive message about the request result."
           },
           "data": {
             "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDto"
@@ -562,36 +582,44 @@
         "properties": {
           "transactionRef": {
             "pattern": "^[a-zA-Z0-9-_\\s]*$",
-            "type": "string"
+            "type": "string",
+            "description": "Unique identifier for the transaction"
           },
           "customerEmail": {
             "pattern": "^[a-zA-Z0-9@_.\\s]*$",
-            "type": "string"
+            "type": "string",
+            "description": "Email of the customer who made the payment"
           },
           "amount": {
             "pattern": "^[1-9]\\d*(\\.\\d+)?$",
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "description": "The payment amount to be paid by customer (must be greater than 0)"
           },
           "currency": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "The currency code (e.g., “USD”, “NGN”)"
           },
           "ipAddress": {
             "pattern": "^[0-9:.\\s]*$",
-            "type": "string"
+            "type": "string",
+            "description": "IP address of the customer who made the payment"
           },
           "callbackUrl": {
             "pattern": "^(http|https):\\/\\/([\\w\\d + (\\-)+?]+\\.)+[\\w]+(\\/.*)?$",
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "URL to redirect after payment"
           },
           "cardDetails": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Card details of the customer"
           },
           "deviceInformation": {
-            "$ref": "#/components/schemas/DeviceInformation"
+            "$ref": "#/components/schemas/DeviceInformation",
+            "description": "Information about the customer's device"
           }
         },
         "additionalProperties": false
@@ -601,51 +629,63 @@
         "properties": {
           "referenceInformationCode": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Reference information code"
           },
           "responseCode": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Response code from the payment processor"
           },
           "amount": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Amount of the transaction"
           },
           "transactionRef": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Unique identifier for the transaction"
           },
           "status": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Current status of the transaction"
           },
           "submitTimeUtc": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Time the transaction was submitted"
           },
           "transactionId": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Unique identifier for the transaction"
           },
           "transactionId3DSecure": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Unique identifier for the 3D secure transaction"
           },
           "eciFlag": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "ECI flag"
           },
           "md": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Merchant data"
           },
           "accessToken": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Access token"
           },
           "threedSecureUrl": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "URL for 3D secure"
           }
         },
         "additionalProperties": false
@@ -654,11 +694,13 @@
         "type": "object",
         "properties": {
           "status": {
-            "type": "boolean"
+            "type": "boolean",
+            "description":"Indicates if the request was successful."
           },
           "message": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description":"Descriptive message about the request result."
           },
           "data": {
             "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
@@ -674,18 +716,22 @@
         "type": "object",
         "properties": {
           "otp": {
-            "type": "string"
+            "type": "string",
+            "description": "OTP sent to the customer"
           },
           "transactionRef": {
-            "type": "string"
+            "type": "string",
+            "description": "Unique identifier for the transaction"
           },
           "paymentId": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Unique identifier for the payment"
           },
           "md": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Merchant data"
           }
         },
         "additionalProperties": false
@@ -695,47 +741,57 @@
         "properties": {
           "amount": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Amount of the transaction"
           },
           "transactionIdentifier": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Unique identifier for the transaction"
           },
           "tokenExpiryDate": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Expiry date for the token"
           },
           "token": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Token for the transaction"
           },
           "message": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Message from the payment processor"
           },
           "transactionRef": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Unique identifier for the transaction"
           },
           "responseCode": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Response code from the payment processor"
           },
           "otpRetryCount": {
             "type": "integer",
             "format": "int32",
-            "nullable": true
+            "nullable": true,
+            "description": "Number of times the OTP has been retried"
           },
           "paymentId": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Unique identifier for the payment"
           },
           "errors": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ErrorModel"
             },
-            "nullable": true
+            "nullable": true,
+            "description": "List of errors encountered during the transaction"
           }
         },
         "additionalProperties": false
@@ -744,11 +800,13 @@
         "type": "object",
         "properties": {
           "status": {
-            "type": "boolean"
+            "type": "boolean",
+            "description":"Indicates if the request was successful."
           },
           "message": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description":"Descriptive message about the request result."
           },
           "data": {
             "$ref": "#/components/schemas/AggregatorValidateOtpResponseDto"
@@ -760,11 +818,13 @@
         "type": "object",
         "properties": {
           "status": {
-            "type": "boolean"
+            "type": "boolean",
+            "description":"Indicates if the request was successful."
           },
           "message": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description":"Descriptive message about the request result."
           }
         },
         "additionalProperties": false
@@ -922,33 +982,42 @@
         "properties": {
           "httpBrowserLanguage": {
             "pattern": "^[a-zA-Z0-9-\\s]*$",
-            "type": "string"
+            "type": "string",
+            "description": "Language of the customer's browser"
           },
           "httpBrowserJavaEnabled": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Indicates if Java is enabled in the customer's browser"
           },
           "httpBrowserJavaScriptEnabled": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Indicates if JavaScript is enabled in the customer's browser"
           },
           "httpBrowserColorDepth": {
-            "type": "string"
+            "type": "string",
+            "description": "Color depth of the customer's browser"
           },
           "httpBrowserScreenHeight": {
-            "type": "string"
+            "type": "string",
+            "description": "Height of the customer's browser screen"
           },
           "httpBrowserScreenWidth": {
-            "type": "string"
+            "type": "string",
+            "description": "Width of the customer's browser screen"
           },
           "httpBrowserTimeDifference": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "Time difference between the customer's browser and the server"
           },
           "userAgentBrowserValue": {
-            "type": "string"
+            "type": "string",
+            "description": "User agent value of the customer's browser"
           },
           "deviceChannel": {
             "pattern": "^[a-zA-Z0-9\\s]*$",
-            "type": "string"
+            "type": "string",
+            "description": "Channel used by the customer's device"
           }
         },
         "additionalProperties": false
@@ -958,11 +1027,13 @@
         "properties": {
           "errorCode": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "specific error code"
           },
           "message": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "description": "description of the error"
           }
         },
         "additionalProperties": false
