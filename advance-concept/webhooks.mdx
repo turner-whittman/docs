@@ -48,6 +48,7 @@ When a transaction happens, we will send information regarding this transaction 
 | `card.collection.status`                   |  Event triggered when a card transaction occurred  |
 | `bank.transfer.collection.status`          |  Event triggered when a bank transfer transaction occurred  |
 | `ussd.collection.status`                   |  Event triggered when a USSD transaction occurred  |
+| `payout.transaction.status`                |  Event triggered when a payout transaction occurred  |
 
 ### Event types structure
 
@@ -136,6 +137,27 @@ The data we send across to you for all event type are of similar structure, only
         },
         "eventType": "ussd.collection.status",
         "sentAt": "2025-01-17T03:22:58.7117494"
+    }
+  ```
+  </Tab>
+  <Tab title="Payout transaction status">
+  ```json
+    {
+        "data": {
+            "merchantId": "TW201325608238020",
+            "transactionAmount": 1000.0000,
+            "currency": "NGN",
+            "destinationBank": "Access Bank",
+            "destinationAccountName": "Test Account 1",
+            "destinationAccountNo": "0034323220",
+            "destinationCountry": "Nigeria",
+            "paymentDescription": "Transfer Test",
+            "status": "SUCCESSFUL",
+            "transactionDate": "2025-01-19T15:36:00",
+            "transactionReference": "fdfdfdeeeeabvsdgsgaga1233ddgdgsagdgadg"
+        },
+        "eventType": "payout.transaction.status",
+        "sentAt": "2025-01-19T21:37:12.4175341"
     }
   ```
   </Tab>
