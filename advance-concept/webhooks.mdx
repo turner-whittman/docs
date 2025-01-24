@@ -30,12 +30,41 @@ To set a webhook URL, head over to your Cepta dashboard > **Settings** > **API C
 </Frame>
 
 ## Validate Event Source
-To ensure the webhook events are coming from us, we will send a signature hash as part of the  `header`, this hash will come in this format `` you will have to validate it before making use of the response data.
+To ensure the webhook events are coming from us, we will send a signature hash as part of the  `header`, this hash will be a **SHA512** calculated encryption with header key `hash-key` you will have to validate it before making use of the response data.
+To calculate this key, you will need to generate a **SHA512** hash by concatenating their secret key and merchant ID. This hash is then compared with the "hash-key" found in the response header to verify the integrity of the request before processing it.
 
 <Warning>   
   Always validate the signature hash before proceeding with business logic.
 </Warning>
 
+For example, using the secret key `test_scrk_5gtnuq9buqeic7c3edu8yjrsqnzhhnur` and the merchant ID `TW201325608238020`, the concatenated string would be:
+
+`"test_scrk_5gtnuq9buqeic7c3edu8yjrsqnzhhnur" | "TW201325608238020"`
+
+Then, you generate the SHA512 hash of that string and compare it with the `hash-key` from the response header.
+
+**Javascript code sample:**
+
+```javascript
+const crypto = require('crypto');
+
+const secretKey = "test_scrk_5gtnuq9buqeic7c3edu8yjrsqnzhhnur";
+const merchantId = "TW201325608238020";
+
+const concatenatedString = secretKey + "|" + merchantId;
+
+// Generate SHA512 hash
+const hashValue = crypto.createHash('sha512').update(concatenatedString).digest('hex');
+
+const responseHeaderHash = "b78e7c3b8b501ff84d3c96f98e3f7b97869b98958bce15b5cd14b9e7a03e5852";
+
+// Compare the calculated hash with the header hash
+if (hashValue === responseHeaderHash) {
+    console.log("Hash verified successfully! Proceeding with processing.");
+} else {
+    console.log("Hash mismatch! Do not process the request.");
+}
+```
 
 ## Payment Event Trigger
 
