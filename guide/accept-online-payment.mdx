@@ -1,0 +1,154 @@
+---
+title: 'Accept Payment with Cepta Checkout'
+description: 'A Step-by-Step Guide to Building with Cepta Checkout'
+---
+
+If you’re looking to integrate Cepta Checkout into your website or application, this guide will walk you through the entire process, from setting up your account to implementing payment processing and handling notifications. With Cepta, you can easily manage payments and create a smooth user experience for your customers. Below, we’ll break down the steps to initialize and verify payments, as well as handle webhooks for real-time updates.
+
+## Getting Started with Cepta
+
+Before you can start integrating Cepta Checkout, the first thing you need to do is create an account. Visit the [Cepta website](https://cepta.co/) and sign up for an account. Once you’ve signed up, you’ll need to access your API keys from the dashboard. These keys are crucial because they authenticate your requests to the Cepta API. Make sure to keep them secure, especially your secret key.
+
+Once you’ve [obtained your API keys](setup-cepta/cepta-keys/obtain-api-keys), you can begin integrating payment processing into your application. If you want to receive real-time updates on payment statuses (such as success or failure), you can set up a webhook to automatically notify your server when these events occur.
+
+## Setting Up Webhooks (Optional)
+
+Webhooks are a convenient way to receive real-time notifications about specific events in the payment lifecycle. To set this up, navigate to the webhook section in your Cepta dashboard. You will need to provide a callback URL where Cepta can send the webhook notifications. For instance, this URL could be something like `https://example.com/webhook`.
+
+After entering your webhook URL, submit the webhook configuration. Now, whenever a relevant event occurs—such as a payment being processed or completed, Cepta will send a `POST` request to your provided URL with all the event details.
+
+To learn more follow the [webhook documentation](/advance-concept/webhooks)
+
+## Initializing a Payment
+
+With your account set up and webhooks configured (if applicable), you can now proceed to the most crucial step: initializing a payment. To start the payment process, you’ll need to make a POST request to the Cepta API to create a payment link. This link will be where your customers can complete their payment.
+
+Here’s an example of how you would initialize a payment:
+
+```bash
+curl --request POST \
+  --url https://dev-adapter.cepta.co/api/v1/pay \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '
+    {
+        "amount": 100,
+        "currency": "NGN",
+        "description": "Purchase of goods",
+        "pageName": "Checkout Page",
+        "transactionReference": "ABC123XYZ",
+        "customerEmail": "customer@example.com",
+        "customUrl": "https://example.com/thank-you",
+        "expiryDate": "2024-11-29T12:03:11.391Z"
+    }
+  '
+```
+
+If everything is set up correctly, the response will include a payment URL and a transaction reference that you can use to verify the payment later.
+
+Here’s an example of a successful response:
+
+```bash
+{
+  "status": true,
+  "message": "Payment link created successfully.",
+  "data": {
+    "transactionRef": "ABC123XYZ",
+    "paymentUrl": "https://dev.twpay.io/payment?paymentRef=861b1cb7-c9ec-4d5b-82ef-c60bb67a51f0&Mode=0"
+  }
+}
+```
+The `paymentUrl` is where the customer will complete their payment. Simply redirect the customer to this **URL**, and they’ll be able to proceed with the payment process.
+
+<Frame caption="Complete your payment">
+  <img src="/images/transaction-link.png" style={{ borderRadius: '0.5rem' }} loading="lazy" />
+</Frame>
+
+After payment is completed, they will be redirected to your submitted `callbackURL` and you will verify the payment
+
+## Verifying the Payment
+
+Once the customer has completed the payment, you need to verify whether the transaction was successful. This can be done by making a `GET` request to the Cepta API using the transaction reference that was provided when the payment link was created.
+
+Here’s how you would verify a payment:
+
+```bash
+curl --request GET \
+  --url https://dev-adapter.cepta.co/api/v1/pay/verify-payment?TransactionRef=ABC123XYZ \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json'
+```
+This request checks the status of the payment and provides you with a detailed response about the transaction.
+
+A successful verification might look like this:
+
+```bash
+{
+  "status": true,
+  "message": "Transaction verified successfully.",
+  "data": {
+    "amount": 100,
+    "chargedAmount": 105,
+    "currency": "USD",
+    "customerEmail": "customer@example.com",
+    "narration": "Payment for order #12345",
+    "status": "Paid",
+    "responseCode": "00",
+    "transactionRef": "ada",
+    "processorResponse": "Payment completed successfully.",
+    "createdAt": "2024-11-29T12:22:27.891Z",
+    "paidAt": "2024-11-29T12:22:27.891Z",
+    "ip": "192.168.1.1",
+    "paymentType": "Card",
+    "fees": 5,
+    "meta": "{}",
+    "message": "Payment processed."
+  }
+}
+```
+In the response, the key data points include `status`, `chargedAmount`, `paymentType` and `message`. 
+
+If the status is "successful" you can safely assume the transaction was successful, and you can proceed with fulfilling the order or providing the purchased goods/services to the customer.
+
+## Handling Webhook Notifications
+If you’ve set up a webhook for a card payment `card.collection.status`, Cepta will automatically send you real-time updates about the payment status. For instance, when a payment is completed successfully, a webhook payload similar to the following will be sent to your server:
+
+```bash
+{
+    "data": {
+        "merchantId": "TW201325608238020",
+        "transactionAmount": 1000.0000,
+        "cardExpirationDate": "",
+        "cardholderName": "testing lee",
+        "currency": "NGN",
+        "destinationCountry": "Nigeria",
+        "feeDeductionAmount": 5.0000,
+        "maskedPan": "23409857****3353",
+        "netAmount": 995.0000,
+        "payerEmail": "test@gmail.com",
+        "payerFirstName": "John",
+        "paymentDescription": "Payment tests",
+        "status": "SUCCESSFUL",
+        "sourceCountry": "Nigeria",
+        "transactionDate": "2025-01-17T01:09:00",
+        "transactionReference": "bdknnnndfbbbvvbbnnndgdgvgoedgd",
+        "ipAddress": "10.110.0.1"
+    },
+    "eventType": "card.collection.status",
+    "sentAt": "2025-01-17T03:10:06.5031934"
+}
+```
+
+You can then handle this data in your system, whether that means updating your order database, sending confirmation emails to customers, or triggering other workflows.
+
+## Conclusion
+
+Integrating Cepta Checkout is a straightforward process, and once you’ve set up your account, you can start processing payments with minimal effort. By following the steps outlined in this guide, you can initialize payments, verify them, and optionally set up webhooks to receive real-time notifications of payment events. Whether you’re selling products online or offering services, Cepta provides a reliable and secure way to handle payments.
+
+
+
+
+
+
+
+
