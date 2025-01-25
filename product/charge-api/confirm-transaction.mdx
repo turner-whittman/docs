@@ -1,0 +1,162 @@
+---
+title: 'Confirm Transaction'
+description: 'Learn how to confirm payment with the Confirm transaction API.'
+---
+
+# Confirm Transaction Status
+
+<Info> 
+  This API is used to verify payment status. It’s important to verify all transactions before updating your customer about the status of their payment to ensure accurate and timely information.
+</Info>
+
+## Request parameter
+
+```bash Request
+curl --request GET \
+  --url https://dev-adapter.cepta.co/api/v1/pay/confirm-status?TransactionRef=exampleRef \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+```
+
+<Note>
+	Ensure secure handling of md (merchant data) and token to maintain transaction integrity.
+</Note>
+
+## Confirm transaction API Response
+
+A sample response of what to expect when a call is made to confirm API status
+```json Success response
+{
+  "status": true,
+  "message": "Transaction status retrieved successfully.",
+  "data": {
+    "responseCode": "00",
+    "responseDescription": "Transaction completed successfully.",
+    "transactionReference": "exampleRef",
+    "amount": 100.00,
+    "remittanceAmount": 95.00,
+    "customerName": "John Doe",
+    "bank": "Bank of Example",
+    "status": "Completed",
+    "submitTimeUtc": "2024-11-29T12:30:00.000Z",
+    "clientReferenceInformation": "Client123",
+    "accountName": "John Doe",
+    "accountNo": "123456****",
+    "maskedPan": "4111********1111",
+    "cardExpiry": "12/25",
+    "transactionId": "TRX12345",
+    "completedTimeUtc": "2024-11-29T12:45:00.000Z",
+    "errors": []
+  }
+}
+```
+
+## Handling successful API response.
+
+When a transaction has been initiated successfully, the API returns response data that can be used to update the customer about the current stage of their transaction.
+
+Below is the list of responses you can expect and their usage:
+<ResponseField name="status" type="boolean">
+  Indicates if the request was successful.
+</ResponseField>
+<ResponseField name="message" type="string">
+  Descriptive message about the result.
+</ResponseField>
+<ResponseField name="data" type="object">
+    Contains detailed transaction status.
+    <Expandable title="object"  defaultOpen="true">
+        <ResponseField name="responseCode" type="string">
+           Response code from the payment processor
+        </ResponseField>
+        <ResponseField name="responseDescription" type="string">
+           Description of the response
+        </ResponseField>
+        <ResponseField name="tokenExpiryDate" type="string (ISO 8601)">
+           Expiry date of the token.
+        </ResponseField>
+        <ResponseField name="transactionReference" type="string">
+           Reference of the queried transaction.
+        </ResponseField>
+        <ResponseField name="transactionRef" type="string">
+           Reference of the validated transaction
+        </ResponseField>
+        <ResponseField name="amount" type="number">
+           Transaction amount.
+        </ResponseField>
+        <ResponseField name="remittanceAmount" type="number">
+            Amount remitted after charges or deductions
+        </ResponseField>
+        <ResponseField name="customerName" type="string">
+            Name of the customer.
+        </ResponseField>
+        <ResponseField name="bank" type="string">
+            Bank involved in the transaction.
+        </ResponseField>
+        <ResponseField name="status" type="string">
+            Status of the transaction
+        </ResponseField>
+        <ResponseField name="submitTimeUtc" type="string (ISO 8601)">
+            UTC time when the transaction was submitted
+        </ResponseField>
+        <ResponseField name="clientReferenceInformation" type="string">
+            Client reference information related to the transaction.
+        </ResponseField>
+        <ResponseField name="accountName" type="string">
+            Client reference information related to the transaction.
+        </ResponseField>
+        <ResponseField name="accountNo" type="string">
+            Account number used, partially masked.
+        </ResponseField>
+        <ResponseField name="maskedPan" type="string">
+            Masked card number (PAN).
+        </ResponseField>
+        <ResponseField name="cardExpiry" type="string">
+            Expiry date of the card used.
+        </ResponseField>
+        <ResponseField name="transactionId" type="string">
+            Unique transaction identifier.
+        </ResponseField>
+        <ResponseField name="completedTimeUtc" type="string (ISO 8601)">
+            UTC time when the transaction was completed
+        </ResponseField>
+        <ResponseField name="errors" type="array">
+           Array of error objects, if any.
+           <Expandable title="array" defaultOpen="false">
+               <ResponseField name="errorCode" type="string">
+                  Specific error code, if applicable.
+               </ResponseField>
+               <ResponseField name="message" type="string">
+                  Description of the error.
+               </ResponseField>
+           </Expandable>
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+
+## Handling failed API response
+When your response message is returned as a failed response, the response.data will return an array containing details of the error. You can show this to your customer to notify them of what went wrong.
+
+Below is a sample failed response data:
+```json Failed response
+{
+  "status": false,
+  "message": "Transaction not found.",
+  "data": {
+    "errors": [
+      {
+        "errorCode": "TRANSACTION_NOT_FOUND",
+        "message": "No transaction found for the provided reference."
+      }
+    ]
+  }
+}
+```
+
+## List of expected errors
+
+It's possible you might encounter an error while making a call to the Confirm Purchase API. Below are the errors you may encounter and their meanings:
+| HTTP Status Code             | Message                               | Description                          |
+| ---------------------------- | ------------------------------------- |------------------------------------- |
+| `400  INVALID_REQUEST`       | Invalid request parameters            | Missing or invalid input fields.     |
+| `404  TRANSACTION_NOT_FOUND` | Transaction not found                 | No transaction matches the reference.|
+| `500  INTERNAL_SERVER_ERROR` | An error occurred                     | A server-side error occurred.        |

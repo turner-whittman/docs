@@ -1,14 +1,21 @@
 {
   "$schema": "https://mintlify.com/schema.json",
   "name": "Cepta",
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "colors": {
-    "primary": "#000000",
+    "primary": "#088725",
     "light": "#B7EF34",
     "dark": "#000000",
     "anchors": {
       "from": "#B7EF34",
       "to": "#B7EF34"
+    }
+  },
+  "font": {
+    "body": {
+      "family": "Raleway, sans-serif",
+      "url":"https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap",
+      "format": "woff"
     }
   },
   "theme": "quill",
@@ -42,65 +49,57 @@
     {
       "name": "Documentation",
       "icon": "book-open-cover",
-      "url": "api-reference"
-    },
-    {
-      "name": "Guide",
-      "icon": "newspaper",
-      "url": "https://www.cepta.co/#"
-    },
-    {
-      "name": "Knowledge base",
-      "icon": "book",
-      "url": "https://www.cepta.co/#"
+      "url": "home"
     }
   ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "Welcome To Cepta",
+      "icon": "door-open",
       "pages": [
-        "introduction",
+        "home",
         "quickstart"
       ]
     },
     {
       "group": "Setup Cepta",
-      "pages": [
-            {
-                "group": "Create account",
-                "pages": [
-                  "setup-cepta/create-account/overview",
-                  "setup-cepta/create-account/activate-your-account",
-                  "setup-cepta/create-account/acceptable-document"
-                ]
-            },
-            {
-              "group": "Authenticate",
-              "pages": [
-                "Overview",
-                "Activate your account"
-              ]
-            }
-        ]
-    },
-    {
-      "group": "Product",
+      "icon": "screwdriver-wrench",
       "pages": [
         {
-          "group": "Merchant",
+          "group": "Create account",
           "pages": [
-            "product/merchant/overview",
-            "product/merchant/create-payment",
-            "product/merchant/verify-payment"
+            "setup-cepta/create-account/overview",
+            "setup-cepta/create-account/activate-your-account",
+            "setup-cepta/create-account/acceptable-document"
           ]
         },
         {
-          "group": "Aggregator",
+          "group": "API Keys",
           "pages": [
-            "product/aggregator/overview",
-            "product/aggregator/purchase",
-            "product/aggregator/validate-otp",
-            "product/aggregator/confirm-purchase-status"
+            "setup-cepta/cepta-keys/obtain-api-keys"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Product",
+      "icon": "product-hunt",
+      "pages": [
+        {
+          "group": "Accept Payment",
+          "pages": [
+            "product/accept-payment/overview",
+            "product/accept-payment/initialize-transaction",
+            "product/accept-payment/verify-transaction-status"
+          ]
+        },
+        {
+          "group": "Charge API",
+          "pages": [
+            "product/charge-api/overview",
+            "product/charge-api/initialize-transaction",
+            "product/charge-api/validate-transaction-otp",
+            "product/charge-api/confirm-transaction"
           ]
         }
       ]
@@ -108,35 +107,73 @@
     {
       "group": "API Documentation",
       "pages": [
-        "api-reference/introduction"
+        "api-reference/introduction",
+        "api-reference/authentication"
       ]
     },
     {
-      
-      "group": "Authentication",
+      "group": "Accept Payment API",
       "pages": [
-        "api-reference/auth/secure-secret-key"
+        "api-reference/accept-payment/create-payment-link",
+        "api-reference/accept-payment/verify-payment-link"
       ]
     },
     {
-      
-      "group": "Merchant",
+      "group": "Charge API",
       "pages": [
-        "api-reference/merchant/create-payment",
-        "api-reference/merchant/verify-payment"
+        "api-reference/charge-api/aggregator-purchase",
+        "api-reference/charge-api/aggregator-validate-otp",
+        "api-reference/charge-api/aggregator-verify-payment-link"
       ]
     },
     {
-      "group": "Aggregator",
+      "group": "Guide",
+      "icon": "head-side-gear",
       "pages": [
-        "api-reference/aggregator/purchase",
-        "api-reference/aggregator/validate-otp",
-        "api-reference/aggregator/confirm-purchase-status"
+        "guide/accept-online-payment"
+      ]
+    },
+    {
+      "group": "Advanced Concepts",
+      "icon": "arrows-to-circle",
+      "pages": [
+        "advance-concept/security",
+        "advance-concept/webhooks"
       ]
     }
   ],
-  "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "linkedin": "https://linkedin.com/company/mintlify"
+  "footer": {
+    "socials": { 
+      "x": "https://cepta.co/", 
+      "website": "https://cepta.co/" 
+    },
+    "links": [
+      {
+        "title": "Need Help?",
+        "links": [
+          { 
+            "label": "Contact Support", 
+            "url": "/#" 
+          },
+          { 
+            "label": "Join Community", 
+            "url": "/#" 
+          },
+          { 
+            "label": "Contact sales", 
+            "url": "mailto:sales@cepta.co" 
+          }
+        ]
+      },
+      {
+        "title": "Product Update",
+        "links": [
+          { 
+            "label": "Changelogs", 
+            "url": "/#" 
+          }
+        ]
+      }
+    ]
   }
 }
