@@ -21,7 +21,7 @@ Make an API call to this endpoint to verify `pay/verify-payment?TransactionRef`.
 ```bash Request
 curl --request GET \
   --url https://dev-adapter.cepta.co/api/v1/pay/verify-payment?TransactionRef={ TransactionRef } \
-  --header 'Authorization: Bearer <token>' \
+  --header 'Authorization: Bearer <secretKey>' \
   --header 'Content-Type: application/json' \
 ```
 

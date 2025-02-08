@@ -1,0 +1,1265 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "MerchnatIntegration.Service",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "description": "Production",
+      "url": "https://dev-adapter.cepta.co"
+    },
+    {
+      "description": "Sandbox",
+      "url": "https://dev-adapter.cepta.co"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/pay": {
+      "post": {
+        "tags": [
+          "Accept Payment"
+        ],
+        "summary": "Create payment link",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InitiatePaymentLinkDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InitiatePaymentLinkDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InitiatePaymentLinkDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePaymentResponseDtoBaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePaymentResponseDtoBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePaymentResponseDtoBaseResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePaymentResponseDtoBaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePaymentResponseDtoBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePaymentResponseDtoBaseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pay/verify-payment": {
+      "get": {
+        "tags": [
+          "Accept Payment"
+        ],
+        "summary": "Verify payment link",
+        "parameters": [
+          {
+            "name": "TransactionRef",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the transaction"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDtoBaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDtoBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDtoBaseResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDtoBaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDtoBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDtoBaseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pay/confirm-status": {
+      "get": {
+        "tags": [
+          "Charge API"
+        ],
+        "summary": "Aggregator Verify payment link",
+        "parameters": [
+          {
+            "name": "TransactionRef",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the transaction"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDtoBaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDtoBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDtoBaseResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDtoBaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDtoBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDtoBaseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pay/validate-otp": {
+      "post": {
+        "tags": [
+          "Charge API"
+        ],
+        "summary": "Validate transaction OTP",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorValidateOtpRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorValidateOtpRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorValidateOtpRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDtoBaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDtoBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDtoBaseResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDtoBaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDtoBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDtoBaseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pay/purchase": {
+      "post": {
+        "tags": [
+          "Charge API"
+        ],
+        "summary": "Initialize a transaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorPurchaseRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorPurchaseRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorPurchaseRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDtoBaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDtoBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDtoBaseResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDtoBaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDtoBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDtoBaseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pay/static-accounts": {
+      "post": {
+          "tags": [
+            "Accounts"
+          ],
+          "summary" : "Creates a virtual merchant",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaticAccountRequestDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaticAccountRequestDto"
+                }
+              },
+              "application/*+json": {
+                  "schema": {
+                  "$ref": "#/components/schemas/StaticAccountRequestDto"
+                }
+              }
+            }
+          },
+        "responses": {}
+      },
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Get static account for a merchant",
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            } 
+          },  
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+            "text/plain": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
+              }
+            },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
+                } 
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BaseResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BaseResponse"
+                  }
+                },
+                "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                  }
+                }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+      "schemas": {
+        "AggregatorConfirmStatusResponseDto": {
+          "type": "object",
+          "properties": {
+            "responseCode": {
+              "type": "string",
+              "nullable": true,
+              "description": "Response code from the payment processor"
+            },
+            "responseDescription": {
+              "type": "string",
+              "nullable": true,
+              "description": "Response description from the payment processor"
+            },
+            "transactionReference": {
+              "type": "string",
+              "nullable": true,
+              "description": "Unique identifier for the transaction"
+            },
+            "amount": {
+              "type": "number",
+              "format": "double",
+              "description": "Amount of the transaction"
+            },
+            "remittanceAmount": {
+              "type": "number",
+              "format": "double",
+              "description": "Amount to be remitted to the merchant"
+            },
+            "customerName": {
+              "type": "string",
+              "nullable": true,
+              "description": "Name of the customer who made the payment"
+            },
+            "bank": {
+              "type": "string",
+              "nullable": true,
+              "description": "Bank of the customer who made the payment"
+            },
+            "status": {
+              "type": "string",
+              "nullable": true,
+              "description": "Current status of the transaction"
+            },
+            "submitTimeUtc": {
+              "type": "string",
+              "nullable": true,
+              "description": "Time the transaction was submitted"
+            },
+            "clientReferenceInformation": {
+              "type": "string",
+              "nullable": true,
+              "description": "Client reference information"
+            },
+            "accountName": {
+              "type": "string",
+              "nullable": true,
+              "description": "Name of the account holder"
+            },
+            "accountNo": {
+              "type": "string",
+              "nullable": true,
+              "description": "Account number used, partially masked"
+            },
+            "maskedPan": {
+              "type": "string",
+              "nullable": true,
+              "description": "Masked card number (PAN)"
+            },
+            "cardExpiry": {
+              "type": "string",
+              "nullable": true,
+              "description": "Card expiry date"
+            },
+            "transactionId": {
+              "type": "string",
+              "nullable": true,
+              "description": "Unique identifier for the transaction"
+            },
+            "completedTimeUtc": {
+              "type": "string",
+              "nullable": true,
+              "description": "Time the transaction was completed"
+            },
+            "errors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ErrorModel"
+              },
+              "nullable": true,
+              "description": "List of errors encountered during the transaction"
+            }
+          },
+          "additionalProperties": false
+        },
+        "AggregatorConfirmStatusResponseDtoBaseResponse": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "boolean",
+              "description":"Indicates if the request was successful."
+            },
+            "message": {
+              "type": "string",
+              "nullable": true,
+              "description":"Descriptive message about the request result."
+            },
+            "data": {
+              "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDto"
+            }
+          },
+          "additionalProperties": false
+        },
+        "AggregatorPurchaseRequestDto": {
+          "required": [
+            "amount",
+            "customerEmail",
+            "ipAddress",
+            "transactionRef"
+          ],
+          "type": "object",
+          "properties": {
+            "transactionRef": {
+              "pattern": "^[a-zA-Z0-9-_\\s]*$",
+              "type": "string",
+              "description": "Unique identifier for the transaction"
+            },
+            "customerEmail": {
+              "pattern": "^[a-zA-Z0-9@_.\\s]*$",
+              "type": "string",
+              "description": "Email of the customer who made the payment"
+            },
+            "amount": {
+              "pattern": "^[1-9]\\d*(\\.\\d+)?$",
+              "type": "number",
+              "format": "double",
+              "description": "The payment amount to be paid by customer (must be greater than 0)"
+            },
+            "currency": {
+              "type": "string",
+              "nullable": true,
+              "description": "The currency code (e.g., “USD”, “NGN”)"
+            },
+            "ipAddress": {
+              "pattern": "^[0-9:.\\s]*$",
+              "type": "string",
+              "description": "IP address of the customer who made the payment"
+            },
+            "callbackUrl": {
+              "pattern": "^(http|https):\\/\\/([\\w\\d + (\\-)+?]+\\.)+[\\w]+(\\/.*)?$",
+              "type": "string",
+              "nullable": true,
+              "description": "URL to redirect after payment"
+            },
+            "cardDetails": {
+              "type": "string",
+              "nullable": true,
+              "description": "Card details of the customer"
+            },
+            "deviceInformation": {
+              "$ref": "#/components/schemas/DeviceInformation",
+              "description": "Information about the customer's device"
+            }
+          },
+          "additionalProperties": false
+        },
+        "AggregatorPurchaseResponseDto": {
+          "type": "object",
+          "properties": {
+            "referenceInformationCode": {
+              "type": "string",
+              "nullable": true,
+              "description": "Reference information code"
+            },
+            "responseCode": {
+              "type": "string",
+              "nullable": true,
+              "description": "Response code from the payment processor"
+            },
+            "amount": {
+              "type": "string",
+              "nullable": true,
+              "description": "Amount of the transaction"
+            },
+            "transactionRef": {
+              "type": "string",
+              "nullable": true,
+              "description": "Unique identifier for the transaction"
+            },
+            "status": {
+              "type": "string",
+              "nullable": true,
+              "description": "Current status of the transaction"
+            },
+            "submitTimeUtc": {
+              "type": "string",
+              "nullable": true,
+              "description": "Time the transaction was submitted"
+            },
+            "transactionId": {
+              "type": "string",
+              "nullable": true,
+              "description": "Unique identifier for the transaction"
+            },
+            "transactionId3DSecure": {
+              "type": "string",
+              "nullable": true,
+              "description": "Unique identifier for the 3D secure transaction"
+            },
+            "eciFlag": {
+              "type": "string",
+              "nullable": true,
+              "description": "ECI flag"
+            },
+            "md": {
+              "type": "string",
+              "nullable": true,
+              "description": "Merchant data"
+            },
+            "accessToken": {
+              "type": "string",
+              "nullable": true,
+              "description": "Access token"
+            },
+            "threedSecureUrl": {
+              "type": "string",
+              "nullable": true,
+              "description": "URL for 3D secure"
+            }
+          },
+          "additionalProperties": false
+        },
+        "AggregatorPurchaseResponseDtoBaseResponse": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "boolean",
+              "description":"Indicates if the request was successful."
+            },
+            "message": {
+              "type": "string",
+              "nullable": true,
+              "description":"Descriptive message about the request result."
+            },
+            "data": {
+              "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
+            }
+          },
+          "additionalProperties": false
+        },
+        "AggregatorValidateOtpRequestDto": {
+          "required": [
+            "otp",
+            "transactionRef"
+          ],
+          "type": "object",
+          "properties": {
+            "otp": {
+              "type": "string",
+              "description": "OTP sent to the customer"
+            },
+            "transactionRef": {
+              "type": "string",
+              "description": "Unique identifier for the transaction"
+            },
+            "paymentId": {
+              "type": "string",
+              "nullable": true,
+              "description": "Unique identifier for the payment"
+            },
+            "md": {
+              "type": "string",
+              "nullable": true,
+              "description": "Merchant data"
+            }
+          },
+          "additionalProperties": false
+        },
+        "AggregatorValidateOtpResponseDto": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "string",
+              "nullable": true,
+              "description": "Amount of the transaction"
+            },
+            "transactionIdentifier": {
+              "type": "string",
+              "nullable": true,
+              "description": "Unique identifier for the transaction"
+            },
+            "tokenExpiryDate": {
+              "type": "string",
+              "nullable": true,
+              "description": "Expiry date for the token"
+            },
+            "token": {
+              "type": "string",
+              "nullable": true,
+              "description": "Token for the transaction"
+            },
+            "message": {
+              "type": "string",
+              "nullable": true,
+              "description": "Message from the payment processor"
+            },
+            "transactionRef": {
+              "type": "string",
+              "nullable": true,
+              "description": "Unique identifier for the transaction"
+            },
+            "responseCode": {
+              "type": "string",
+              "nullable": true,
+              "description": "Response code from the payment processor"
+            },
+            "otpRetryCount": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true,
+              "description": "Number of times the OTP has been retried"
+            },
+            "paymentId": {
+              "type": "string",
+              "nullable": true,
+              "description": "Unique identifier for the payment"
+            },
+            "errors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ErrorModel"
+              },
+              "nullable": true,
+              "description": "List of errors encountered during the transaction"
+            }
+          },
+          "additionalProperties": false
+        },
+        "AggregatorValidateOtpResponseDtoBaseResponse": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "boolean",
+              "description":"Indicates if the request was successful."
+            },
+            "message": {
+              "type": "string",
+              "nullable": true,
+              "description":"Descriptive message about the request result."
+            },
+            "data": {
+              "$ref": "#/components/schemas/AggregatorValidateOtpResponseDto"
+            }
+          },
+          "additionalProperties": false
+        },
+        "BaseResponse": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "boolean",
+              "description":"Indicates if the request was successful."
+            },
+            "message": {
+              "type": "string",
+              "nullable": true,
+              "description":"Descriptive message about the request result."
+            }
+          },
+          "additionalProperties": false
+        },
+        "ConfirmMerchantPaymentDto": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "format": "double",
+              "description": "Original payment amount"
+            },
+            "chargedAmount": {
+              "type": "number",
+              "format": "double",
+              "description": "Amount charged to the customer"
+            },
+            "currency": {
+              "type": "string",
+              "nullable": true,
+              "description": "Currency of the transaction (e.g., “USD”)."
+            },
+            "customerEmail": {
+              "type": "string",
+              "nullable": true,
+              "description": "Email of the customer who made the payment"
+            },
+            "narration": {
+              "type": "string",
+              "nullable": true,
+              "description": "Description or narrative of the payment"
+            },
+            "status": {
+              "type": "string",
+              "nullable": true,
+              "description": "Current status of the transaction (e.g., “Paid”)"
+            },
+            "responseCode": {
+              "type": "string",
+              "nullable": true,
+              "description": "Response code from the payment processor"
+            },
+            "transactionRef": {
+              "type": "string",
+              "nullable": true,
+              "description": "Unique identifier for the created transaction"
+            },
+            "processorResponse": {
+              "type": "string",
+              "nullable": true,
+              "description": "Response from the payment processor"
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Time the transaction was created."
+            },
+            "paidAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Reference for the created transaction."
+            },
+            "ip": {
+              "type": "string",
+              "nullable": true,
+              "description": "IP address from which the payment was made."
+            },
+            "paymentType": {
+              "type": "string",
+              "nullable": true,
+              "description": "Type of payment method used (e.g., “Card”)."
+            },
+            "fees": {
+              "type": "number",
+              "format": "double",
+              "description": "Fees charged for the transaction"
+            },
+            "meta": {
+              "type": "string",
+              "nullable": true,
+              "description": "Additional metadata associated with the payment"
+            },
+            "message": {
+              "type": "string",
+              "nullable": true,
+              "description": "Additional metadata associated with the payment"
+            }
+          },
+          "additionalProperties": false
+        },
+        "ConfirmMerchantPaymentDtoBaseResponse": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "boolean",
+              "description":"Indicates if the request was successful."
+            },
+            "message": {
+              "type": "string",
+              "nullable": true,
+              "description":"Descriptive message about the request result."
+            },
+            "data": {
+              "$ref": "#/components/schemas/ConfirmMerchantPaymentDto"
+            }
+          },
+          "additionalProperties": false
+        },
+        "CreatePaymentResponseDto": {
+          "type": "object",
+          "properties": {
+            "transactionRef": {
+              "type": "string",
+              "nullable": true,
+              "description": "Unique identifier for the created transaction"
+            },
+            "paymentUrl": {
+              "type": "string",
+              "nullable": true,
+              "description": "URL to the payment page"
+            }
+          },
+          "additionalProperties": false
+        },
+        "CreatePaymentResponseDtoBaseResponse": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "boolean",
+              "description":"Indicates if the request was successful."
+            },
+            "message": {
+              "type": "string",
+              "nullable": true,
+              "description":"Descriptive message about the request result."
+            },
+            "data": {
+              "$ref": "#/components/schemas/CreatePaymentResponseDto"
+            }
+          },
+          "additionalProperties": false
+        },
+        "DeviceInformation": {
+          "required": [
+            "deviceChannel",
+            "httpBrowserColorDepth",
+            "httpBrowserJavaEnabled",
+            "httpBrowserJavaScriptEnabled",
+            "httpBrowserLanguage",
+            "httpBrowserScreenHeight",
+            "httpBrowserScreenWidth",
+            "userAgentBrowserValue"
+          ],
+          "type": "object",
+          "properties": {
+            "httpBrowserLanguage": {
+              "pattern": "^[a-zA-Z0-9-\\s]*$",
+              "type": "string",
+              "description": "Language of the customer's browser"
+            },
+            "httpBrowserJavaEnabled": {
+              "type": "boolean",
+              "description": "Indicates if Java is enabled in the customer's browser"
+            },
+            "httpBrowserJavaScriptEnabled": {
+              "type": "boolean",
+              "description": "Indicates if JavaScript is enabled in the customer's browser"
+            },
+            "httpBrowserColorDepth": {
+              "type": "string",
+              "description": "Color depth of the customer's browser"
+            },
+            "httpBrowserScreenHeight": {
+              "type": "string",
+              "description": "Height of the customer's browser screen"
+            },
+            "httpBrowserScreenWidth": {
+              "type": "string",
+              "description": "Width of the customer's browser screen"
+            },
+            "httpBrowserTimeDifference": {
+              "type": "string",
+              "nullable": true,
+              "description": "Time difference between the customer's browser and the server"
+            },
+            "userAgentBrowserValue": {
+              "type": "string",
+              "description": "User agent value of the customer's browser"
+            },
+            "deviceChannel": {
+              "pattern": "^[a-zA-Z0-9\\s]*$",
+              "type": "string",
+              "description": "Channel used by the customer's device"
+            }
+          },
+          "additionalProperties": false
+        },
+        "ErrorModel": {
+          "type": "object",
+          "properties": {
+            "errorCode": {
+              "type": "string",
+              "nullable": true,
+              "description": "specific error code"
+            },
+            "message": {
+              "type": "string",
+              "nullable": true,
+              "description": "description of the error"
+            }
+          },
+          "additionalProperties": false
+        },
+        "InitiatePaymentLinkDto": {
+          "required": [
+            "amount",
+            "customerEmail",
+            "transactionReference"
+          ],
+          "type": "object",
+          "properties": {
+            "amount": {
+              "pattern": "^[1-9]\\d*(\\.\\d+)?$",
+              "type": "number",
+              "format": "double",
+              "description": "The payment amount to be paid by customer (must be greater than 0)"
+            },
+            "currency": {
+              "type": "string",
+              "nullable": true,
+              "description": "The currency code (e.g., “USD”, “NGN”)"
+            },
+            "description": {
+              "pattern": "^[a-zA-Z0-9\\s]*$",
+              "type": "string",
+              "nullable": true,
+              "description": "Description of the transaction"
+            },
+            "pageName": {
+              "type": "string",
+              "nullable": true,
+              "description": "Name of the payment page"
+            },
+            "transactionReference": {
+              "maxLength": 50,
+              "minLength": 5,
+              "type": "string",
+              "description": "Unique identifier for the transaction"
+            },
+            "customerEmail": {
+              "type": "string",
+              "description": "URL to redirect after payment"
+            },
+            "customUrl": {
+              "type": "string",
+              "nullable": true,
+              "description": "URL to redirect after payment"
+            },
+            "expiryDate": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Expiry date for the payment link."
+            }
+          },
+          "additionalProperties": false
+        },
+        "StaticAccountRequestDto": {
+          "type": "object",
+          "properties": {
+              "firstName": {
+              "type": "string",
+              "nullable": true
+            },
+            "lastName": {
+              "type": "string",
+              "nullable": true
+            },
+            "phoneNumber": {
+              "type": "string",
+              "nullable": true
+            },
+            "email": {
+              "type": "string",
+              "nullable": true
+            },
+            "bvn": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "securitySchemes": {
+        "Bearer": {
+          "type": "apiKey",
+          "description": "JWT Authorization header using the Bearer scheme.",
+          "name": "Authorization",
+          "in": "header"
+        }
+      }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ]
+}

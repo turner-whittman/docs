@@ -1,0 +1,119 @@
+---
+title: 'Create a virtual account'
+description: 'Learn how to create a virtual account'
+---
+
+<Info> 
+  This endpoint is used to create a static virtual account, you will get a generated account when you make a request to this endpoint. This account will be attached a business or individual solely for transaction purposes.
+</Info>
+
+To request for an account, make a `POST` request to the endpoint `/v1/static-accounts`. you will be required to pass the request parameters listed below.  
+`firstName`, `lastName`, `phoneNumber`,`email` and `bvn`.
+
+## create virtual account request
+
+```bash Request
+curl --request POST \
+  --url https://dev-adapter.cepta.co/api/v1/static-accounts \
+  --header 'Authorization: Bearer <secretKey>' \
+  --header 'Content-Type: application/json' \
+  --data '
+    {
+        "firstName": "Coke",
+        "lastName": "Smith",
+        "phoneNumber": "08090485843",
+        "email": "coke_smith@mailinator.com",
+        "bvn": ""
+    }
+  '
+```
+
+
+<ParamField body="order" type="object" required>
+    Account reference
+    <Expandable title="object" defaultOpen="true">
+        <ParamField body="amount" type="number" required>
+            The payment amount to be paid by customer (must be greater than 0)
+        </ParamField>
+        <ParamField body="currency" type="string" required>
+            The currency code (e.g., "USD", "NGN")
+        </ParamField>
+        <ParamField body="description" type="string" required>
+            Description of the transaction
+        </ParamField>
+        <ParamField body="pageName" type="string" required>
+            Name of the payment page
+        </ParamField>
+        <ParamField body="transactionReference" type="string" required>
+            Unique identifier for the transaction
+        </ParamField>
+        <ParamField body="customerEmail" type="string" required>
+            The customer email address.
+        </ParamField>
+        <ParamField body="customUrl" type="string">
+            URL to redirect after payment
+        </ParamField>
+        <ParamField body="expiryDate" type="string (ISO 8601)" required>
+            Expiry date for the payment link.
+        </ParamField>
+    </Expandable>
+</ParamField>
+
+## Create virtual account response  
+
+An example response body of an account that is created successfully.
+
+```json Success response
+{
+    "status": true,
+    "message": "Successfully created virtual account",
+    "data": {
+        "firstName": "Coke",
+        "lastName": "Smith",
+        "phoneNumber": "08090485843",
+        "email": "coke_smith@mailinator.com",
+        "accountNumber": "4051460587",
+        "bankName": "Premium Trust Bank",
+        "isActive": true,
+        "createdAt": "2025-01-31T19:08:05.1263716Z"
+    }
+}
+```
+
+When you successfully created a virtual account, the response returned will include a `data` object that contains the generated `accountNumber` and `bankName`. The `isActive` property indicates if the account is active or expired.
+
+##  Handling Create virtual account response
+ 
+<ResponseField name="status" type="boolean">
+  Indicates if the request was successful.
+</ResponseField>
+<ResponseField name="message" type="string">
+  Descriptive message about the request result.
+</ResponseField>
+<ResponseField name="data" type="object">
+  <Expandable title="object" defaultOpen="true">
+    <ResponseField name="firstName" type="string">
+      Account holder first name.
+    </ResponseField>
+    <ResponseField name="lastName" type="string">
+      Account holder last name.
+    </ResponseField>
+    <ResponseField name="phoneNumber" type="string">
+      Account holder phone number.
+    </ResponseField>
+    <ResponseField name="email" type="string">
+      Account holder email address.
+    </ResponseField>
+    <ResponseField name="accountNumber" type="string">
+      Account holder generated account number.
+    </ResponseField>
+    <ResponseField name="bankName" type="string">
+      The generated bank name.
+    </ResponseField>
+    <ResponseField name="isActive" type="boolean">
+      Shows account is active or expired
+    </ResponseField>
+    <ResponseField name="createdAt" type="string (ISO 8601)">
+    </ResponseField>
+  </Expandable>
+</ResponseField>

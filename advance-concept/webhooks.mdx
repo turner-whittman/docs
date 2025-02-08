@@ -31,7 +31,7 @@ To set a webhook URL, head over to your Cepta dashboard > **Settings** > **API C
 
 ## Validate Event Source
 To ensure the webhook events are coming from us, we will send a signature hash as part of the  `header`, this hash will be a **SHA512** calculated encryption with header key `hash-key` you will have to validate it before making use of the response data.
-To calculate this key, you will need to generate a **SHA512** hash by concatenating their secret key and merchant ID. This hash is then compared with the "hash-key" found in the response header to verify the integrity of the request before processing it.
+To calculate this key, you will need to generate a **SHA512** hash by concatenating your secret key and merchant ID. This hash is then compared with the "hash-key" found in the response header to verify the integrity of the request before processing it.
 
 <Warning>   
   Always validate the signature hash before proceeding with business logic.

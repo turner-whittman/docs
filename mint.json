@@ -101,6 +101,14 @@
             "product/charge-api/validate-transaction-otp",
             "product/charge-api/confirm-transaction"
           ]
+        },
+        {
+          "group": "Accounts",
+          "pages": [
+            "product/accounts/overview",
+            "product/accounts/create-virtual-account",
+            "product/accounts/list-all-virtual-accounts"
+          ]
         }
       ]
     },
@@ -124,6 +132,13 @@
         "api-reference/charge-api/aggregator-purchase",
         "api-reference/charge-api/aggregator-validate-otp",
         "api-reference/charge-api/aggregator-verify-payment-link"
+      ]
+    },
+    {
+      "group": "Accounts API",
+      "pages": [
+        "api-reference/accounts/creates-a-virtual-account",
+        "api-reference/accounts/get-static-account-for-a-merchant"
       ]
     },
     {

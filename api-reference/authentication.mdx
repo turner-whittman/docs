@@ -7,11 +7,11 @@ description: 'Obtain the API secret key to authenticate with Cepta.'
 
 To authenticate API requests, you must include a Bearer token in the `Authorization` header of your requests. You can obtain this token from your [Dashboard](https://qa.cepta.co/settings/api-credentials) once you’ve created your account and logged in.
 
-Here’s an example of how to include the Bearer token in your API requests:
+Here’s an example of how to include the secret key in your API requests:
 
 ```bash
 curl -X GET https://api.cepta.co/endpoint \
--H "Authorization: Bearer YOUR_BEARER_TOKEN"
+-H "Authorization: Bearer SECRET_KEY"
 ```
 
 <Warning>

@@ -1,0 +1,168 @@
+---
+title: 'Fetch all virtual accounts'
+description: 'Learn how to fetch all virtual accounts'
+---
+
+<Info> 
+  This endpoint is used to fetch all created virtual account for a merchant. Note that this endpoint return a paginated data which helps to control the size of data received.
+</Info>
+
+To request for all created account, make a `GET` request to the endpoint `/v1/static-accounts`.  
+
+## Pagination Query Parameters
+The pagination approach used here follows page-based pagination, where `pageNumber` and `pageSize` control data retrieval. The response includes metadata like `currentPage`, `totalPages`, `totalCount`, and flags `hasPrevious`, `hasNext` to indicate available pages. 
+
+
+`pageNumber`
+The page number to retrieve. Defaults to 1 if not provided.
+
+`pagesize`
+The number of records per page. Defaults to 10 if not specified.
+
+`startData` Filter dataset by account creation date
+
+`endDate`: Filter dateset by expiryDate
+
+These parameters allow clients to control paginated data retrieval efficiently.
+
+
+## fetch all created virtual account request
+
+```bash Request
+curl --request GET \
+  --url https://dev-adapter.cepta.co/api/v1/static-accounts \
+  --header 'Authorization: Bearer <secretKey>' \
+  --header 'Content-Type: application/json' \
+```
+
+## Create virtual account response
+
+An example response body for successfully fetching virtual accounts.
+
+```json Success response
+{
+    "status": true,
+    "message": "Accounts returned successfully",
+    "data": {
+        "currentPage": 1,
+        "totalPages": 1,
+        "pageSize": 10,
+        "totalCount": 5,
+        "hasPrevious": false,
+        "hasNext": false,
+        "results": [
+            {
+                "firstName": "Rakuzo",
+                "lastName": "Kilian",
+                "phoneNumber": "08043339321",
+                "email": "rakuzokilian@mailinator.com",
+                "accountNumber": "4051453962",
+                "bankName": "Premium Trust Bank",
+                "isActive": true,
+                "createdAt": "2025-01-30T20:53:23.587885"
+            },
+            {
+                "firstName": "Randy",
+                "lastName": "Orton",
+                "phoneNumber": "08093339321",
+                "email": "randy_o@mailinator.com",
+                "accountNumber": "4051454548",
+                "bankName": "Premium Trust Bank",
+                "isActive": true,
+                "createdAt": "2025-01-30T22:38:04.2213172"
+            },
+            {
+                "firstName": "zola",
+                "lastName": "camora",
+                "phoneNumber": "08029339321",
+                "email": "zolacamora@mailinator.com",
+                "accountNumber": "4051453909",
+                "bankName": "Premium Trust Bank",
+                "isActive": true,
+                "createdAt": "2025-01-30T20:47:07.493649"
+            }
+        ]
+    }
+}
+```
+
+When virtual accounts are successfully fetched, the response contains a data object that includes a list of accounts, with each containing details such as `accountNumber`, `bankName`, and `isActive` status.
+
+##  Handling fetch virtual account response
+ 
+<ResponseField name="status" type="boolean">
+  Indicates if the request was successful.
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Descriptive message about the request result.
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  <Expandable title="object" defaultOpen="true">
+
+    <ResponseField name="currentPage" type="integer">
+      The current page number.
+    </ResponseField>
+
+    <ResponseField name="totalPages" type="integer">
+      The total number of pages available.
+    </ResponseField>
+
+    <ResponseField name="pageSize" type="integer">
+      The number of items per page.
+    </ResponseField>
+
+    <ResponseField name="totalCount" type="integer">
+      The total number of records available.
+    </ResponseField>
+
+    <ResponseField name="hasPrevious" type="boolean">
+      Indicates if there is a previous page.
+    </ResponseField>
+
+    <ResponseField name="hasNext" type="boolean">
+      Indicates if there is a next page.
+    </ResponseField>
+
+    <ResponseField name="results" type="array">
+      <Expandable title="array of objects" defaultOpen="true">
+
+        <ResponseField name="firstName" type="string">
+          Account holder first name.
+        </ResponseField>
+
+        <ResponseField name="lastName" type="string">
+          Account holder last name.
+        </ResponseField>
+
+        <ResponseField name="phoneNumber" type="string">
+          Account holder phone number.
+        </ResponseField>
+
+        <ResponseField name="email" type="string">
+          Account holder email address.
+        </ResponseField>
+
+        <ResponseField name="accountNumber" type="string">
+          Account holder generated account number.
+        </ResponseField>
+
+        <ResponseField name="bankName" type="string">
+          The generated bank name.
+        </ResponseField>
+
+        <ResponseField name="isActive" type="boolean">
+          Shows whether the account is active or expired.
+        </ResponseField>
+
+        <ResponseField name="createdAt" type="string (ISO 8601)">
+          Timestamp of when the account was created.
+        </ResponseField>
+
+      </Expandable>
+    </ResponseField>
+
+  </Expandable>
+</ResponseField>
+
