@@ -70,7 +70,8 @@
           "pages": [
             "setup-cepta/create-account/overview",
             "setup-cepta/create-account/activate-your-account",
-            "setup-cepta/create-account/acceptable-document"
+            "setup-cepta/create-account/acceptable-document",
+            "setup-cepta/create-account/test-card"
           ]
         },
         {
