@@ -143,14 +143,3 @@ Below is a sample failed response data.
   }
 }
 ```
-
-
-## List of expected errors
-
-It's possible you encounter an error while making a call to the validate OTP API, here are the errors that you may encounter and what they mean.
-| HTTP Status Code             | Message                               | Description                          |
-| ---------------------------- | ------------------------------------- |------------------------------------- |
-| `400  INVALID_REQUEST`       | Invalid request parameters            | Missing or invalid input fields.     |
-| `401  UNAUTHORIZED`          | Authentication failed                 | Invalid or expired credentials.     |
-| `403  INVALID_OTP`           | The provided OTP is incorrect         | OTP provided does not match.        |
-| `500  INTERNAL_SERVER_ERROR` | An error occurred                     | A server-side error occurred.        |

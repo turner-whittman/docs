@@ -1,0 +1,27 @@
+---
+title: 'Pagination'
+description: 'Learn about how to handle pagination with Cepta'
+---
+
+## Overview  
+
+Pagination helps manage large datasets efficiently by breaking them into smaller, manageable pages. Cepta uses **page-based pagination**, allowing developers to request specific pages using query parameters.
+
+Currently, only one endpoint requires pagination when integrating with Cepta:
+
+### Endpoint Requiring Pagination  
+- **`/api/v1/static-accounts`**
+
+## Pagination Query Parameters  
+
+| Parameter   | Type    | Description                        | Default |
+|------------|--------|------------------------------------|---------|
+| `pageNumber` | integer | The page number to retrieve.     | `1`     |
+| `pageSize`   | integer | Number of records per page.      | `10`    |
+
+## Handling Pagination  
+
+1. Navigating to the next page – Increment `pageNumber`, example `pageNumber=2`.  
+2. Retrieving more items per page – Increase `pageSize` example `pageSize=20`.  
+3. Checking for available pages – Use `hasPrevious` and `hasNext` flags to determine navigation options.  
+

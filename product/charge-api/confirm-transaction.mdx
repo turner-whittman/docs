@@ -151,12 +151,3 @@ Below is a sample failed response data:
   }
 }
 ```
-
-## List of expected errors
-
-It's possible you might encounter an error while making a call to the Confirm Purchase API. Below are the errors you may encounter and their meanings:
-| HTTP Status Code             | Message                               | Description                          |
-| ---------------------------- | ------------------------------------- |------------------------------------- |
-| `400  INVALID_REQUEST`       | Invalid request parameters            | Missing or invalid input fields.     |
-| `404  TRANSACTION_NOT_FOUND` | Transaction not found                 | No transaction matches the reference.|
-| `500  INTERNAL_SERVER_ERROR` | An error occurred                     | A server-side error occurred.        |

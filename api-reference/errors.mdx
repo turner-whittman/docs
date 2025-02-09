@@ -1,0 +1,19 @@
+---
+title: 'Errors'
+description: 'Learn about how to handle errors with Cepta'
+---
+
+## Overview  
+
+Handling errors properly ensures a smooth user experience and helps debug issues efficiently. This guide provides details on common errors encountered while using Cepta and how to resolve them.  
+
+## List of common errors
+
+| HTTP Status Code             | Message                               | Description                          |
+| ---------------------------- | ------------------------------------- |------------------------------------- |
+| `400  INVALID_REQUEST`       | Invalid request parameters            | Missing or invalid input fields.     |
+| `401  UNAUTHORIZED`          | Authentication failed                 | Invalid or expired credentials.     |
+| `403  INVALID_OTP`           | The provided OTP is incorrect         | OTP provided does not match.        |
+| `404  TRANSACTION_NOT_FOUND` | Transaction not found                 | No transaction matches the reference.|
+| `404  NOT FOUND`             | Endpoint not found                    | The specified endpoint does not exist.|
+| `500  INTERNAL_SERVER_ERROR` | An error occurred                     | A server-side error occurred.        |

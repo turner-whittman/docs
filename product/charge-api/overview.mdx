@@ -13,19 +13,55 @@ To initialize and complete a transaction using our **Charge API**, we expect tha
 2. Validate Transaction OTP
 3. Confirm Transaction
 
-**Initialize Transaction**
+<Frame caption="Cepta Charge Flow">
+  <img src="/images/cepta-charge-flow.png" style={{ borderRadius: '0.5rem' }} loading="lazy" />
+</Frame>
+
+## Initialize Transaction
+
 The first step is to create and initiate a payment request for your customer. This step typically involves sending a request to our API to initiate the transaction by providing necessary details like the payment amount, currency, customer information, and other relevant data.
 
-**Verify Transaction OTP**
+## Encrypt card details with AES Encryption
+
+To securely encrypt the card details, the IV (Initialization Vector) and Key must first be converted from `Base64` encoding into a raw binary buffer to be used in the AES encryption process. The encryption should be performed using either AES-CBC (Cipher Block Chaining) or the more secure AES-GCM (Galois/Counter Mode). 
+
+Before encryption, the card details object must be serialized into a string format using JSON.stringify(). Using the derived Key and IV, the data is then encrypted and the resulting ciphertext is encoded into Base64, making it suitable for transmission. To decrypt the data, the same Key and IV are used to reverse the encryption process, converting the Base64-encoded ciphertext back into its original readable format. This ensures that sensitive information remains protected while being transmitted or stored securely.
+
+See sample code:
+```JavaScript
+const crypto = require("crypto");
+
+const key = Buffer.from("qD0JjHkS4/21ej8wD2xT6Q==", "base64"); // Convert Base64 key
+const iv = Buffer.from("h4sR8+RuyyP1+1k2g2+GOQ==", "base64"); // Convert Base64 IV
+const data = JSON.stringify({
+  cardNumber: "5060666666666666666",
+  expiryYear: "26",
+  expiryMonth: "02",
+  pin: "1111",
+  cvv: "111",
+});
+
+function encryptAES(data, key, iv) {
+  const cipher = crypto.createCipheriv("aes-256-cbc", key, iv);
+  let encrypted = cipher.update(data, "utf8", "base64");
+  encrypted += cipher.final("base64");
+  return encrypted;
+}
+
+const encryptedData = encryptAES(data, key, iv);
+```
+
+## Verify Transaction OTP
+
 After the transaction is initialized, the customer will be prompted to verify their payment by entering an OTP (One-Time Password) sent to their registered contact (e.g., phone number or email). This step ensures that the person initiating the transaction is the authorized user.
 
-**Confirm Transaction**
+## Confirm Transaction
+
 Once the OTP is verified, the final step is to confirm the transaction status to know if the payment was successfully completed. To learn more about our transaction status, [check here](). 
 
 <Note>
-We recommended that you set up a webhook to verify transaction status; check here to explore how to use a webhook to verify a transaction.
+  We recommended that you set up a webhook to verify transaction status; check here to explore how to use a webhook to verify a transaction.
 </Note>
-
 
 ## Dive straight into the usage
 
