@@ -2,6 +2,13 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Cepta",
   "favicon": "/favicon.png",
+  "search": {
+    "location": "top",
+    "prompt": "Search the docs..."
+  },
+  "seo": {
+    "indexHiddenPages": true
+  },
   "colors": {
     "primary": "#088725",
     "light": "#B7EF34",
@@ -29,9 +36,6 @@
     "name": "Dashboard",
     "url": "https://dev.twpay.io/home"
   },
-  "search": {
-    "location": "top"
-  },
   "versions": [
     "v1.0"
   ],
@@ -43,13 +47,6 @@
     {
       "name": "API Reference",
       "url": "api-reference"
-    }
-  ],
-  "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "home"
     }
   ],
   "navigation": [
