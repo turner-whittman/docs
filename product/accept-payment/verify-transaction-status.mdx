@@ -20,8 +20,8 @@ Make an API call to this endpoint to verify `pay/verify-payment?TransactionRef`.
 
 ```bash Request
 curl --request GET \
-  --url https://dev-adapter.cepta.co/api/v1/pay/verify-payment?TransactionRef={ TransactionRef } \
-  --header 'Authorization: Bearer <secretKey>' \
+  --url https://adapter.cepta.co/api/v1/pay/verify-payment?TransactionRef={ TransactionRef } \
+  --header 'Authorization: <SECRET_KEY>' \
   --header 'Content-Type: application/json' \
 ```
 

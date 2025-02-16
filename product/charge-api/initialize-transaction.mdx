@@ -13,8 +13,8 @@ description: 'Learn how to initialize a charge to accept payments'
 
 ```bash Request
 curl --request POST \
-  --url https://dev-adapter.cepta.co/api/v1/pay/purchase \
-  --header 'Authorization: Bearer <token>' \
+  --url https://adapter.cepta.co/api/v1/pay/purchase \
+  --header 'Authorization: <SECRET_KEY>' \
   --header 'Content-Type: application/json' \
   --data '
     {

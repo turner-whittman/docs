@@ -37,8 +37,8 @@ Before you can start using Cepta, you need to create an account. Follow these si
 Initialize a transaction link endpoint by making an API call to this endpoint. [Learn more]('/product/accept-payment') about how the accept payment API works.
 ```bash Request
 curl --request POST \
-  --url https://dev-adapter.cepta.co/api/v1/pay \
-  --header 'Authorization: Bearer <token>' \
+  --url https://adapter.cepta.co/api/v1/pay \
+  --header 'Authorization: Bearer <SECRET_KEY>' \
   --header 'Content-Type: application/json' \
   --data '
     {

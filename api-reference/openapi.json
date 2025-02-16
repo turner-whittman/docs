@@ -7,11 +7,11 @@
     "servers": [
     {
       "description": "Production",
-      "url": "https://dev-adapter.cepta.co"
+      "url": "https://adapter.cepta.co"
     },
     {
       "description": "Sandbox",
-      "url": "https://dev-adapter.cepta.co"
+      "url": "https://adapter.cepta.co"
     }
   ],
     "paths": {

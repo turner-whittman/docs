@@ -19,8 +19,8 @@ To initialize a transaction, when you make a `POST` request to the endpoint `/v1
 
 ```bash Request
 curl --request POST \
-  --url https://dev-adapter.cepta.co/api/v1/pay \
-  --header 'Authorization: Bearer <secretKey>' \
+  --url https://adapter.cepta.co/api/v1/pay \
+  --header 'Authorization: <SECRET_KEY>' \
   --header 'Content-Type: application/json' \
   --data '
     {
@@ -79,7 +79,7 @@ An example response body of a transaction.
   "message": "Payment link created successfully.",
   "data": {
     "transactionRef": "ABC123XYZ",
-    "paymentUrl": " https://dev.twpay.io/payment?paymentRef=861b1cb7-c9ec-4d5b-82ef-c60bb67a51f0&Mode=0"
+    "paymentUrl": " https://app.cepta.co/payment?paymentRef=861b1cb7-c9ec-4d5b-82ef-c60bb67a51f0&Mode=0"
   }
 }
 ```

@@ -27,8 +27,8 @@ Here’s an example of how you would initialize a payment:
 
 ```bash
 curl --request POST \
-  --url https://dev-adapter.cepta.co/api/v1/pay \
-  --header 'Authorization: Bearer <token>' \
+  --url https://adapter.cepta.co/api/v1/pay \
+  --header 'Authorization: <SECRET_KEY>' \
   --header 'Content-Type: application/json' \
   --data '
     {
@@ -54,7 +54,7 @@ Here’s an example of a successful response:
   "message": "Payment link created successfully.",
   "data": {
     "transactionRef": "ABC123XYZ",
-    "paymentUrl": "https://dev.twpay.io/payment?paymentRef=861b1cb7-c9ec-4d5b-82ef-c60bb67a51f0&Mode=0"
+    "paymentUrl": "https://app.cepta.co/payment?paymentRef=861b1cb7-c9ec-4d5b-82ef-c60bb67a51f0&Mode=0"
   }
 }
 ```
@@ -74,8 +74,8 @@ Here’s how you would verify a payment:
 
 ```bash
 curl --request GET \
-  --url https://dev-adapter.cepta.co/api/v1/pay/verify-payment?TransactionRef=ABC123XYZ \
-  --header 'Authorization: Bearer <token>' \
+  --url https://adapter.cepta.co/api/v1/pay/verify-payment?TransactionRef=ABC123XYZ \
+  --header 'Authorization: <SECRET_KEY>' \
   --header 'Content-Type: application/json'
 ```
 This request checks the status of the payment and provides you with a detailed response about the transaction.
