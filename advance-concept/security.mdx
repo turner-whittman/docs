@@ -15,7 +15,7 @@ HTTPS is a secure version of the standard web protocol, HTTP, that uses encrypti
 ## Secured card communicating with AES
 AES (Advanced Encryption Standard) is a popular encryption method used to keep data safe. It works by scrambling data with a secret key so that only person with the right key can unscramble and read it. AES is fast, secure, and widely used to protect sensitive information like credit card details, personal messages, and even government communications. It can use different key sizes (128, 192, or 256 bits), with longer keys offering stronger protection. Because it’s both secure and efficient, AES is the go-to encryption method for protecting data in many industries, from banking to healthcare.
 
-## Tokens Are Used as Means for Authentication
+## Secret Keys Are Used as Means for Authentication
 
-We used tokens as a secure way to communicate with Cepta when integrating; tokens are useful because even if someone intercepts the token, it cannot be used to access sensitive data since it's meaningless on its own. This enhances security by minimizing the risk of data breaches and fraud, as the original information is never stored or transmitted. Tokens are commonly used in situations like single sign-on (SSO), payment processing, and mobile apps to make authentication safer and more secure. 
+We use secret keys as a secure method to communicate with Cepta during integration. Secret keys provide an added layer of security because, even if intercepted, they cannot be exploited to access sensitive data without the corresponding authentication mechanisms. This minimizes the risk of data breaches and fraud, as the original credentials are never stored or transmitted. Secret keys are commonly utilized in scenarios such as API authentication, payment processing, and secure application access to enhance security and protect sensitive information. 
 
