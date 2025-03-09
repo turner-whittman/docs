@@ -30,6 +30,7 @@ To set a webhook URL, head over to your Cepta dashboard > **Settings** > **API C
 </Frame>
 
 ## Validate Event Source
+
 To ensure the webhook events are coming from us, we will send a signature hash as part of the  `header`, this hash will be a **SHA512** calculated encryption with header key `hash-key` you will have to validate it before making use of the response data.
 To calculate this key, you will need to generate a **SHA512** hash by concatenating your secret key and merchant ID. This hash is then compared with the "hash-key" found in the response header to verify the integrity of the request before processing it.
 
@@ -78,6 +79,7 @@ When a transaction happens, we will send information regarding this transaction 
 | `bank.transfer.collection.status`          |  Event triggered when a bank transfer transaction occurred  |
 | `ussd.collection.status`                   |  Event triggered when a USSD transaction occurred  |
 | `payout.transaction.status`                |  Event triggered when a payout transaction occurred  |
+| `wallet.transaction.status`                |  Event triggered when a wallet transaction occurred  |
 
 ### Event types structure
 
@@ -188,6 +190,27 @@ The data we send across to you for all event type are of similar structure, only
         "eventType": "payout.transaction.status",
         "sentAt": "2025-01-19T21:37:12.4175341"
     }
+  ```
+  </Tab>
+  <Tab title="Wallet transaction status">
+  ```json
+    {
+      "data": {
+          "moneyMovement": "Credit",
+          "transaction": {
+              "originatorAccountNumber": "3039713406",
+              "originatorBankName": "First bank",
+              "originatorName": "Tee Lee",
+              "currency": "NGN",
+              "amount": "1000.00",
+              "paymentReference": "vvvvvvbnocccbbvvvcnobvvvvv",
+              "destinationAccountName": "One Director",
+              "destinationAccountNumber": "8053660290"
+          }
+      },
+      "eventType": "wallet.transaction.status",
+      "sentAt": "2025-03-03T17:59:41.849167"
+   }
   ```
   </Tab>
 </Tabs>
