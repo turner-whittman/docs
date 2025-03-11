@@ -77,9 +77,10 @@ When a transaction happens, we will send information regarding this transaction 
 | -------------------------------------------|----------------------------------------------------|
 | `card.collection.status`                   |  Event triggered when a card transaction occurred  |
 | `bank.transfer.collection.status`          |  Event triggered when a bank transfer transaction occurred  |
-| `ussd.collection.status`                   |  Event triggered when a USSD transaction occurred  |
 | `payout.transaction.status`                |  Event triggered when a payout transaction occurred  |
 | `wallet.transaction.status`                |  Event triggered when a wallet transaction occurred  |
+
+[//]: # (| `ussd.collection.status`                   |  Event triggered when a USSD transaction occurred  |)
 
 ### Event types structure
 
@@ -142,35 +143,64 @@ The data we send across to you for all event type are of similar structure, only
     }
   ```
   </Tab>
-  <Tab title="USSD transaction status">
-  ```json
-    {
-        "data": {
-            "merchantId": "TW201325608238020",
-            "transactionAmount": 1000.0000,
-            "currency": "NGN",
-            "destinationBank": "First Bank of Nigeria",
-            "destinationAccountName": "Test Lee",
-            "destinationAccountNo": "8053660290",
-            "destinationCountry": "Nigeria",
-            "feeDeductionAmount": 200.0000,
-            "netAmount": 800.0000,
-            "payerEmail": "ataiwo84@gmail.com",
-            "payerFirstName": "John",
-            "paymentDescription": "Payment tests",
-            "status": "SUCCESSFUL",
-            "sourceAccountName": "John Sarah",
-            "sourceAccountNumber": "3039323401",
-            "sourceBank": "First Bank of Nigeria",
-            "sourceCountry": "Nigeria",
-            "transactionDate": "2025-01-17T01:09:00",
-            "transactionReference": "trfknnnndfbbbvvbbnnndgddggvgoedgd"
-        },
-        "eventType": "ussd.collection.status",
-        "sentAt": "2025-01-17T03:22:58.7117494"
-    }
-  ```
-  </Tab>
+
+[//]: # (<Tab title="USSD transaction status">)
+
+[//]: # (```json)
+
+[//]: # (  {)
+
+[//]: # (      "data": {)
+
+[//]: # (          "merchantId": "TW201325608238020",)
+
+[//]: # (          "transactionAmount": 1000.0000,)
+
+[//]: # (          "currency": "NGN",)
+
+[//]: # (          "destinationBank": "First Bank of Nigeria",)
+
+[//]: # (          "destinationAccountName": "Test Lee",)
+
+[//]: # (          "destinationAccountNo": "8053660290",)
+
+[//]: # (          "destinationCountry": "Nigeria",)
+
+[//]: # (          "feeDeductionAmount": 200.0000,)
+
+[//]: # (          "netAmount": 800.0000,)
+
+[//]: # (          "payerEmail": "ataiwo84@gmail.com",)
+
+[//]: # (          "payerFirstName": "John",)
+
+[//]: # (          "paymentDescription": "Payment tests",)
+
+[//]: # (          "status": "SUCCESSFUL",)
+
+[//]: # (          "sourceAccountName": "John Sarah",)
+
+[//]: # (          "sourceAccountNumber": "3039323401",)
+
+[//]: # (          "sourceBank": "First Bank of Nigeria",)
+
+[//]: # (          "sourceCountry": "Nigeria",)
+
+[//]: # (          "transactionDate": "2025-01-17T01:09:00",)
+
+[//]: # (          "transactionReference": "trfknnnndfbbbvvbbnnndgddggvgoedgd")
+
+[//]: # (      },)
+
+[//]: # (      "eventType": "ussd.collection.status",)
+
+[//]: # (      "sentAt": "2025-01-17T03:22:58.7117494")
+
+[//]: # (  })
+
+[//]: # (```)
+
+[//]: # (</Tab>)
   <Tab title="Payout transaction status">
   ```json
     {

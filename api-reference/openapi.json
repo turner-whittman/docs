@@ -1487,7 +1487,7 @@
       "securitySchemes": {
         "Bearer": {
           "type": "apiKey",
-          "description": "JWT Authorization header using the Bearer scheme.",
+          "description": "Authorization header with the <SECRET_KEY> value.",
           "name": "Authorization",
           "in": "header"
         }
