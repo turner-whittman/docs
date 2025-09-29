@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.1",
     "info": {
-      "title": "MerchnatIntegration.Service",
+      "title": "MerchantIntegration.Service",
       "version": "v1"
     },
     "servers": [
@@ -1485,18 +1485,34 @@
         }
       },
       "securitySchemes": {
-        "Bearer": {
+        "AccessAuth": {
+          "name": "X-Access-Key",
+          "in": "header",
           "type": "apiKey",
-          "description": "Authorization header with the <SECRET_KEY> value.",
-          "name": "Authorization",
-          "in": "header"
+          "description": "Access key from Dashboard"
+        },
+        "SignatureAuth": {
+          "name": "X-Access-Signature",
+          "in": "header",
+          "type": "apiKey",
+          "description": "HMAC-SHA256 signature (hex lowercase)"
+        },
+        "TimestampAuth": {
+          "name": "X-Access-Ts",
+          "in": "header",
+          "type": "apiKey",
+          "description": "Unix timestamp in seconds (UTC) as a string"
         }
-      }
+}
     },
-    "security": [
-      {
-        "Bearer": [ ]
-      }
-    ]
+
+  "security": [
+    {
+      "AccessAuth": [],
+      "SignatureAuth": [],
+      "TimestampAuth": []
+    }
+  ]
+
 }
   

@@ -14,8 +14,10 @@ To request for an account, make a `POST` request to the endpoint `/v1/static-acc
 
 ```bash Request
 curl --request POST \
-  --url https://adapter.cepta.co/api/v1/static-accounts \
-  --header 'Authorization: <SECRET_KEY>' \
+  --url https://adapter.cepta.co/api/v1/pay/static-accounts \
+  --header 'X-Access-Key: <X-Access-Key>' \
+  --header 'X-Access-Signature: <X-Access-Signature>' \
+  --header 'X-Access-Ts: <X-Access-Ts>' \
   --header 'Content-Type: application/json' \
   --data '
     {
