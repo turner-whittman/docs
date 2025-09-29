@@ -18,13 +18,13 @@
       "to": "#B7EF34"
     }
   },
-  "font": {
-    "body": {
-      "family": "Raleway, sans-serif",
-      "url":"https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap",
-      "format": "woff"
-    }
-  },
+//  "font": {
+//    "body": {
+//      "family": "Roboto, sans-serif",
+//      "url": "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap",
+//      "format": "woff2"
+//    }
+//  },
   "theme": "quill",
   "topbarLinks": [
     {
@@ -168,7 +168,7 @@
         "links": [
           { 
             "label": "Contact Support", 
-            "url": "/#" 
+            "url": "mailto:support@cepta.co"
           },
           { 
             "label": "Join Community", 

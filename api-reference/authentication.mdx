@@ -1,18 +1,269 @@
 ---
 title: 'Authentication'
-description: 'Obtain the API secret key to authenticate with Cepta.'
+description: 'To start working with the Cepta API, all clients must authenticate themselves.'
 ---
 
-## overview
+## Overview
 
-To authenticate API requests, you must include a secret key in the `Authorization` header of your requests. You can obtain the secret key from your [Dashboard](https://app.cepta.co/settings/api-credentials) once you’ve created your account and logged in.
+An access key `public key` is a secure method of communication with our API.  You can generate keys from the  [Dashboard](https://app.cepta.co/settings/api-credentials) once you’ve created your account and logged in.
 
 Here’s an example of how to include the secret key in your API requests:
 
-```bash
-curl -X GET https://adapter.cepta.co/endpoint \
--H "Authorization: <SECRET_KEY>"
-```
+## Make requests
+
+All requests must contain the following headers:
+
+- `X-Access-Key` - an app token that you generate in the Dashboard.
+- `X-Access-Signature` - a request signature in the HEX format and lowercase.
+- `X-Access-Ts` - a number of seconds since Unix Epoch in UTC.
+
+## Sign requests
+
+The value of the `X-Access-Signature header` is generated with the `sha256 HMAC` algorithm using a secret key on the bytes obtained by concatenating the following information:
+
+- A timestamp (value of the `X-Access-Ts` header) taken as a string.
+- An HTTP method name in upper-case, e.g. `GET` or `POST`.
+- URI of the request without a host name, starting with a slash and including all query parameters, e.g. `/api/v1/pay/confirm-status?TransactionRef=exampleRef`
+- Request body, taken exactly as it will be sent. If there is no request body, e.g., for `GET` requests, do not include it.
+
+
+<Tabs>
+  <Tab title="Javascript">
+      ```javascript
+        const crypto = require("crypto");
+        const axios = require("axios");
+
+        // Replace with your generated keys from the Dashboard
+        const SECRET_KEY = "your-secret-key";
+
+        const BASE_URL = "https://api.example.com";
+
+        /**
+         * Generate HMAC-SHA256 signature
+         */
+        function generateSignature(secretKey, timestamp, method, uri, body = "") {
+          const message = `${timestamp}${method.toUpperCase()}${uri}${body}`;
+          return crypto
+            .createHmac("sha256", secretKey)
+            .update(message)
+            .digest("hex")
+            .toLowerCase();
+        }
+
+        /**
+         * Make signed request
+         */
+        async function makeRequest(method, uri, body = "") {
+          const timestamp = Math.floor(Date.now() / 1000).toString(); // seconds since Unix epoch UTC
+          const signature = generateSignature(SECRET_KEY, timestamp, method, uri, body);
+
+          const headers = {
+            "X-Access-Key": SECRET_KEY,
+            "X-Access-Signature": signature,
+            "X-Access-Ts": timestamp,
+            "Content-Type": "application/json",
+          };
+
+          const url = `${BASE_URL}${uri}`;
+
+          try {
+            let response;
+            if (method.toUpperCase() === "GET") {
+              response = await axios.get(url, { headers });
+            } else if (method.toUpperCase() === "POST") {
+              response = await axios.post(url, body ? JSON.parse(body) : {}, { headers });
+            } else {
+              throw new Error("Unsupported HTTP method");
+            }
+
+            console.log("Response:", response.status, response.data);
+            return response.data;
+          } catch (err) {
+            console.error("Request failed:", err.response?.status, err.response?.data || err.message);
+            throw err;
+          }
+        }
+
+        // Example usage:
+
+        // GET request (no body)
+        makeRequest("GET", "/api/v1/pay/confirm-status?TransactionRef=exampleRef");
+
+        // POST request (with body)
+        const body = JSON.stringify({ amount: 100, currency: "USD" });
+        makeRequest("POST", "/api/v1/pay/initiate", body);
+
+      ```
+  </Tab>
+    <Tab title="Python">
+        ```python
+            import time, hmac, hashlib, requests
+
+            SECRET_KEY = "your-secret-key"
+            BASE_URL = "https://api.example.com"
+
+            def generate_signature(secret_key, timestamp, method, uri, body=""):
+                message = f"{timestamp}{method.upper()}{uri}{body}"
+                return hmac.new(secret_key.encode(), message.encode(), hashlib.sha256).hexdigest().lower()
+
+            def make_request(method, uri, body=""):
+                timestamp = str(int(time.time()))
+                signature = generate_signature(SECRET_KEY, timestamp, method, uri, body)
+
+                headers = {
+                    "X-Access-Key": SECRET_KEY,
+                    "X-Access-Signature": signature,
+                    "X-Access-Ts": timestamp,
+                    "Content-Type": "application/json"
+                }
+                url = f"{BASE_URL}{uri}"
+                r = requests.request(method, url, headers=headers, data=body)
+                print("Response:", r.status_code, r.text)
+        ```
+    </Tab>
+    <Tab title=".NET">
+       ```csharp
+            using System;
+            using System.Net.Http;
+            using System.Security.Cryptography;
+            using System.Text;
+            using System.Threading.Tasks;
+
+            class Program
+            {
+                private const string SECRET_KEY = "your-secret-key";
+                private const string BASE_URL = "https://api.example.com";
+
+                static async Task Main(string[] args)
+                {
+                    await MakeRequest("GET", "/api/v1/pay/confirm-status?TransactionRef=exampleRef");
+                    await MakeRequest("POST", "/api/v1/pay/initiate", "{\"amount\":100,\"currency\":\"USD\"}");
+                }
+
+                static string GenerateSignature(string secretKey, string timestamp, string method, string uri, string body = "")
+                {
+                    var message = $"{timestamp}{method.ToUpper()}{uri}{body}";
+                    using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(secretKey)))
+                    {
+                        var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(message));
+                        return BitConverter.ToString(hash).Replace("-", "").ToLower();
+                    }
+                }
+
+                static async Task MakeRequest(string method, string uri, string body = "")
+                {
+                    var timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString();
+                    var signature = GenerateSignature(SECRET_KEY, timestamp, method, uri, body);
+
+                    using (var client = new HttpClient())
+                    {
+                        client.DefaultRequestHeaders.Add("X-Access-Key", SECRET_KEY);
+                        client.DefaultRequestHeaders.Add("X-Access-Signature", signature);
+                        client.DefaultRequestHeaders.Add("X-Access-Ts", timestamp);
+
+                        HttpResponseMessage response;
+
+                        if (method.ToUpper() == "GET")
+                        {
+                            response = await client.GetAsync(BASE_URL + uri);
+                        }
+                        else if (method.ToUpper() == "POST")
+                        {
+                            var content = new StringContent(body, Encoding.UTF8, "application/json");
+                            response = await client.PostAsync(BASE_URL + uri, content);
+                        }
+                        else
+                        {
+                            throw new Exception("Unsupported method");
+                        }
+
+                        var responseText = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine($"Response: {response.StatusCode} {responseText}");
+                    }
+                }
+            }
+        ```
+    </Tab>
+    <Tab title="Go">
+        ```go
+            package main
+
+            import (
+                "bytes"
+                "crypto/hmac"
+                "crypto/sha256"
+                "encoding/hex"
+                "fmt"
+                "io"
+                "net/http"
+                "strings"
+                "time"
+            )
+
+            const (
+                SECRET_KEY = "your-secret-key"
+                BASE_URL   = "https://api.example.com"
+            )
+
+            func generateSignature(secretKey, timestamp, method, uri, body string) string {
+                message := fmt.Sprintf("%s%s%s%s", timestamp, strings.ToUpper(method), uri, body)
+                h := hmac.New(sha256.New, []byte(secretKey))
+                h.Write([]byte(message))
+                return hex.EncodeToString(h.Sum(nil))
+            }
+
+            func makeRequest(method, uri, body string) error {
+                timestamp := fmt.Sprintf("%d", time.Now().Unix())
+                signature := generateSignature(SECRET_KEY, timestamp, method, uri, body)
+
+                client := &http.Client{}
+                url := BASE_URL + uri
+
+                var req *http.Request
+                var err error
+
+                if strings.ToUpper(method) == "GET" {
+                    req, err = http.NewRequest("GET", url, nil)
+                } else if strings.ToUpper(method) == "POST" {
+                    req, err = http.NewRequest("POST", url, bytes.NewBuffer([]byte(body)))
+                    req.Header.Set("Content-Type", "application/json")
+                } else {
+                    return fmt.Errorf("unsupported method: %s", method)
+                }
+
+                if err != nil {
+                    return err
+                }
+
+                req.Header.Set("X-Access-Key", SECRET_KEY)
+                req.Header.Set("X-Access-Signature", signature)
+                req.Header.Set("X-Access-Ts", timestamp)
+
+                resp, err := client.Do(req)
+                if err != nil {
+                    return err
+                }
+                defer resp.Body.Close()
+
+                respBody, _ := io.ReadAll(resp.Body)
+                fmt.Printf("Response: %d %s\n", resp.StatusCode, string(respBody))
+                return nil
+            }
+
+            func main() {
+                // Example GET
+                makeRequest("GET", "/api/v1/pay/confirm-status?TransactionRef=exampleRef", "")
+
+                // Example POST
+                body := `{"amount":100,"currency":"USD"}`
+                makeRequest("POST", "/api/v1/pay/initiate", body)
+            }
+            ```
+    </Tab>
+
+</Tabs>
+
+
 
 <Warning>
   **Always protect your secret keys**

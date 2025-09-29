@@ -14,7 +14,9 @@ description: 'Learn how to validate a customer purchase via OTP'
 ```bash Request
 curl --request POST \
   --url https://adapter.cepta.co/api/v1/pay/validate-otp \
-  --header 'Authorization: <SECRET_KEY>' \
+  --header 'X-Access-Key: <X-Access-Key>' \
+  --header 'X-Access-Signature: <X-Access-Signature>' \
+  --header 'X-Access-Ts: <X-Access-Ts>' \
   --header 'Content-Type: application/json' \
   --data '
     {

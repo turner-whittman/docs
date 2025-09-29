@@ -20,7 +20,9 @@ To initialize a transaction, when you make a `POST` request to the endpoint `/v1
 ```bash Request
 curl --request POST \
   --url https://adapter.cepta.co/api/v1/pay \
-  --header 'Authorization: <SECRET_KEY>' \
+  --header 'X-Access-Key: <X-Access-Key>' \
+  --header 'X-Access-Signature: <X-Access-Signature>' \
+  --header 'X-Access-Ts: <X-Access-Ts>' \
   --header 'Content-Type: application/json' \
   --data '
     {
