@@ -1,4 +1,4 @@
-FROM node:18-alpine AS runner
+FROM node:22-alpine AS runner
 WORKDIR /app
 
 RUN npm i -g mintlify
