@@ -8,7 +8,7 @@ jobs:
   build:
     name: Cepta Build Microservice
     if: github.ref == 'refs/heads/main'
-    uses: TurnerWhittman/actions-workflow/.github/workflows/frontend-build.yml@main
+    uses: TurnerWhittman/actions-workflow/.github/workflows/frontend-build.yml@12fcfec168e422d4b9ec3a3f13953ebdeef7eb9a
     with:
       ECR_REPOSITORY: "twpay-api-documentation"
     secrets:
@@ -18,9 +18,9 @@ jobs:
     name: Cepta Deploy Microservice
     needs: build
     if: github.ref == 'refs/heads/main'
-    uses: TurnerWhittman/actions-workflow/.github/workflows/release.yml@main
+    uses: TurnerWhittman/actions-workflow/.github/workflows/release.yml@12fcfec168e422d4b9ec3a3f13953ebdeef7eb9a
     with:
-      SERVICE: apidocs
+      service: apidocs
       GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
       GITHUB_ACTOR: ${{ github.actor }}
       GITHUB_REF_NAME: ${{ github.ref_name }}
