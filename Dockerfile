@@ -1,7 +1,7 @@
 FROM node:22-alpine AS runner
 WORKDIR /app
 
-RUN npm i -g mintlify
+RUN npm i -g mint
 
 COPY . .
 
@@ -12,5 +12,5 @@ USER nextjs
 EXPOSE 3000
 
 
-CMD ["mintlify", "dev"]
+CMD ["mint", "dev"]
 
