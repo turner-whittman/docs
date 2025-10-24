@@ -14,9 +14,9 @@ description: 'Learn how to initialize a charge to accept payments'
 ```bash Request
 curl --request POST \
   --url https://adapter.cepta.co/api/v1/pay/purchase \
-  --header 'X-Access-Key: <X-Access-Key>' \
-  --header 'X-Access-Signature: <X-Access-Signature>' \
-  --header 'X-Access-Ts: <X-Access-Ts>' \
+  --header 'X-Access-Ts: <EPOCH Timestamp(seconds)>' \
+  --header 'X-Access-Key: <PUBLIC_KEY>' \
+  --header 'X-Access-Signature: <HMAC SHA256 signature>' \
   --header 'Content-Type: application/json' \
   --data '
     {

@@ -18,16 +18,23 @@
       "to": "#B7EF34"
     }
   },
-  "theme": "quill",
+  "font": {
+    "body": {
+      "family": "Hubot Sans",
+      "url":"https://mintlify-assets.b-cdn.net/fonts/Hubot-Sans.woff2",
+      "format": "woff2"
+    }
+  },
+  "theme": "prism",
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "support@cepta.co"
+      "url": "info@cepta.co"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://app.cepta.co/home"
+    "url": "https://dev.twpay.io/home"
   },
   "versions": [
     "v1.0"
@@ -151,34 +158,34 @@
     }
   ],
   "footer": {
-    "socials": { 
-      "x": "https://cepta.co/", 
-      "website": "https://cepta.co/" 
+    "socials": {
+      "x": "https://cepta.co/",
+      "website": "https://cepta.co/"
     },
     "links": [
       {
         "title": "Need Help?",
         "links": [
-          { 
-            "label": "Contact Support", 
-            "url": "mailto:support@cepta.co"
+          {
+            "label": "Contact Support",
+            "url": "/#"
           },
-          { 
-            "label": "Join Community", 
-            "url": "/#" 
+          {
+            "label": "Join Community",
+            "url": "/#"
           },
-          { 
-            "label": "Contact sales", 
-            "url": "mailto:sales@cepta.co" 
+          {
+            "label": "Contact sales",
+            "url": "mailto:sales@cepta.co"
           }
         ]
       },
       {
         "title": "Product Update",
         "links": [
-          { 
-            "label": "Changelogs", 
-            "url": "/#" 
+          {
+            "label": "Changelogs",
+            "url": "/#"
           }
         ]
       }
