@@ -77,9 +77,9 @@ Here’s how you would verify a payment:
 ```bash
 curl --request GET \
   --url https://adapter.cepta.co/api/v1/pay/verify-payment?TransactionRef=ABC123XYZ \
-  --header 'X-Access-Key: <X-Access-Key>' \
-  --header 'X-Access-Signature: <X-Access-Signature>' \
-  --header 'X-Access-Ts: <X-Access-Ts>' \
+  --header 'X-Access-Ts: <EPOCH Timestamp(seconds)>' \
+  --header 'X-Access-Key: <PUBLIC_KEY>' \
+  --header 'X-Access-Signature: <HMAC SHA256 signature>' \
   --header 'Content-Type: application/json'
 ```
 This request checks the status of the payment and provides you with a detailed response about the transaction.

@@ -38,7 +38,9 @@ Initialize a transaction link endpoint by making an API call to this endpoint. [
 ```bash Request
 curl --request POST \
   --url https://adapter.cepta.co/api/v1/pay \
-  --header 'Authorization: Bearer <SECRET_KEY>' \
+  --header 'X-Access-Ts: <EPOCH Timestamp(seconds)>' \
+  --header 'X-Access-Key: <PUBLIC_KEY>' \
+  --header 'X-Access-Signature: <HMAC SHA256 signature>' \
   --header 'Content-Type: application/json' \
   --data '
     {
@@ -48,8 +50,7 @@ curl --request POST \
         "pageName": "Checkout Page",
         "transactionReference": "ABC123XYZ",
         "customerEmail": "customer@example.com",
-        "customUrl": "https://example.com/thank-you",
-        "expiryDate": "2024-11-29T12:03:11.391Z"
+        "customUrlText": "callback",
     }
   '
 ```
