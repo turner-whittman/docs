@@ -29,12 +29,12 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "info@cepta.co"
+      "url": "https://app.cepta.co"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dev.twpay.io/home"
+    "url": "https://app.cepta.co"
   },
   "versions": [
     "v1.0"
