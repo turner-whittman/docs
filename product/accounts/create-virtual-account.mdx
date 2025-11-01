@@ -30,33 +30,23 @@ curl --request POST \
   '
 ```
 
-
-<ParamField body="order" type="object" required>
-    Account reference
+<ParamField body="data" type="object" required>
+    Create Virtual Account
     <Expandable title="object" defaultOpen="true">
-        <ParamField body="amount" type="number" required>
-            The payment amount to be paid by customer (must be greater than 0)
+        <ParamField body="firstName" type="string" required>
+            Account holder first name.
         </ParamField>
-        <ParamField body="currency" type="string" required>
-            The currency code (e.g., "USD", "NGN")
+        <ParamField body="lastName" type="string" required>
+            Account holder last name.
         </ParamField>
-        <ParamField body="description" type="string" required>
-            Description of the transaction
+        <ParamField body="phoneNumber" type="string" required>
+            Account holder phone number.
         </ParamField>
-        <ParamField body="pageName" type="string" required>
-            Name of the payment page
+        <ParamField body="email" type="string" required>
+            Account holder email.
         </ParamField>
-        <ParamField body="transactionReference" type="string" required>
-            Unique identifier for the transaction
-        </ParamField>
-        <ParamField body="customerEmail" type="string" required>
-            The customer email address.
-        </ParamField>
-        <ParamField body="customUrl" type="string">
-            URL to redirect after payment
-        </ParamField>
-        <ParamField body="expiryDate" type="string (ISO 8601)" required>
-            Expiry date for the payment link.
+        <ParamField body="bvn" type="string" required>
+            Account holder bvn.
         </ParamField>
     </Expandable>
 </ParamField>
