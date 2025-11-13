@@ -55,7 +55,8 @@
       "icon": "door-open",
       "pages": [
         "home",
-        "quickstart"
+        "quickstart",
+        "test-card"
       ]
     },
     {
