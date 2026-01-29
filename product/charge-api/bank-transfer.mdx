@@ -1,0 +1,118 @@
+---
+title: 'Bank Transfer'
+description: 'Learn how to Initiate bank transfer.'
+---
+
+# Bank Transfer
+
+<Info> 
+  This API is used to initiate bank transfer. It’s important to verify all transactions before updating your customer about the status of their payment to ensure accurate and timely information.
+</Info>
+
+## Request parameter
+
+```bash Request
+curl --request GET \
+  --url https://adapter.cepta.co/api/v1/pay/transfer \
+  --header 'X-Access-Ts: <EPOCH Timestamp(seconds)>' \
+  --header 'X-Access-Key: <PUBLIC_KEY>' \
+  --header 'X-Access-Signature: <HMAC SHA256 signature>' \
+  --header 'Content-Type: application/json' \
+```
+
+<Note>
+	Ensure secure handling of md (merchant data) and token to maintain transaction integrity.
+</Note>
+
+## Confirm transfer API Response
+
+A sample response of what to expect when a call is made to confirm API status
+```json Success response
+{
+    "status": true,
+    "message": "Bank Transfer Succeeded",
+    "data": {
+        "transactionRef": "TW201321082886170_20290129012944",
+        "virtualAccount": "1234567890",
+        "virtualAccountName": "Cepta / TWDSL",
+        "virtualBank": "Cepta",
+        "accountExpiration": "01/29/2026 01:59:26",
+        "transferAmount": 100.00,
+        "responseCode": "00"
+    }
+}
+```
+
+## Handling successful API response.
+
+When a transaction has been initiated successfully, the API returns response data that can be used to update the customer about the current stage of their transaction.
+
+Below is the list of responses you can expect and their usage:
+<ResponseField name="status" type="boolean">
+  Indicates if the request was successful.
+</ResponseField>
+<ResponseField name="message" type="string">
+  Descriptive message about the result.
+</ResponseField>
+<ResponseField name="data" type="object">
+    Contains detailed transaction status.
+    <Expandable title="object"  defaultOpen="true">
+        <ResponseField name="responseCode" type="string">
+           Response code from the payment processor
+        </ResponseField>
+        <ResponseField name="accountExpiration" type="string (ISO 8601)">
+           Expiry date of the token.
+        </ResponseField>
+        <ResponseField name="transactionReference" type="string">
+           Reference of the queried transaction.
+        </ResponseField>
+        <ResponseField name="transactionRef" type="string">
+           Reference of the validated transaction
+        </ResponseField>
+        <ResponseField name="amount" type="number">
+           Transaction amount.
+        </ResponseField>
+        <ResponseField name="virtualAccount" type="number">
+            Virtual account number
+        </ResponseField>
+        <ResponseField name="virtualAccountName" type="string">
+            Name of the virtual account.
+        </ResponseField>
+        <ResponseField name="virtualBank" type="string">
+            Bank involved in the transaction.
+        </ResponseField>
+        <ResponseField name="status" type="string">
+            Status of the transaction
+        </ResponseField>
+        <ResponseField name="errors" type="array">
+           Array of error objects, if any.
+           <Expandable title="array" defaultOpen="false">
+               <ResponseField name="errorCode" type="string">
+                  Specific error code, if applicable.
+               </ResponseField>
+               <ResponseField name="message" type="string">
+                  Description of the error.
+               </ResponseField>
+           </Expandable>
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+
+## Handling failed API response
+When your response message is returned as a failed response, the response.data will return an array containing details of the error. You can show this to your customer to notify them of what went wrong.
+
+Below is a sample failed response data:
+```json Failed response
+{
+  "status": false,
+  "message": "Transaction not found.",
+  "data": {
+    "errors": [
+      {
+        "errorCode": "TRANSACTION_NOT_FOUND",
+        "message": "No transaction found for the provided reference."
+      }
+    ]
+  }
+}
+```

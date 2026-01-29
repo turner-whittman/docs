@@ -68,8 +68,7 @@
           "pages": [
             "setup-cepta/create-account/overview",
             "setup-cepta/create-account/activate-your-account",
-            "setup-cepta/create-account/acceptable-document",
-            "setup-cepta/create-account/test-card"
+            "setup-cepta/create-account/acceptable-document"
           ]
         },
         {
@@ -96,6 +95,7 @@
           "group": "Charge API",
           "pages": [
             "product/charge-api/overview",
+            "product/charge-api/bank-transfer",
             "product/charge-api/initialize-transaction",
             "product/charge-api/validate-transaction-otp",
             "product/charge-api/confirm-transaction"
@@ -130,6 +130,7 @@
     {
       "group": "Charge API",
       "pages": [
+        "api-reference/charge-api/aggregator-bank-transfer",
         "api-reference/charge-api/aggregator-purchase",
         "api-reference/charge-api/aggregator-validate-otp",
         "api-reference/charge-api/aggregator-verify-payment-link"
