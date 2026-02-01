@@ -133,7 +133,8 @@
         "api-reference/charge-api/aggregator-bank-transfer",
         "api-reference/charge-api/aggregator-purchase",
         "api-reference/charge-api/aggregator-validate-otp",
-        "api-reference/charge-api/aggregator-verify-payment-link"
+        "api-reference/charge-api/aggregator-verify-payment-link",
+        "api-reference/charge-api/aggregator-verify-payment-link-sandbox"
       ]
     },
     {

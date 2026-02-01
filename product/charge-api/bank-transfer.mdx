@@ -18,7 +18,45 @@ curl --request GET \
   --header 'X-Access-Key: <PUBLIC_KEY>' \
   --header 'X-Access-Signature: <HMAC SHA256 signature>' \
   --header 'Content-Type: application/json' \
+  -- data '
+       {
+          "transactionRef": "111111111111111349122",
+          "customerEmail": "customer@email.com",
+          "amount": 100,
+          "currency": "NGN"
+        }
+    '
 ```
+To get started with the Bank Transfer API, initialize a transaction using the example request described above.
+
+You are required to pass several parameters as part of the request. Required parameters include amount, transactionRef, currency, and customerEmail.
+
+In the sandbox environment, the virtual account returned is static and will always respond with `Bank Transfer Succeeded` and a 200 status code.
+
+In the production environment, a unique virtual account is generated for the customer to transfer funds into. If the payment has not yet been confirmed by the processor, calling the endpoint `confirm-status?transactionRef=exampleRef` will return a pending status.
+
+
+<Info>
+  To confirm bank transfer on sandbox, use this endpoint
+
+    `https://adapter.cepta.co/api/v1/pay/simulate-notification?transactionRef=exampleRef`.  Use the [confirm transaction](/product/charge-api/confirm-transaction) in production.
+</Info>
+
+Below is a list of request parameters accepted for the purchase API.
+
+<ParamField body="transactionRef" type="string" required>
+    Unique reference for the transaction.
+</ParamField>
+<ParamField body="customerEmail" type="string" required>
+    Email of the customer making the purchase.
+</ParamField>
+<ParamField body="amount" type="number" required>
+    Amount to be charged
+</ParamField>
+<ParamField body="currency" type="string" required>
+    Currency of the transaction ("NGN").
+</ParamField>
+
 
 <Note>
 	Ensure secure handling of md (merchant data) and token to maintain transaction integrity.
@@ -61,7 +99,7 @@ Below is the list of responses you can expect and their usage:
            Response code from the payment processor
         </ResponseField>
         <ResponseField name="accountExpiration" type="string (ISO 8601)">
-           Expiry date of the token.
+           Expiry date of the Virtual Account
         </ResponseField>
         <ResponseField name="transactionReference" type="string">
            Reference of the queried transaction.
@@ -98,21 +136,3 @@ Below is the list of responses you can expect and their usage:
     </Expandable>
 </ResponseField>
 
-## Handling failed API response
-When your response message is returned as a failed response, the response.data will return an array containing details of the error. You can show this to your customer to notify them of what went wrong.
-
-Below is a sample failed response data:
-```json Failed response
-{
-  "status": false,
-  "message": "Transaction not found.",
-  "data": {
-    "errors": [
-      {
-        "errorCode": "TRANSACTION_NOT_FOUND",
-        "message": "No transaction found for the provided reference."
-      }
-    ]
-  }
-}
-```
