@@ -108,6 +108,14 @@
             "product/accounts/create-dynamic-account",
             "product/accounts/list-all-virtual-accounts"
           ]
+        },
+        {
+          "group": "KES Payment",
+          "pages": [
+            "product/kes-payment/overview",
+            "product/kes-payment/ussd-charge",
+            "product/kes-payment/single-transfer"
+          ]
         }
       ]
     },
@@ -142,6 +150,13 @@
         "api-reference/accounts/creates-a-virtual-account",
         "api-reference/accounts/create-dynamic-virtual-account",
         "api-reference/accounts/get-static-account-for-a-merchant"
+      ]
+    },
+    {
+      "group": "KES Payment API",
+      "pages": [
+        "api-reference/kes-payment/ussd-charge",
+        "api-reference/kes-payment/single-transfer"
       ]
     },
     {
