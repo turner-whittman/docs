@@ -1,0 +1,55 @@
+---
+title: 'Overview'
+description: 'Accept mobile money payments and disburse funds across M-PESA, Airtel Money, T-KASH, and SasaPay in Kenya'
+---
+
+The KES Payment API lets you collect payments from customers via STK Push (USSD Charge) and send funds out to mobile money wallets (Single Transfer). Both endpoints operate in Kenyan Shillings (KES) and route through the SasaPay aggregation layer.
+
+## Supported Channels
+
+| Channel Code | Provider     |
+|-------------|--------------|
+| `63902`     | M-PESA       |
+| `63903`     | Airtel Money |
+| `63907`     | T-KASH       |
+| `0`         | SasaPay      |
+
+## How it works
+
+### USSD Charge
+
+When you initiate a USSD Charge, Cepta sends an STK Push notification directly to your customer's phone. The customer enters their mobile money PIN to approve the payment. You receive the outcome via webhook or by polling the verify-payment endpoint.
+
+1. Call `POST /api/v1/pay/ussd-charge` with the customer's phone number, amount, and channel code.
+2. The customer receives a push prompt on their phone and enters their PIN.
+3. Verify the final payment status using your webhook or the verify-payment endpoint.
+
+### Single Transfer (B2C Payout)
+
+Single Transfer moves funds from your Cepta merchant account directly to a recipient's mobile money wallet. Ensure your merchant account has sufficient balance before initiating a payout.
+
+1. Fund your Cepta merchant account via STK Push collection.
+2. Call `POST /api/v1/pay/single-transfer` with the recipient details and amount.
+
+<Note>
+  Ensure your Cepta merchant account has sufficient balance before initiating a Single Transfer. Insufficient balance will return a `400` error with the message `"Insufficient balance to send KES X.XX"`.
+</Note>
+
+
+
+<CardGroup cols={2}>
+  <Card
+    title="USSD Charge"
+    icon="mobile"
+    href="/product/kes-payment/ussd-charge"
+  >
+    Trigger an STK Push to collect payment from a customer's mobile wallet.
+  </Card>
+  <Card
+    title="Single Transfer"
+    icon="money-bill-transfer"
+    href="/product/kes-payment/single-transfer"
+  >
+    Send funds from your merchant account to a mobile money number.
+  </Card>
+</CardGroup>

@@ -626,6 +626,186 @@
       },
 
 
+      "/api/v1/pay/ussd-charge": {
+        "post": {
+          "tags": [
+            "Pay"
+          ],
+          "summary": "USSD Charge (STK Push)",
+          "description": "Triggers an STK Push prompt on the customer's mobile phone to collect payment. Supports M-PESA (63902), Airtel Money (63903), T-KASH (63907), and SasaPay (0).",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorUssdChargeRequestDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorUssdChargeRequestDto"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorUssdChargeRequestDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AggregatorUssdChargeResponseDtoBaseResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AggregatorUssdChargeResponseDtoBaseResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AggregatorUssdChargeResponseDtoBaseResponse"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BaseResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BaseResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BaseResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AggregatorUssdChargeResponseDtoBaseResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AggregatorUssdChargeResponseDtoBaseResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AggregatorUssdChargeResponseDtoBaseResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/pay/single-transfer": {
+        "post": {
+          "tags": [
+            "Pay"
+          ],
+          "summary": "Single Transfer (B2C Payout)",
+          "description": "Sends money from the merchant SasaPay account to a recipient's mobile money number. Supports M-PESA (63902), Airtel Money (63903), and SasaPay (0).",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorSingleTransferRequestDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorSingleTransferRequestDto"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorSingleTransferRequestDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AggregatorSingleTransferResponseDtoBaseResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AggregatorSingleTransferResponseDtoBaseResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AggregatorSingleTransferResponseDtoBaseResponse"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BaseResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BaseResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BaseResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AggregatorSingleTransferResponseDtoBaseResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AggregatorSingleTransferResponseDtoBaseResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AggregatorSingleTransferResponseDtoBaseResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "/api/v1/pay/static-accounts": {
         "post": {
           "tags": [
@@ -1784,6 +1964,226 @@
               "type": "string",
               "nullable": true,
               "description": "The user's bvn"
+            }
+          },
+          "additionalProperties": false
+        },
+        "AggregatorUssdChargeRequestDto": {
+          "required": [
+            "amount",
+            "customerEmail",
+            "transactionRef"
+          ],
+          "type": "object",
+          "properties": {
+            "transactionRef": {
+              "pattern": "^[a-zA-Z0-9-_\\s]*$",
+              "type": "string",
+              "description": "Unique reference for this transaction (alphanumeric, hyphens, underscores, spaces)"
+            },
+            "customerEmail": {
+              "pattern": "^[a-zA-Z0-9@_.\\s]*$",
+              "type": "string",
+              "description": "Email address of the customer"
+            },
+            "amount": {
+              "pattern": "^[1-9]\\d*(\\.\\d+)?$",
+              "type": "number",
+              "format": "double",
+              "description": "Amount to charge the customer (must be greater than 0)"
+            },
+            "currency": {
+              "type": "string",
+              "nullable": true,
+              "description": "Currency code. Must be \"KES\""
+            },
+            "bankAccount": {
+              "type": "string",
+              "nullable": true,
+              "description": "Mobile money channel code: 63902 (M-PESA), 63903 (Airtel Money), 63907 (T-KASH), 0 (SasaPay)"
+            },
+            "phoneNumber": {
+              "type": "string",
+              "nullable": true,
+              "description": "Customer phone number in 254XXXXXXXXX format"
+            },
+            "fullName": {
+              "type": "string",
+              "nullable": true,
+              "description": "Full name of the customer (optional)"
+            }
+          },
+          "additionalProperties": false
+        },
+        "AggregatorUssdChargeResponseDto": {
+          "type": "object",
+          "properties": {
+            "transactionRef": {
+              "type": "string",
+              "nullable": true,
+              "description": "The transaction reference echoed back"
+            },
+            "ussdCode": {
+              "type": "string",
+              "nullable": true,
+              "description": "USSD code returned by the provider where applicable"
+            },
+            "amount": {
+              "type": "number",
+              "format": "double",
+              "description": "Amount charged"
+            },
+            "responseCode": {
+              "type": "string",
+              "nullable": true,
+              "description": "Response code from the mobile money provider. 0 indicates success"
+            },
+            "paymentId": {
+              "type": "string",
+              "nullable": true,
+              "description": "Unique payment identifier generated by Cepta"
+            }
+          },
+          "additionalProperties": false
+        },
+        "AggregatorUssdChargeResponseDtoBaseResponse": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "boolean",
+              "description": "Indicates if the STK Push was successfully dispatched"
+            },
+            "message": {
+              "type": "string",
+              "nullable": true,
+              "description": "Descriptive message (e.g., \"MPESA STK sent. Enter your PIN\")"
+            },
+            "data": {
+              "$ref": "#/components/schemas/AggregatorUssdChargeResponseDto"
+            }
+          },
+          "additionalProperties": false
+        },
+        "AggregatorSingleTransferRequestDto": {
+          "required": [
+            "accountName",
+            "accountNumber",
+            "amount",
+            "bankAccount",
+            "currency",
+            "description",
+            "reference"
+          ],
+          "type": "object",
+          "properties": {
+            "bankAccount": {
+              "type": "string",
+              "description": "Mobile money channel code: 63902 (M-PESA), 63903 (Airtel Money), 0 (SasaPay)"
+            },
+            "accountNumber": {
+              "type": "string",
+              "description": "Recipient phone number in 254XXXXXXXXX format"
+            },
+            "accountName": {
+              "type": "string",
+              "description": "Full name of the recipient"
+            },
+            "amount": {
+              "pattern": "^[1-9]\\d*(\\.\\d+)?$",
+              "type": "number",
+              "format": "double",
+              "description": "Amount to transfer (must be greater than 0)"
+            },
+            "description": {
+              "type": "string",
+              "description": "Purpose or reason for the transfer (e.g., \"Salary disbursement\")"
+            },
+            "currency": {
+              "type": "string",
+              "description": "Currency code. Must be \"KES\""
+            },
+            "reference": {
+              "pattern": "^[a-zA-Z0-9-_\\s]*$",
+              "type": "string",
+              "description": "Unique reference for this transfer (alphanumeric, hyphens, underscores, spaces)"
+            },
+            "narration": {
+              "type": "string",
+              "nullable": true,
+              "description": "Additional notes for the transfer (optional)"
+            }
+          },
+          "additionalProperties": false
+        },
+        "AggregatorSingleTransferResponseDto": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "boolean",
+              "description": "Indicates if the transfer was initiated successfully"
+            },
+            "message": {
+              "type": "string",
+              "nullable": true,
+              "description": "Descriptive message about the transfer result"
+            },
+            "reference": {
+              "type": "string",
+              "nullable": true,
+              "description": "The transfer reference echoed back"
+            },
+            "transactionId": {
+              "type": "string",
+              "nullable": true,
+              "description": "Unique transaction identifier generated by Cepta"
+            },
+            "amount": {
+              "type": "number",
+              "format": "double",
+              "description": "Amount transferred"
+            },
+            "currency": {
+              "type": "string",
+              "nullable": true,
+              "description": "Currency code of the transfer"
+            },
+            "accountNumber": {
+              "type": "string",
+              "nullable": true,
+              "description": "Recipient phone number"
+            },
+            "accountName": {
+              "type": "string",
+              "nullable": true,
+              "description": "Recipient name"
+            },
+            "bankAccount": {
+              "type": "string",
+              "nullable": true,
+              "description": "Channel code used for the transfer"
+            },
+            "transferStatus": {
+              "type": "string",
+              "nullable": true,
+              "description": "Current status of the transfer (e.g., \"pending\")"
+            }
+          },
+          "additionalProperties": false
+        },
+        "AggregatorSingleTransferResponseDtoBaseResponse": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "boolean",
+              "description": "Indicates if the transfer was successfully initiated"
+            },
+            "message": {
+              "type": "string",
+              "nullable": true,
+              "description": "Descriptive message (e.g., \"Transfer initiated successfully\")"
+            },
+            "data": {
+              "$ref": "#/components/schemas/AggregatorSingleTransferResponseDto"
             }
           },
           "additionalProperties": false
