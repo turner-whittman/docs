@@ -7,12 +7,13 @@ The KES Payment API lets you collect payments from customers via STK Push (USSD 
 
 ## Supported Channels
 
-| Channel Code | Provider     |
-|-------------|--------------|
-| `63902`     | M-PESA       |
-| `63903`     | Airtel Money |
-| `63907`     | T-KASH       |
-| `0`         | SasaPay      |
+You can retrieve the list of supported mobile money channels and their codes dynamically from the API:
+
+```
+GET https://adapter.cepta.co/api/v1/pay/mobile-money-banks
+```
+
+The response returns an array of channel objects. Use the `code` field as the `channelCode` when initiating a USSD Charge or Single Transfer.
 
 ## How it works
 

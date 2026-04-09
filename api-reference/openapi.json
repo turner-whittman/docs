@@ -632,7 +632,7 @@
             "Pay"
           ],
           "summary": "USSD Charge (STK Push)",
-          "description": "Triggers an STK Push prompt on the customer's mobile phone to collect payment. Supports M-PESA (63902), Airtel Money (63903), T-KASH (63907), and SasaPay (0).",
+          "description": "Triggers an STK Push prompt on the customer's mobile phone to collect payment. Retrieve supported channel codes from GET /api/v1/pay/mobile-money-banks.",
           "requestBody": {
             "content": {
               "application/json": {
@@ -722,7 +722,7 @@
             "Pay"
           ],
           "summary": "Single Transfer (B2C Payout)",
-          "description": "Sends money from the merchant SasaPay account to a recipient's mobile money number. Supports M-PESA (63902), Airtel Money (63903), and SasaPay (0).",
+          "description": "Sends money from the merchant SasaPay account to a recipient's mobile money number. Retrieve supported channel codes from GET /api/v1/pay/mobile-money-banks.",
           "requestBody": {
             "content": {
               "application/json": {
@@ -2000,7 +2000,7 @@
             "bankAccount": {
               "type": "string",
               "nullable": true,
-              "description": "Mobile money channel code: 63902 (M-PESA), 63903 (Airtel Money), 63907 (T-KASH), 0 (SasaPay)"
+              "description": "Mobile money channel code. Retrieve available codes from GET /api/v1/pay/mobile-money-banks"
             },
             "phoneNumber": {
               "type": "string",
@@ -2078,7 +2078,7 @@
           "properties": {
             "bankAccount": {
               "type": "string",
-              "description": "Mobile money channel code: 63902 (M-PESA), 63903 (Airtel Money), 0 (SasaPay)"
+              "description": "Mobile money channel code. Retrieve available codes from GET /api/v1/pay/mobile-money-banks"
             },
             "accountNumber": {
               "type": "string",

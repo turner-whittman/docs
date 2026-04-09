@@ -11,12 +11,13 @@ description: 'Trigger an SIM Toolkit Push prompt on a customer phone to collect 
 
 ## Channel Codes
 
-| Code    | Provider     |
-|---------|--------------|
-| `63902` | M-PESA       |
-| `63903` | Airtel Money |
-| `63907` | T-KASH       |
-| `0`     | SasaPay      |
+Retrieve the list of supported mobile money channels dynamically:
+
+```
+GET https://adapter.cepta.co/api/v1/pay/mobile-money-banks
+```
+
+Use the `code` field from the response as the `bankAccount` value in your request.
 
 ## Request
 
@@ -61,7 +62,7 @@ curl --request POST \
 </ParamField>
 
 <ParamField body="bankAccount" type="string" required>
-  Mobile money channel code. One of: `63902` (M-PESA), `63903` (Airtel Money), `63907` (T-KASH), `0` (SasaPay).
+  Mobile money channel code. Retrieve available codes from `GET /api/v1/pay/mobile-money-banks`.
 </ParamField>
 
 <ParamField body="phoneNumber" type="string" required>
