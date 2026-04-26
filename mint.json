@@ -114,7 +114,8 @@
           "pages": [
             "product/kes-payment/overview",
             "product/kes-payment/ussd-charge",
-            "product/kes-payment/single-transfer"
+            "product/kes-payment/single-transfer",
+            "product/kes-payment/payout-status"
           ]
         }
       ]
@@ -156,7 +157,9 @@
       "group": "KES Payment API",
       "pages": [
         "api-reference/kes-payment/ussd-charge",
-        "api-reference/kes-payment/single-transfer"
+        "api-reference/kes-payment/single-transfer",
+        "api-reference/kes-payment/payout-status",
+        "api-reference/kes-payment/simulate-payout-notification"
       ]
     },
     {

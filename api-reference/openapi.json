@@ -1,10 +1,10 @@
 {
-    "openapi": "3.0.1",
-    "info": {
-      "title": "MerchantIntegration.Service",
-      "version": "v1"
-    },
-    "servers": [
+  "openapi": "3.0.1",
+  "info": {
+    "title": "MerchantIntegration.Service",
+    "version": "v1"
+  },
+  "servers": [
     {
       "description": "Production",
       "url": "https://adapter.cepta.co"
@@ -14,449 +14,449 @@
       "url": "https://adapter.cepta.co"
     }
   ],
-    "paths": {
-      "/": {
-        "get": {
-          "tags": [
-            "Home"
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
-      },
-      "/api/v1/pay": {
-        "post": {
-          "tags": [
-            "Pay"
-          ],
-          "summary": "Create payment link",
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InitiatePaymentLinkDto"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InitiatePaymentLinkDto"
-                }
-              },
-              "application/*+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InitiatePaymentLinkDto"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/CreatePaymentResponseDto"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/CreatePaymentResponseDto"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/CreatePaymentResponseDto"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not Found",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Bad Request",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/CreatePaymentResponseDto"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/CreatePaymentResponseDto"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/CreatePaymentResponseDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/pay/verify-payment": {
-        "get": {
-          "tags": [
-            "Pay"
-          ],
-          "summary": "Verify payment link",
-          "parameters": [
-            {
-              "name": "TransactionRef",
-              "in": "query",
-              "required": true,
+      }
+    },
+    "/api/v1/pay": {
+      "post": {
+        "tags": [
+          "Pay"
+        ],
+        "summary": "Create payment link",
+        "requestBody": {
+          "content": {
+            "application/json": {
               "schema": {
-                "type": "string"
-              },
-              "description": "Unique identifier for the transaction"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ConfirmMerchantPaymentDto"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ConfirmMerchantPaymentDto"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ConfirmMerchantPaymentDto"
-                  }
-                }
+                "$ref": "#/components/schemas/InitiatePaymentLinkDto"
               }
             },
-            "404": {
-              "description": "Not Found",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                }
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InitiatePaymentLinkDto"
               }
             },
-            "400": {
-              "description": "Bad Request",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ConfirmMerchantPaymentDto"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ConfirmMerchantPaymentDto"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ConfirmMerchantPaymentDto"
-                  }
-                }
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InitiatePaymentLinkDto"
               }
             }
           }
-        }
-      },
-      "/api/v1/pay/confirm-status": {
-        "get": {
-          "tags": [
-            "Pay"
-          ],
-          "summary": "Aggregator Verify payment link",
-          "parameters": [
-            {
-                "name": "TransactionRef",
-                "in": "query",
-                "required": true,
-                "schema": {
-                "type": "string"
-                },
-                "description": "Unique identifier for the transaction"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDto"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDto"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDto"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not Found",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Bad Request",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDto"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDto"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/pay/validate-otp": {
-        "post": {
-          "tags": [
-            "Pay"
-          ],
-          "summary": "Aggregator Validate Otp",
-          "requestBody": {
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
             "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePaymentResponseDto"
+                }
+              },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AggregatorValidateOtpRequestDto"
+                  "$ref": "#/components/schemas/CreatePaymentResponseDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AggregatorValidateOtpRequestDto"
-                }
-              },
-              "application/*+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorValidateOtpRequestDto"
+                  "$ref": "#/components/schemas/CreatePaymentResponseDto"
                 }
               }
             }
           },
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorValidateOtpResponseDto"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorValidateOtpResponseDto"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorValidateOtpResponseDto"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not Found",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Bad Request",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorValidateOtpResponseDto"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorValidateOtpResponseDto"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorValidateOtpResponseDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/pay/purchase": {
-        "post": {
-          "tags": [
-            "Pay"
-          ],
-          "summary": "Aggregator Purchase",
-          "requestBody": {
+          "404": {
+            "description": "Not Found",
             "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AggregatorPurchaseRequestDto"
+                  "$ref": "#/components/schemas/BaseResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AggregatorPurchaseRequestDto"
-                }
-              },
-              "application/*+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorPurchaseRequestDto"
+                  "$ref": "#/components/schemas/BaseResponse"
                 }
               }
             }
           },
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
-                  }
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePaymentResponseDto"
                 }
-              }
-            },
-            "404": {
-              "description": "Not Found",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePaymentResponseDto"
                 }
-              }
-            },
-            "400": {
-              "description": "Bad Request",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
-                  }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePaymentResponseDto"
                 }
               }
             }
           }
         }
-      },
-      "/api/v1/pay/transfer": {
+      }
+    },
+    "/api/v1/pay/verify-payment": {
+      "get": {
+        "tags": [
+          "Pay"
+        ],
+        "summary": "Verify payment link",
+        "parameters": [
+          {
+            "name": "TransactionRef",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the transaction"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmMerchantPaymentDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pay/confirm-status": {
+      "get": {
+        "tags": [
+          "Pay"
+        ],
+        "summary": "Aggregator Verify payment link",
+        "parameters": [
+          {
+            "name": "TransactionRef",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the transaction"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorConfirmStatusResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pay/validate-otp": {
+      "post": {
+        "tags": [
+          "Pay"
+        ],
+        "summary": "Aggregator Validate Otp",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorValidateOtpRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorValidateOtpRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorValidateOtpRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorValidateOtpResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pay/purchase": {
+      "post": {
+        "tags": [
+          "Pay"
+        ],
+        "summary": "Aggregator Purchase",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorPurchaseRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorPurchaseRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorPurchaseRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorPurchaseResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pay/transfer": {
       "post": {
         "tags": [
           "Pay"
@@ -545,7 +545,7 @@
         }
       }
     },
-      "/api/v1/pay//simulate-payment": {
+    "/api/v1/pay//simulate-payment": {
       "get": {
         "tags": [
           "Merchant"
@@ -623,378 +623,90 @@
           }
         }
       }
-      },
-
-
-      "/api/v1/pay/ussd-charge": {
-        "post": {
-          "tags": [
-            "Pay"
-          ],
-          "summary": "USSD Charge (STK Push)",
-          "description": "Triggers an STK Push prompt on the customer's mobile phone to collect payment. Retrieve supported channel codes from GET /api/v1/pay/mobile-money-banks.",
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorUssdChargeRequestDto"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorUssdChargeRequestDto"
-                }
-              },
-              "application/*+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorUssdChargeRequestDto"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorUssdChargeResponseDtoBaseResponse"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorUssdChargeResponseDtoBaseResponse"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorUssdChargeResponseDtoBaseResponse"
-                  }
-                }
+    },
+    "/api/v1/pay/ussd-charge": {
+      "post": {
+        "tags": [
+          "Pay"
+        ],
+        "summary": "USSD Charge (STK Push)",
+        "description": "Triggers an STK Push prompt on the customer's mobile phone to collect payment. Retrieve supported channel codes from GET /api/v1/pay/mobile-money-banks.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorUssdChargeRequestDto"
               }
             },
-            "404": {
-              "description": "Not Found",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                }
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorUssdChargeRequestDto"
               }
             },
-            "400": {
-              "description": "Bad Request",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorUssdChargeResponseDtoBaseResponse"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorUssdChargeResponseDtoBaseResponse"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorUssdChargeResponseDtoBaseResponse"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/pay/single-transfer": {
-        "post": {
-          "tags": [
-            "Pay"
-          ],
-          "summary": "Single Transfer (B2C Payout)",
-          "description": "Sends money from the merchant SasaPay account to a recipient's mobile money number. Retrieve supported channel codes from GET /api/v1/pay/mobile-money-banks.",
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorSingleTransferRequestDto"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorSingleTransferRequestDto"
-                }
-              },
-              "application/*+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AggregatorSingleTransferRequestDto"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorSingleTransferResponseDtoBaseResponse"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorSingleTransferResponseDtoBaseResponse"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorSingleTransferResponseDtoBaseResponse"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not Found",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Bad Request",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorSingleTransferResponseDtoBaseResponse"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorSingleTransferResponseDtoBaseResponse"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/AggregatorSingleTransferResponseDtoBaseResponse"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/pay/static-accounts": {
-        "post": {
-          "tags": [
-            "Pay"
-          ],
-          "summary": "Creates a new static account for a merchant",
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/StaticAccountRequestDto"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/StaticAccountRequestDto"
-                }
-              },
-              "application/*+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/StaticAccountRequestDto"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Static_AccountResponseDto"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Static_AccountResponseDto"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Static_AccountResponseDto"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not Found",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Bad Request",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Static_AccountResponseDto"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Static_AccountResponseDto"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Static_AccountResponseDto"
-                  }
-                }
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorUssdChargeRequestDto"
               }
             }
           }
         },
-        "get": {
-          "tags": [
-            "Pay"
-          ],
-          "summary": "Get static account for a merchant",
-          "parameters": [
-            {
-              "name": "pageNumber",
-              "in": "query",
-              "schema": {
-                "type": "integer",
-                "format": "int32"
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorUssdChargeResponseDtoBaseResponse"
+                }
               },
-              "description":"Current page number"
-            },
-            {
-              "name": "pageSize",
-              "in": "query",
-              "schema": {
-                "type": "integer",
-                "format": "int32"
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorUssdChargeResponseDtoBaseResponse"
+                }
               },
-              "description":"total page number"
-            },
-            {
-              "name": "startDate",
-              "in": "query",
-              "schema": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "description": "Account creation date"
-            },
-            {
-              "name": "EndDate",
-              "in": "query",
-              "schema": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "description": "Account expiry date"
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorUssdChargeResponseDtoBaseResponse"
+                }
+              }
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/GetStaticAccountResponseDto"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/GetStaticAccountResponseDto"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/GetStaticAccountResponseDto"
-                  }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
                 }
               }
-            },
-            "404": {
-              "description": "Not Found",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/BaseResponse"
-                  }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorUssdChargeResponseDtoBaseResponse"
                 }
-              }
-            },
-            "400": {
-              "description": "Bad Request",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "$ref": "#/components/schemas/GetStaticAccountResponseDto"
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/GetStaticAccountResponseDto"
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/GetStaticAccountResponseDto"
-                  }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorUssdChargeResponseDtoBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorUssdChargeResponseDtoBaseResponse"
                 }
               }
             }
@@ -1002,220 +714,678 @@
         }
       }
     },
-    "components": {
-      "schemas": {
-        "ACSData": {
-          "type": "object",
-          "properties": {
-            "responseCode": {
-              "type": "string",
-              "nullable": true,
-              "description": "Response code from the payment processor"
+    "/api/v1/pay/single-transfer": {
+      "post": {
+        "tags": [
+          "Pay"
+        ],
+        "summary": "Single Transfer (B2C Payout)",
+        "description": "Sends money from the merchant SasaPay account to a recipient's mobile money number. Retrieve supported channel codes from GET /api/v1/pay/mobile-money-banks.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorSingleTransferRequestDto"
+              }
             },
-            "responseDescription": {
-              "type": "string",
-              "nullable": true,
-              "description": "Response description from the payment processor"
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorSingleTransferRequestDto"
+              }
             },
-            "transactionReference": {
-              "type": "string",
-              "nullable": true,
-              "description": "Unique identifier for the transaction"
-            },
-            "amount": {
-              "type": "number",
-              "format": "double",
-              "description": "Amount of the transaction"
-            },
-            "remittanceAmount": {
-              "type": "number",
-              "format": "double",
-              "description": "Amount to be remitted to the merchant"
-            },
-            "customerName": {
-              "type": "string",
-              "nullable": true,
-              "description": "Name of the customer who made the payment"
-            },
-            "bank": {
-              "type": "string",
-              "nullable": true,
-              "description": "Bank of the customer who made the payment"
-            },
-            "status": {
-              "type": "string",
-              "nullable": true,
-              "description": "Current status of the transaction"
-            },
-            "submitTimeUtc": {
-              "type": "string",
-              "nullable": true,
-              "description": "Time the transaction was submitted"
-            },
-            "clientReferenceInformation": {
-              "type": "string",
-              "nullable": true,
-              "description": "Client reference information"
-            },
-            "accountName": {
-              "type": "string",
-              "nullable": true,
-              "description": "Name of the account holder"
-            },
-            "accountNo": {
-              "type": "string",
-              "nullable": true,
-              "description": "Account number used, partially masked"
-            },
-            "maskedPan": {
-              "type": "string",
-              "nullable": true,
-              "description": "Masked card number (PAN)"
-            },
-            "cardExpiry": {
-              "type": "string",
-              "nullable": true,
-              "description": "Card expiry date"
-            },
-            "transactionId": {
-              "type": "string",
-              "nullable": true,
-              "description": "Unique identifier for the transaction"
-            },
-            "completedTimeUtc": {
-              "type": "string",
-              "nullable": true,
-              "description": "Time the transaction was completed"
-            },
-            "errors": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/ErrorModel"
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatorSingleTransferRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorSingleTransferResponseDtoBaseResponse"
+                }
               },
-              "nullable": true,
-              "description": "List of errors encountered during the transaction"
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorSingleTransferResponseDtoBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorSingleTransferResponseDtoBaseResponse"
+                }
+              }
             }
           },
-          "additionalProperties": false
-        },
-        "AggregatorConfirmStatusResponseDto": {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "boolean",
-              "description":"Indicates if the request was successful."
-            },
-            "message": {
-              "type": "string",
-              "nullable": true,
-              "description":"Descriptive message about the request result."
-            },
-            "data": {
-              "$ref": "#/components/schemas/ACSData"
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
             }
           },
-          "additionalProperties": false
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorSingleTransferResponseDtoBaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorSingleTransferResponseDtoBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatorSingleTransferResponseDtoBaseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pay/static-accounts": {
+      "post": {
+        "tags": [
+          "Pay"
+        ],
+        "summary": "Creates a new static account for a merchant",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaticAccountRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaticAccountRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaticAccountRequestDto"
+              }
+            }
+          }
         },
-        "AggregatorPurchaseRequestDto": {
-          "required": [
-            "amount",
-            "customerEmail",
-            "ipAddress",
-            "transactionRef"
-          ],
-          "type": "object",
-          "properties": {
-            "transactionRef": {
-              "pattern": "^[a-zA-Z0-9-_\\s]*$",
-              "type": "string",
-              "description": "Unique identifier for the transaction"
-            },
-            "customerEmail": {
-              "pattern": "^[a-zA-Z0-9@_.\\s]*$",
-              "type": "string",
-              "description": "Email of the customer who made the payment"
-            },
-            "amount": {
-              "pattern": "^[1-9]\\d*(\\.\\d+)?$",
-              "type": "number",
-              "format": "double",
-              "description": "The payment amount to be paid by customer (must be greater than 0)"
-            },
-            "currency": {
-              "type": "string",
-              "nullable": true,
-              "description": "The currency code (e.g., “USD”, “NGN”)"
-            },
-            "ipAddress": {
-              "pattern": "^[0-9:.\\s]*$",
-              "type": "string",
-              "description": "IP address of the customer who made the payment"
-            },
-            "callbackUrl": {
-              "pattern": "^(http|https):\\/\\/([\\w\\d + (\\-)+?]+\\.)+[\\w]+(\\/.*)?$",
-              "type": "string",
-              "nullable": true,
-              "description": "URL to redirect after payment"
-            },
-            "cardDetails": {
-              "type": "string",
-              "nullable": true,
-              "description": "Card details of the customer"
-            },
-            "deviceInformation": {
-              "$ref": "#/components/schemas/DeviceInformation",
-              "description": "Information about the customer's device"
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Static_AccountResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Static_AccountResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Static_AccountResponseDto"
+                }
+              }
             }
           },
-          "additionalProperties": false
-        },
-        "AggregatorPurchaseResponseDto": {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "boolean",
-              "description": "status code"
-            },
-            "message": {
-              "type": "string",
-              "nullable": true,
-              "description": "Descriptive message about the request result."
-            },
-            "data": {
-              "$ref": "#/components/schemas/APRData"
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
             }
           },
-          "additionalProperties": false
-        },
-        "AggregatorValidateOtpRequestDto": {
-          "required": [
-            "otp",
-            "transactionRef"
-          ],
-          "type": "object",
-          "properties": {
-            "otp": {
-              "type": "string",
-              "description": "OTP sent to the customer"
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Static_AccountResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Static_AccountResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Static_AccountResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Pay"
+        ],
+        "summary": "Get static account for a merchant",
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             },
-            "transactionRef": {
-              "type": "string",
-              "description": "Unique identifier for the transaction"
+            "description": "Current page number"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             },
-            "paymentId": {
+            "description": "total page number"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
               "type": "string",
-              "nullable": true,
-              "description": "Unique identifier for the payment"
+              "format": "date-time"
             },
-            "md": {
+            "description": "Account creation date"
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
               "type": "string",
-              "nullable": true,
-              "description": "Merchant data"
+              "format": "date-time"
+            },
+            "description": "Account expiry date"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStaticAccountResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStaticAccountResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStaticAccountResponseDto"
+                }
+              }
             }
           },
-          "additionalProperties": false
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStaticAccountResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStaticAccountResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStaticAccountResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pay/payout-status": {
+      "get": {
+        "tags": [
+          "Pay"
+        ],
+        "summary": "Confirm Payout Transaction Status",
+        "description": "Retrieves the current status of a payout transaction using the reference returned after initiating a payout.",
+        "parameters": [
+          {
+            "name": "reference",
+            "in": "query",
+            "required": true,
+            "description": "The transaction reference returned after initiating a payout",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayoutStatusResponseDtoBaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayoutStatusResponseDtoBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayoutStatusResponseDtoBaseResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pay/simulate-payout-notification": {
+      "post": {
+        "tags": [
+          "Pay"
+        ],
+        "summary": "Simulate Payout Notification (Sandbox Only)",
+        "description": "Simulates a payout status notification in the sandbox environment. Use this to test how your application handles payout outcomes without performing real transactions.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimulatePayoutNotificationRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimulatePayoutNotificationRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimulatePayoutNotificationRequestDto"
+              }
+            }
+          }
         },
-              "AggregatorTransferRequestDto": {
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ACSData": {
+        "type": "object",
+        "properties": {
+          "responseCode": {
+            "type": "string",
+            "nullable": true,
+            "description": "Response code from the payment processor"
+          },
+          "responseDescription": {
+            "type": "string",
+            "nullable": true,
+            "description": "Response description from the payment processor"
+          },
+          "transactionReference": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unique identifier for the transaction"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "description": "Amount of the transaction"
+          },
+          "remittanceAmount": {
+            "type": "number",
+            "format": "double",
+            "description": "Amount to be remitted to the merchant"
+          },
+          "customerName": {
+            "type": "string",
+            "nullable": true,
+            "description": "Name of the customer who made the payment"
+          },
+          "bank": {
+            "type": "string",
+            "nullable": true,
+            "description": "Bank of the customer who made the payment"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true,
+            "description": "Current status of the transaction"
+          },
+          "submitTimeUtc": {
+            "type": "string",
+            "nullable": true,
+            "description": "Time the transaction was submitted"
+          },
+          "clientReferenceInformation": {
+            "type": "string",
+            "nullable": true,
+            "description": "Client reference information"
+          },
+          "accountName": {
+            "type": "string",
+            "nullable": true,
+            "description": "Name of the account holder"
+          },
+          "accountNo": {
+            "type": "string",
+            "nullable": true,
+            "description": "Account number used, partially masked"
+          },
+          "maskedPan": {
+            "type": "string",
+            "nullable": true,
+            "description": "Masked card number (PAN)"
+          },
+          "cardExpiry": {
+            "type": "string",
+            "nullable": true,
+            "description": "Card expiry date"
+          },
+          "transactionId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unique identifier for the transaction"
+          },
+          "completedTimeUtc": {
+            "type": "string",
+            "nullable": true,
+            "description": "Time the transaction was completed"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ErrorModel"
+            },
+            "nullable": true,
+            "description": "List of errors encountered during the transaction"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AggregatorConfirmStatusResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indicates if the request was successful."
+          },
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "description": "Descriptive message about the request result."
+          },
+          "data": {
+            "$ref": "#/components/schemas/ACSData"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AggregatorPurchaseRequestDto": {
+        "required": [
+          "amount",
+          "customerEmail",
+          "ipAddress",
+          "transactionRef"
+        ],
+        "type": "object",
+        "properties": {
+          "transactionRef": {
+            "pattern": "^[a-zA-Z0-9-_\\s]*$",
+            "type": "string",
+            "description": "Unique identifier for the transaction"
+          },
+          "customerEmail": {
+            "pattern": "^[a-zA-Z0-9@_.\\s]*$",
+            "type": "string",
+            "description": "Email of the customer who made the payment"
+          },
+          "amount": {
+            "pattern": "^[1-9]\\d*(\\.\\d+)?$",
+            "type": "number",
+            "format": "double",
+            "description": "The payment amount to be paid by customer (must be greater than 0)"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true,
+            "description": "The currency code (e.g., \u201cUSD\u201d, \u201cNGN\u201d)"
+          },
+          "ipAddress": {
+            "pattern": "^[0-9:.\\s]*$",
+            "type": "string",
+            "description": "IP address of the customer who made the payment"
+          },
+          "callbackUrl": {
+            "pattern": "^(http|https):\\/\\/([\\w\\d + (\\-)+?]+\\.)+[\\w]+(\\/.*)?$",
+            "type": "string",
+            "nullable": true,
+            "description": "URL to redirect after payment"
+          },
+          "cardDetails": {
+            "type": "string",
+            "nullable": true,
+            "description": "Card details of the customer"
+          },
+          "deviceInformation": {
+            "$ref": "#/components/schemas/DeviceInformation",
+            "description": "Information about the customer's device"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AggregatorPurchaseResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "status code"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "description": "Descriptive message about the request result."
+          },
+          "data": {
+            "$ref": "#/components/schemas/APRData"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AggregatorValidateOtpRequestDto": {
+        "required": [
+          "otp",
+          "transactionRef"
+        ],
+        "type": "object",
+        "properties": {
+          "otp": {
+            "type": "string",
+            "description": "OTP sent to the customer"
+          },
+          "transactionRef": {
+            "type": "string",
+            "description": "Unique identifier for the transaction"
+          },
+          "paymentId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unique identifier for the payment"
+          },
+          "md": {
+            "type": "string",
+            "nullable": true,
+            "description": "Merchant data"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AggregatorTransferRequestDto": {
         "required": [
           "amount",
           "customerEmail",
@@ -1243,7 +1413,7 @@
         },
         "additionalProperties": false
       },
-        "ATRData": {
+      "ATRData": {
         "type": "object",
         "properties": {
           "transactionRef": {
@@ -1293,531 +1463,530 @@
         },
         "additionalProperties": false
       },
-        "AggregatorValidateOtpResponseDto": {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "boolean",
-              "description": "Indicates if the request was successful."
-
-            },
-            "message": {
-              "type": "string",
-              "nullable": true,
-              "description": "Descriptive message about the request result."
-            },
-            "data": {
-              "$ref": "#/components/schemas/AVOData"
-            }
+      "AggregatorValidateOtpResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indicates if the request was successful."
           },
-          "additionalProperties": false
-        },
-        "APRData": {
-          "type": "object",
-          "properties": {
-            "referenceInformationCode": {
-              "type": "string",
-              "nullable": true,
-              "description": "Reference information code"
-            },
-            "responseCode": {
-              "type": "string",
-              "nullable": true,
-              "description": "Response code from the payment processor"
-            },
-            "amount": {
-              "type": "string",
-              "nullable": true,
-              "description": "Amount of the transaction"
-            },
-            "transactionRef": {
-              "type": "string",
-              "nullable": true,
-              "description": "Unique identifier for the transaction"
-            },
-            "status": {
-              "type": "string",
-              "nullable": true,
-              "description": "Current status of the transaction"
-            },
-            "submitTimeUtc": {
-              "type": "string",
-              "nullable": true,
-              "description": "Time the transaction was submitted"
-            },
-            "transactionId": {
-              "type": "string",
-              "nullable": true,
-              "description": "Unique identifier for the transaction"
-            },
-            "transactionId3DSecure": {
-              "type": "string",
-              "nullable": true,
-              "description": "Unique identifier for the 3D secure transaction"
-            },
-            "eciFlag": {
-              "type": "string",
-              "nullable": true,
-              "description": "ECI flag"
-            },
-            "md": {
-              "type": "string",
-              "nullable": true,
-              "description": "Merchant data"
-            },
-            "accessToken": {
-              "type": "string",
-              "nullable": true,
-              "description": "Access token"
-            },
-            "threedSecureUrl": {
-              "type": "string",
-              "nullable": true,
-              "description": "URL for 3D secure"
-            }
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "description": "Descriptive message about the request result."
           },
-          "additionalProperties": false
+          "data": {
+            "$ref": "#/components/schemas/AVOData"
+          }
         },
-        "AVOData": {
-          "type": "object",
-          "properties": {
-            "amount": {
-              "type": "string",
-              "nullable": true,
-              "description": "Amount of the transaction"
-            },
-            "transactionIdentifier": {
-              "type": "string",
-              "nullable": true,
-              "description": "Unique identifier for the transaction"
-            },
-            "tokenExpiryDate": {
-              "type": "string",
-              "nullable": true,
-              "description": "Expiry date for the token"
-            },
-            "token": {
-              "type": "string",
-              "nullable": true,
-              "description": "Token for the transaction"
-            },
-            "message": {
-              "type": "string",
-              "nullable": true,
-              "description": "Message from the payment processor"
-            },
-            "transactionRef": {
-              "type": "string",
-              "nullable": true,
-              "description": "Unique identifier for the transaction"
-            },
-            "responseCode": {
-              "type": "string",
-              "nullable": true,
-              "description": "Response code from the payment processor"
-            },
-            "otpRetryCount": {
-              "type": "integer",
-              "format": "int32",
-              "nullable": true,
-              "description": "Number of times the OTP has been retried"
-            },
-            "paymentId": {
-              "type": "string",
-              "nullable": true,
-              "description": "Unique identifier for the payment"
-            },
-            "errors": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/ErrorModel"
-              },
-              "nullable": true,
-              "description": "List of errors encountered during the transaction"
-            }
+        "additionalProperties": false
+      },
+      "APRData": {
+        "type": "object",
+        "properties": {
+          "referenceInformationCode": {
+            "type": "string",
+            "nullable": true,
+            "description": "Reference information code"
           },
-          "additionalProperties": false
-        },
-        "BaseResponse": {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "boolean"
-            },
-            "message": {
-              "type": "string",
-              "nullable": true
-            }
+          "responseCode": {
+            "type": "string",
+            "nullable": true,
+            "description": "Response code from the payment processor"
           },
-          "additionalProperties": false
-        },
-        "CMPData": {
-          "type": "object",
-          "properties": {
-            "amount": {
-              "type": "number",
-              "format": "double",
-              "description": "Original payment amount"
-            },
-            "chargedAmount": {
-              "type": "number",
-              "format": "double",
-              "description": "Amount charged to the customer"
-            },
-            "currency": {
-              "type": "string",
-              "nullable": true,
-              "description": "Currency of the transaction (e.g., “USD”)."
-            },
-            "customerEmail": {
-              "type": "string",
-              "nullable": true,
-              "description": "Email of the customer who made the payment"
-            },
-            "narration": {
-              "type": "string",
-              "nullable": true,
-              "description": "Description or narrative of the payment"
-            },
-            "status": {
-              "type": "string",
-              "nullable": true,
-              "description": "Current status of the transaction (e.g., “Paid”)"
-            },
-            "responseCode": {
-              "type": "string",
-              "nullable": true,
-              "description": "Response code from the payment processor"
-            },
-            "transactionRef": {
-              "type": "string",
-              "nullable": true,
-              "description": "Unique identifier for the created transaction"
-            },
-            "processorResponse": {
-              "type": "string",
-              "nullable": true,
-              "description": "Response from the payment processor"
-            },
-            "createdAt": {
-              "type": "string",
-              "format": "date-time",
-              "description": "Time the transaction was created."
-            },
-            "paidAt": {
-              "type": "string",
-              "format": "date-time",
-              "description": "Reference for the created transaction."
-            },
-            "ip": {
-              "type": "string",
-              "nullable": true,
-              "description": "IP address from which the payment was made."
-            },
-            "paymentType": {
-              "type": "string",
-              "nullable": true,
-              "description": "Type of payment method used (e.g., “Card”)."
-            },
-            "fees": {
-              "type": "number",
-              "format": "double",
-              "description": "Fees charged for the transaction"
-            },
-            "meta": {
-              "type": "string",
-              "nullable": true,
-              "description": "Additional metadata associated with the payment"
-            },
-            "message": {
-              "type": "string",
-              "nullable": true,
-              "description": "Additional metadata associated with the payment"
-            }
+          "amount": {
+            "type": "string",
+            "nullable": true,
+            "description": "Amount of the transaction"
           },
-          "additionalProperties": false
-        },
-        "ConfirmMerchantPaymentDto": {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "boolean",
-              "description":"Indicates if the request was successful."
-            },
-            "message": {
-              "type": "string",
-              "nullable": true,
-              "description":"Descriptive message about the request result."
-            },
-            "data": {
-              "$ref": "#/components/schemas/CMPData"
-            }
+          "transactionRef": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unique identifier for the transaction"
           },
-          "additionalProperties": false
-        },
-        "CPData": {
-          "type": "object",
-          "properties": {
-            "transactionRef": {
-              "type": "string",
-              "nullable": true,
-              "description": "Unique identifier for the created transaction"
-            },
-            "paymentUrl": {
-              "type": "string",
-              "nullable": true,
-              "description": "URL to the payment page"
-            }
+          "status": {
+            "type": "string",
+            "nullable": true,
+            "description": "Current status of the transaction"
           },
-          "additionalProperties": false
-        },
-        "CreatePaymentResponseDto": {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "boolean",
-              "description":"Indicates if the request was successful."
-            },
-            "message": {
-              "type": "string",
-              "nullable": true,
-              "description":"Descriptive message about the request result."
-            },
-            "data": {
-              "$ref": "#/components/schemas/CPData"
-            }
+          "submitTimeUtc": {
+            "type": "string",
+            "nullable": true,
+            "description": "Time the transaction was submitted"
           },
-          "additionalProperties": false
-        },
-        "DeviceInformation": {
-          "required": [
-            "deviceChannel",
-            "httpBrowserColorDepth",
-            "httpBrowserJavaEnabled",
-            "httpBrowserJavaScriptEnabled",
-            "httpBrowserLanguage",
-            "httpBrowserScreenHeight",
-            "httpBrowserScreenWidth",
-            "userAgentBrowserValue"
-          ],
-          "type": "object",
-          "properties": {
-            "httpBrowserLanguage": {
-              "pattern": "^[a-zA-Z0-9-\\s]*$",
-              "type": "string",
-              "description": "Language of the customer's browser"
-            },
-            "httpBrowserJavaEnabled": {
-              "type": "boolean",
-              "description": "Indicates if Java is enabled in the customer's browser"
-            },
-            "httpBrowserJavaScriptEnabled": {
-              "type": "boolean",
-              "description": "Indicates if JavaScript is enabled in the customer's browser"
-            },
-            "httpBrowserColorDepth": {
-              "type": "string",
-              "description": "Color depth of the customer's browser"
-            },
-            "httpBrowserScreenHeight": {
-              "type": "string",
-              "description": "Height of the customer's browser screen"
-            },
-            "httpBrowserScreenWidth": {
-              "type": "string",
-              "description": "Width of the customer's browser screen"
-            },
-            "httpBrowserTimeDifference": {
-              "type": "string",
-              "nullable": true,
-              "description": "Time difference between the customer's browser and the server"
-            },
-            "userAgentBrowserValue": {
-              "type": "string",
-              "description": "User agent value of the customer's browser"
-            },
-            "deviceChannel": {
-              "pattern": "^[a-zA-Z0-9\\s]*$",
-              "type": "string",
-              "description": "Channel used by the customer's device"
-            }
+          "transactionId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unique identifier for the transaction"
           },
-          "additionalProperties": false
-        },
-        "ErrorModel": {
-          "type": "object",
-          "properties": {
-            "errorCode": {
-              "type": "string",
-              "nullable": true,
-              "description": "specific error code"
-            },
-            "message": {
-              "type": "string",
-              "nullable": true,
-              "description": "description of the error"
-            }
+          "transactionId3DSecure": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unique identifier for the 3D secure transaction"
           },
-          "additionalProperties": false
-        },
-        "InitiatePaymentLinkDto": {
-          "required": [
-            "amount",
-            "customerEmail",
-            "transactionReference"
-          ],
-          "type": "object",
-          "properties": {
-            "amount": {
-              "pattern": "^[1-9]\\d*(\\.\\d+)?$",
-              "type": "number",
-              "format": "double",
-              "description": "The payment amount to be paid by customer (must be greater than 0)"
-            },
-            "currency": {
-              "type": "string",
-              "nullable": true,
-              "description": "The currency code (e.g., “USD”, “NGN”)"
-            },
-            "description": {
-              "pattern": "^[a-zA-Z0-9\\s]*$",
-              "type": "string",
-              "nullable": true,
-              "description": "Description of the transaction"
-            },
-            "pageName": {
-              "type": "string",
-              "nullable": true,
-              "description": "Name of the payment page"
-            },
-            "transactionReference": {
-              "maxLength": 50,
-              "minLength": 5,
-              "type": "string",
-              "description": "Unique identifier for the transaction"
-            },
-            "customerEmail": {
-              "type": "string",
-              "description": "URL to redirect after payment"
-            },
-            "customUrl": {
-              "type": "string",
-              "nullable": true,
-              "description": "URL to redirect after payment"
-            },
-            "expiryDate": {
-              "type": "string",
-              "format": "date-time",
-              "description": "Expiry date for the payment link."
-            }
+          "eciFlag": {
+            "type": "string",
+            "nullable": true,
+            "description": "ECI flag"
           },
-          "additionalProperties": false
-        },
-        "GetStaticAccountResponseDto": {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "boolean",
-              "description": "specific error code"
-            },
-            "message": {
-              "type": "string",
-              "nullable": true,
-              "description": "description of the error"
-            },
-            "data": {
-              "$ref": "#/components/schemas/GetStaticData"
-            }
+          "md": {
+            "type": "string",
+            "nullable": true,
+            "description": "Merchant data"
           },
-          "additionalProperties": false
-        },
-        "GetStaticData": {
-            "type": "object",
-            "properties": {
-              "currentPage": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The current page number"
-              },
-              "totalPages": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The total number of pages"
-              },
-             "pageSize": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The number of items in the list"
-              },
-              "totalCount": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The total number of items in the list"
-              },
-              "hasPrevious": {
-                "type": "boolean",
-                "description": "A boolean value that shows if there is a previous page."
-              },
-              "hasNext": {
-                "type": "boolean",
-                "description": "A boolean value that shows if there is a next page."
-              },
-              "results": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/Result"
-              },
-              "nullable": true
-            }
+          "accessToken": {
+            "type": "string",
+            "nullable": true,
+            "description": "Access token"
           },
-          "additionalProperties": false
+          "threedSecureUrl": {
+            "type": "string",
+            "nullable": true,
+            "description": "URL for 3D secure"
+          }
         },
-        "Result": {
-          "type": "object",
-          "properties": {
-            "firstName": {
-              "type": "string",
-              "nullable": true,
-              "description": "The account holder first name."
-            },
-            "lastName": {
-              "type": "string",
-              "nullable": true,
-              "description": "The account holder last name."
-            },
-            "phoneNumber": {
-              "type": "string",
-              "nullable": true,
-              "description": "The user's phone number"
-            },
-            "email": {
-              "type": "string",
-              "nullable": true,
-              "description": "The account holder email."
-            },
-            "accountNumber": {
-              "type": "string",
-              "nullable": true,
-              "description": "The generated bank account number."
-            },
-            "bankName": {
-              "type": "string",
-              "nullable": true,
-              "description": "The generated bank account name."
-            },
-            "isActive": {
-              "type": "boolean",
-              "description": "A boolean value that shows if account is active or expired."
-            },
-            "createdAt": {
-              "type": "string",
-              "format": "date-time",
-              "description": "Time the account was created."
-            }
+        "additionalProperties": false
+      },
+      "AVOData": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "string",
+            "nullable": true,
+            "description": "Amount of the transaction"
           },
-          "additionalProperties": false
+          "transactionIdentifier": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unique identifier for the transaction"
+          },
+          "tokenExpiryDate": {
+            "type": "string",
+            "nullable": true,
+            "description": "Expiry date for the token"
+          },
+          "token": {
+            "type": "string",
+            "nullable": true,
+            "description": "Token for the transaction"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "description": "Message from the payment processor"
+          },
+          "transactionRef": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unique identifier for the transaction"
+          },
+          "responseCode": {
+            "type": "string",
+            "nullable": true,
+            "description": "Response code from the payment processor"
+          },
+          "otpRetryCount": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "description": "Number of times the OTP has been retried"
+          },
+          "paymentId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unique identifier for the payment"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ErrorModel"
+            },
+            "nullable": true,
+            "description": "List of errors encountered during the transaction"
+          }
         },
-        "VerifyTransactionStandardResponse": {
+        "additionalProperties": false
+      },
+      "BaseResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CMPData": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "description": "Original payment amount"
+          },
+          "chargedAmount": {
+            "type": "number",
+            "format": "double",
+            "description": "Amount charged to the customer"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true,
+            "description": "Currency of the transaction (e.g., \u201cUSD\u201d)."
+          },
+          "customerEmail": {
+            "type": "string",
+            "nullable": true,
+            "description": "Email of the customer who made the payment"
+          },
+          "narration": {
+            "type": "string",
+            "nullable": true,
+            "description": "Description or narrative of the payment"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true,
+            "description": "Current status of the transaction (e.g., \u201cPaid\u201d)"
+          },
+          "responseCode": {
+            "type": "string",
+            "nullable": true,
+            "description": "Response code from the payment processor"
+          },
+          "transactionRef": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unique identifier for the created transaction"
+          },
+          "processorResponse": {
+            "type": "string",
+            "nullable": true,
+            "description": "Response from the payment processor"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time the transaction was created."
+          },
+          "paidAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Reference for the created transaction."
+          },
+          "ip": {
+            "type": "string",
+            "nullable": true,
+            "description": "IP address from which the payment was made."
+          },
+          "paymentType": {
+            "type": "string",
+            "nullable": true,
+            "description": "Type of payment method used (e.g., \u201cCard\u201d)."
+          },
+          "fees": {
+            "type": "number",
+            "format": "double",
+            "description": "Fees charged for the transaction"
+          },
+          "meta": {
+            "type": "string",
+            "nullable": true,
+            "description": "Additional metadata associated with the payment"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "description": "Additional metadata associated with the payment"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConfirmMerchantPaymentDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indicates if the request was successful."
+          },
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "description": "Descriptive message about the request result."
+          },
+          "data": {
+            "$ref": "#/components/schemas/CMPData"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CPData": {
+        "type": "object",
+        "properties": {
+          "transactionRef": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unique identifier for the created transaction"
+          },
+          "paymentUrl": {
+            "type": "string",
+            "nullable": true,
+            "description": "URL to the payment page"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreatePaymentResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indicates if the request was successful."
+          },
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "description": "Descriptive message about the request result."
+          },
+          "data": {
+            "$ref": "#/components/schemas/CPData"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceInformation": {
+        "required": [
+          "deviceChannel",
+          "httpBrowserColorDepth",
+          "httpBrowserJavaEnabled",
+          "httpBrowserJavaScriptEnabled",
+          "httpBrowserLanguage",
+          "httpBrowserScreenHeight",
+          "httpBrowserScreenWidth",
+          "userAgentBrowserValue"
+        ],
+        "type": "object",
+        "properties": {
+          "httpBrowserLanguage": {
+            "pattern": "^[a-zA-Z0-9-\\s]*$",
+            "type": "string",
+            "description": "Language of the customer's browser"
+          },
+          "httpBrowserJavaEnabled": {
+            "type": "boolean",
+            "description": "Indicates if Java is enabled in the customer's browser"
+          },
+          "httpBrowserJavaScriptEnabled": {
+            "type": "boolean",
+            "description": "Indicates if JavaScript is enabled in the customer's browser"
+          },
+          "httpBrowserColorDepth": {
+            "type": "string",
+            "description": "Color depth of the customer's browser"
+          },
+          "httpBrowserScreenHeight": {
+            "type": "string",
+            "description": "Height of the customer's browser screen"
+          },
+          "httpBrowserScreenWidth": {
+            "type": "string",
+            "description": "Width of the customer's browser screen"
+          },
+          "httpBrowserTimeDifference": {
+            "type": "string",
+            "nullable": true,
+            "description": "Time difference between the customer's browser and the server"
+          },
+          "userAgentBrowserValue": {
+            "type": "string",
+            "description": "User agent value of the customer's browser"
+          },
+          "deviceChannel": {
+            "pattern": "^[a-zA-Z0-9\\s]*$",
+            "type": "string",
+            "description": "Channel used by the customer's device"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorModel": {
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "string",
+            "nullable": true,
+            "description": "specific error code"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "description": "description of the error"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InitiatePaymentLinkDto": {
+        "required": [
+          "amount",
+          "customerEmail",
+          "transactionReference"
+        ],
+        "type": "object",
+        "properties": {
+          "amount": {
+            "pattern": "^[1-9]\\d*(\\.\\d+)?$",
+            "type": "number",
+            "format": "double",
+            "description": "The payment amount to be paid by customer (must be greater than 0)"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true,
+            "description": "The currency code (e.g., \u201cUSD\u201d, \u201cNGN\u201d)"
+          },
+          "description": {
+            "pattern": "^[a-zA-Z0-9\\s]*$",
+            "type": "string",
+            "nullable": true,
+            "description": "Description of the transaction"
+          },
+          "pageName": {
+            "type": "string",
+            "nullable": true,
+            "description": "Name of the payment page"
+          },
+          "transactionReference": {
+            "maxLength": 50,
+            "minLength": 5,
+            "type": "string",
+            "description": "Unique identifier for the transaction"
+          },
+          "customerEmail": {
+            "type": "string",
+            "description": "URL to redirect after payment"
+          },
+          "customUrl": {
+            "type": "string",
+            "nullable": true,
+            "description": "URL to redirect after payment"
+          },
+          "expiryDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Expiry date for the payment link."
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetStaticAccountResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "specific error code"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "description": "description of the error"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetStaticData"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetStaticData": {
+        "type": "object",
+        "properties": {
+          "currentPage": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The current page number"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The total number of pages"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items in the list"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The total number of items in the list"
+          },
+          "hasPrevious": {
+            "type": "boolean",
+            "description": "A boolean value that shows if there is a previous page."
+          },
+          "hasNext": {
+            "type": "boolean",
+            "description": "A boolean value that shows if there is a next page."
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Result"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Result": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "nullable": true,
+            "description": "The account holder first name."
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true,
+            "description": "The account holder last name."
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true,
+            "description": "The user's phone number"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true,
+            "description": "The account holder email."
+          },
+          "accountNumber": {
+            "type": "string",
+            "nullable": true,
+            "description": "The generated bank account number."
+          },
+          "bankName": {
+            "type": "string",
+            "nullable": true,
+            "description": "The generated bank account name."
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "A boolean value that shows if account is active or expired."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time the account was created."
+          }
+        },
+        "additionalProperties": false
+      },
+      "VerifyTransactionStandardResponse": {
         "type": "object",
         "properties": {
           "amount": {
@@ -1919,343 +2088,422 @@
         },
         "additionalProperties": false
       },
-        "Static_AccountResponseDto": {
-            "type": "object",
-            "properties": {
-              "status": {
-              "type": "boolean",
-              "description": "The status of the request."
-            },
-            "message": {
-              "type": "string",
-              "nullable": true,
-              "description": "Additional information about the request."
-            },
-            "data": {
-              "$ref": "#/components/schemas/StaticData"
-            }
+      "Static_AccountResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "The status of the request."
           },
-          "additionalProperties": false
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "description": "Additional information about the request."
+          },
+          "data": {
+            "$ref": "#/components/schemas/StaticData"
+          }
         },
-        "StaticAccountRequestDto": {
-          "type": "object",
-          "properties": {
-            "firstName": {
-              "type": "string",
-              "nullable": true,
-              "description": "The user's first name."
-            },
-            "lastName": {
-              "type": "string",
-              "nullable": true,
-              "description": "The user's last name"
-            },
-            "phoneNumber": {
-              "type": "string",
-              "nullable": true,
-              "description": "The user's phone number"
-            },
-            "email": {
-              "type": "string",
-              "nullable": true,
-              "description": "The user's first email."
-            },
-            "bvn": {
-              "type": "string",
-              "nullable": true,
-              "description": "The user's bvn"
-            }
-          },
-          "additionalProperties": false
-        },
-        "AggregatorUssdChargeRequestDto": {
-          "required": [
-            "amount",
-            "customerEmail",
-            "transactionRef"
-          ],
-          "type": "object",
-          "properties": {
-            "transactionRef": {
-              "pattern": "^[a-zA-Z0-9-_\\s]*$",
-              "type": "string",
-              "description": "Unique reference for this transaction (alphanumeric, hyphens, underscores, spaces)"
-            },
-            "customerEmail": {
-              "pattern": "^[a-zA-Z0-9@_.\\s]*$",
-              "type": "string",
-              "description": "Email address of the customer"
-            },
-            "amount": {
-              "pattern": "^[1-9]\\d*(\\.\\d+)?$",
-              "type": "number",
-              "format": "double",
-              "description": "Amount to charge the customer (must be greater than 0)"
-            },
-            "currency": {
-              "type": "string",
-              "nullable": true,
-              "description": "Currency code. Must be \"KES\""
-            },
-            "bankAccount": {
-              "type": "string",
-              "nullable": true,
-              "description": "Mobile money channel code. Retrieve available codes from GET /api/v1/pay/mobile-money-banks"
-            },
-            "phoneNumber": {
-              "type": "string",
-              "nullable": true,
-              "description": "Customer phone number in 254XXXXXXXXX format"
-            },
-            "fullName": {
-              "type": "string",
-              "nullable": true,
-              "description": "Full name of the customer (optional)"
-            }
-          },
-          "additionalProperties": false
-        },
-        "AggregatorUssdChargeResponseDto": {
-          "type": "object",
-          "properties": {
-            "transactionRef": {
-              "type": "string",
-              "nullable": true,
-              "description": "The transaction reference echoed back"
-            },
-            "ussdCode": {
-              "type": "string",
-              "nullable": true,
-              "description": "USSD code returned by the provider where applicable"
-            },
-            "amount": {
-              "type": "number",
-              "format": "double",
-              "description": "Amount charged"
-            },
-            "responseCode": {
-              "type": "string",
-              "nullable": true,
-              "description": "Response code from the mobile money provider. 0 indicates success"
-            },
-            "paymentId": {
-              "type": "string",
-              "nullable": true,
-              "description": "Unique payment identifier generated by Cepta"
-            }
-          },
-          "additionalProperties": false
-        },
-        "AggregatorUssdChargeResponseDtoBaseResponse": {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "boolean",
-              "description": "Indicates if the STK Push was successfully dispatched"
-            },
-            "message": {
-              "type": "string",
-              "nullable": true,
-              "description": "Descriptive message (e.g., \"MPESA STK sent. Enter your PIN\")"
-            },
-            "data": {
-              "$ref": "#/components/schemas/AggregatorUssdChargeResponseDto"
-            }
-          },
-          "additionalProperties": false
-        },
-        "AggregatorSingleTransferRequestDto": {
-          "required": [
-            "accountName",
-            "accountNumber",
-            "amount",
-            "bankAccount",
-            "currency",
-            "description",
-            "reference"
-          ],
-          "type": "object",
-          "properties": {
-            "bankAccount": {
-              "type": "string",
-              "description": "Mobile money channel code. Retrieve available codes from GET /api/v1/pay/mobile-money-banks"
-            },
-            "accountNumber": {
-              "type": "string",
-              "description": "Recipient phone number in 254XXXXXXXXX format"
-            },
-            "accountName": {
-              "type": "string",
-              "description": "Full name of the recipient"
-            },
-            "amount": {
-              "pattern": "^[1-9]\\d*(\\.\\d+)?$",
-              "type": "number",
-              "format": "double",
-              "description": "Amount to transfer (must be greater than 0)"
-            },
-            "description": {
-              "type": "string",
-              "description": "Purpose or reason for the transfer (e.g., \"Salary disbursement\")"
-            },
-            "currency": {
-              "type": "string",
-              "description": "Currency code. Must be \"KES\""
-            },
-            "reference": {
-              "pattern": "^[a-zA-Z0-9-_\\s]*$",
-              "type": "string",
-              "description": "Unique reference for this transfer (alphanumeric, hyphens, underscores, spaces)"
-            },
-            "narration": {
-              "type": "string",
-              "nullable": true,
-              "description": "Additional notes for the transfer (optional)"
-            }
-          },
-          "additionalProperties": false
-        },
-        "AggregatorSingleTransferResponseDto": {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "boolean",
-              "description": "Indicates if the transfer was initiated successfully"
-            },
-            "message": {
-              "type": "string",
-              "nullable": true,
-              "description": "Descriptive message about the transfer result"
-            },
-            "reference": {
-              "type": "string",
-              "nullable": true,
-              "description": "The transfer reference echoed back"
-            },
-            "transactionId": {
-              "type": "string",
-              "nullable": true,
-              "description": "Unique transaction identifier generated by Cepta"
-            },
-            "amount": {
-              "type": "number",
-              "format": "double",
-              "description": "Amount transferred"
-            },
-            "currency": {
-              "type": "string",
-              "nullable": true,
-              "description": "Currency code of the transfer"
-            },
-            "accountNumber": {
-              "type": "string",
-              "nullable": true,
-              "description": "Recipient phone number"
-            },
-            "accountName": {
-              "type": "string",
-              "nullable": true,
-              "description": "Recipient name"
-            },
-            "bankAccount": {
-              "type": "string",
-              "nullable": true,
-              "description": "Channel code used for the transfer"
-            },
-            "transferStatus": {
-              "type": "string",
-              "nullable": true,
-              "description": "Current status of the transfer (e.g., \"pending\")"
-            }
-          },
-          "additionalProperties": false
-        },
-        "AggregatorSingleTransferResponseDtoBaseResponse": {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "boolean",
-              "description": "Indicates if the transfer was successfully initiated"
-            },
-            "message": {
-              "type": "string",
-              "nullable": true,
-              "description": "Descriptive message (e.g., \"Transfer initiated successfully\")"
-            },
-            "data": {
-              "$ref": "#/components/schemas/AggregatorSingleTransferResponseDto"
-            }
-          },
-          "additionalProperties": false
-        },
-        "StaticData": {
-          "type": "object",
-          "properties": {
-            "firstName": {
-              "type": "string",
-              "nullable": true,
-              "description": "The account holder first name."
-            },
-            "lastName": {
-              "type": "string",
-              "nullable": true,
-              "description": "The account holder last name."
-            },
-            "phoneNumber": {
-              "type": "string",
-              "nullable": true,
-              "description": "The account phone number."
-            },
-            "email": {
-              "type": "string",
-              "nullable": true,
-              "description": "The account holder email."
-            },
-            "accountNumber": {
-              "type": "string",
-              "nullable": true,
-              "description": "The account number generated."
-            },
-            "bankName": {
-              "type": "string",
-              "nullable": true,
-              "description": "The generated bank account name."
-            },
-            "isActive": {
-              "type": "boolean",
-              "description": "A boolean value that shows if account is active or expired."
-            },
-            "createdAt": {
-              "type": "string",
-              "format": "date-time",
-              "description": "Account creation date."
-            }
-          },
-          "additionalProperties": false
-        }
+        "additionalProperties": false
       },
-      "securitySchemes": {
-        "AccessAuth": {
-          "name": "X-Access-Key",
-          "in": "header",
-          "type": "apiKey",
-          "description": "Access key from Dashboard"
+      "StaticAccountRequestDto": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "nullable": true,
+            "description": "The user's first name."
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true,
+            "description": "The user's last name"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true,
+            "description": "The user's phone number"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true,
+            "description": "The user's first email."
+          },
+          "bvn": {
+            "type": "string",
+            "nullable": true,
+            "description": "The user's bvn"
+          }
         },
-        "SignatureAuth": {
-          "name": "X-Access-Signature",
-          "in": "header",
-          "type": "apiKey",
-          "description": "HMAC-SHA256 signature (hex lowercase)"
+        "additionalProperties": false
+      },
+      "AggregatorUssdChargeRequestDto": {
+        "required": [
+          "amount",
+          "customerEmail",
+          "transactionRef"
+        ],
+        "type": "object",
+        "properties": {
+          "transactionRef": {
+            "pattern": "^[a-zA-Z0-9-_\\s]*$",
+            "type": "string",
+            "description": "Unique reference for this transaction (alphanumeric, hyphens, underscores, spaces)"
+          },
+          "customerEmail": {
+            "pattern": "^[a-zA-Z0-9@_.\\s]*$",
+            "type": "string",
+            "description": "Email address of the customer"
+          },
+          "amount": {
+            "pattern": "^[1-9]\\d*(\\.\\d+)?$",
+            "type": "number",
+            "format": "double",
+            "description": "Amount to charge the customer (must be greater than 0)"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true,
+            "description": "Currency code. Must be \"KES\""
+          },
+          "bankAccount": {
+            "type": "string",
+            "nullable": true,
+            "description": "Mobile money channel code. Retrieve available codes from GET /api/v1/pay/mobile-money-banks"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true,
+            "description": "Customer phone number in 254XXXXXXXXX format"
+          },
+          "fullName": {
+            "type": "string",
+            "nullable": true,
+            "description": "Full name of the customer (optional)"
+          }
         },
-        "TimestampAuth": {
-          "name": "X-Access-Ts",
-          "in": "header",
-          "type": "apiKey",
-          "description": "Unix timestamp in seconds (UTC) as a string"
-        }
-}
+        "additionalProperties": false
+      },
+      "AggregatorUssdChargeResponseDto": {
+        "type": "object",
+        "properties": {
+          "transactionRef": {
+            "type": "string",
+            "nullable": true,
+            "description": "The transaction reference echoed back"
+          },
+          "ussdCode": {
+            "type": "string",
+            "nullable": true,
+            "description": "USSD code returned by the provider where applicable"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "description": "Amount charged"
+          },
+          "responseCode": {
+            "type": "string",
+            "nullable": true,
+            "description": "Response code from the mobile money provider. 0 indicates success"
+          },
+          "paymentId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unique payment identifier generated by Cepta"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AggregatorUssdChargeResponseDtoBaseResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indicates if the STK Push was successfully dispatched"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "description": "Descriptive message (e.g., \"MPESA STK sent. Enter your PIN\")"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AggregatorUssdChargeResponseDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AggregatorSingleTransferRequestDto": {
+        "required": [
+          "accountName",
+          "accountNumber",
+          "amount",
+          "bankAccount",
+          "currency",
+          "description",
+          "reference"
+        ],
+        "type": "object",
+        "properties": {
+          "bankAccount": {
+            "type": "string",
+            "description": "Mobile money channel code. Retrieve available codes from GET /api/v1/pay/mobile-money-banks"
+          },
+          "accountNumber": {
+            "type": "string",
+            "description": "Recipient phone number in 254XXXXXXXXX format"
+          },
+          "accountName": {
+            "type": "string",
+            "description": "Full name of the recipient"
+          },
+          "amount": {
+            "pattern": "^[1-9]\\d*(\\.\\d+)?$",
+            "type": "number",
+            "format": "double",
+            "description": "Amount to transfer (must be greater than 0)"
+          },
+          "description": {
+            "type": "string",
+            "description": "Purpose or reason for the transfer (e.g., \"Salary disbursement\")"
+          },
+          "currency": {
+            "type": "string",
+            "description": "Currency code. Must be \"KES\""
+          },
+          "reference": {
+            "pattern": "^[a-zA-Z0-9-_\\s]*$",
+            "type": "string",
+            "description": "Unique reference for this transfer (alphanumeric, hyphens, underscores, spaces)"
+          },
+          "narration": {
+            "type": "string",
+            "nullable": true,
+            "description": "Additional notes for the transfer (optional)"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AggregatorSingleTransferResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indicates if the transfer was initiated successfully"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "description": "Descriptive message about the transfer result"
+          },
+          "reference": {
+            "type": "string",
+            "nullable": true,
+            "description": "The transfer reference echoed back"
+          },
+          "transactionId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unique transaction identifier generated by Cepta"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "description": "Amount transferred"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true,
+            "description": "Currency code of the transfer"
+          },
+          "accountNumber": {
+            "type": "string",
+            "nullable": true,
+            "description": "Recipient phone number"
+          },
+          "accountName": {
+            "type": "string",
+            "nullable": true,
+            "description": "Recipient name"
+          },
+          "bankAccount": {
+            "type": "string",
+            "nullable": true,
+            "description": "Channel code used for the transfer"
+          },
+          "transferStatus": {
+            "type": "string",
+            "nullable": true,
+            "description": "Current status of the transfer (e.g., \"pending\")"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AggregatorSingleTransferResponseDtoBaseResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indicates if the transfer was successfully initiated"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "description": "Descriptive message (e.g., \"Transfer initiated successfully\")"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AggregatorSingleTransferResponseDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StaticData": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "nullable": true,
+            "description": "The account holder first name."
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true,
+            "description": "The account holder last name."
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true,
+            "description": "The account phone number."
+          },
+          "email": {
+            "type": "string",
+            "nullable": true,
+            "description": "The account holder email."
+          },
+          "accountNumber": {
+            "type": "string",
+            "nullable": true,
+            "description": "The account number generated."
+          },
+          "bankName": {
+            "type": "string",
+            "nullable": true,
+            "description": "The generated bank account name."
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "A boolean value that shows if account is active or expired."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Account creation date."
+          }
+        },
+        "additionalProperties": false
+      },
+      "PayoutStatusResponseDto": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string",
+            "nullable": true,
+            "description": "The payout transaction reference"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true,
+            "description": "Current status of the payout (e.g., \"pending\", \"successful\", \"failed\")"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "description": "Amount of the payout"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true,
+            "description": "Currency code of the payout"
+          },
+          "accountNumber": {
+            "type": "string",
+            "nullable": true,
+            "description": "Recipient phone number"
+          },
+          "accountName": {
+            "type": "string",
+            "nullable": true,
+            "description": "Recipient name"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "description": "Descriptive message about the payout status"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PayoutStatusResponseDtoBaseResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/PayoutStatusResponseDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SimulatePayoutNotificationRequestDto": {
+        "required": [
+          "isSuccess",
+          "reference"
+        ],
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string",
+            "description": "The transaction reference of the payout to simulate"
+          },
+          "isSuccess": {
+            "type": "boolean",
+            "description": "Set to true to simulate a successful payout, false to simulate a failure"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "description": "Optional message describing the simulated outcome (e.g., \"Insufficient funds at provider\")"
+          }
+        },
+        "additionalProperties": false
+      }
     },
-
+    "securitySchemes": {
+      "AccessAuth": {
+        "name": "X-Access-Key",
+        "in": "header",
+        "type": "apiKey",
+        "description": "Access key from Dashboard"
+      },
+      "SignatureAuth": {
+        "name": "X-Access-Signature",
+        "in": "header",
+        "type": "apiKey",
+        "description": "HMAC-SHA256 signature (hex lowercase)"
+      },
+      "TimestampAuth": {
+        "name": "X-Access-Ts",
+        "in": "header",
+        "type": "apiKey",
+        "description": "Unix timestamp in seconds (UTC) as a string"
+      }
+    }
+  },
   "security": [
     {
       "AccessAuth": [],
@@ -2263,6 +2511,4 @@
       "TimestampAuth": []
     }
   ]
-
 }
-  

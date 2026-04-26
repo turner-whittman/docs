@@ -1,0 +1,122 @@
+---
+title: 'Payout Status'
+description: 'Check the status of a KES payout and simulate outcomes in sandbox'
+---
+
+# Payout Status
+
+After initiating a payout via [Single Transfer](/product/kes-payment/single-transfer), use the payout status endpoint to confirm the final outcome of the transaction.
+
+## Confirm Payout Status
+
+```bash Request
+curl --request GET \
+  --url 'https://adapter.cepta.co/api/v1/pay/payout-status?reference=sngTW201321082886170_788589' \
+  --header 'X-Access-Ts: <EPOCH Timestamp(seconds)>' \
+  --header 'X-Access-Key: <PUBLIC_KEY>' \
+  --header 'X-Access-Signature: <HMAC SHA256 signature>'
+```
+
+### Query Parameters
+
+<ParamField query="reference" type="string" required>
+  The transaction reference returned after initiating a payout.
+</ParamField>
+
+### Response
+
+```json Success Response
+{
+  "status": true,
+  "message": "Payout status retrieved successfully",
+  "data": {
+    "reference": "sngTW201321082886170_788589",
+    "status": "successful",
+    "amount": 1000.00,
+    "currency": "KES",
+    "accountNumber": "254712345678",
+    "accountName": "Jane Wanjiku",
+    "message": "Transfer completed successfully"
+  }
+}
+```
+
+### Response Fields
+
+<ResponseField name="status" type="boolean">
+  `true` if the request was processed successfully.
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  Contains payout status details.
+  <Expandable title="data" defaultOpen="true">
+    <ResponseField name="reference" type="string">
+      The payout transaction reference.
+    </ResponseField>
+    <ResponseField name="status" type="string">
+      Current status of the payout: `"pending"`, `"successful"`, or `"failed"`.
+    </ResponseField>
+    <ResponseField name="amount" type="number">
+      Amount of the payout in KES.
+    </ResponseField>
+    <ResponseField name="currency" type="string">
+      Currency code (`"KES"`).
+    </ResponseField>
+    <ResponseField name="accountNumber" type="string">
+      Recipient phone number.
+    </ResponseField>
+    <ResponseField name="accountName" type="string">
+      Recipient name.
+    </ResponseField>
+    <ResponseField name="message" type="string">
+      Descriptive message about the payout outcome.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+---
+
+## Simulate Payout Notification (Sandbox Only)
+
+<Warning>
+  This endpoint is available in **sandbox mode only**. Do not use it in production.
+</Warning>
+
+In sandbox, payout notifications are not sent automatically. Use this endpoint to simulate the outcome of a payout and trigger your webhook handler.
+
+```bash Request
+curl --request POST \
+  --url https://adapter.cepta.co/api/v1/pay/simulate-payout-notification \
+  --header 'X-Access-Ts: <EPOCH Timestamp(seconds)>' \
+  --header 'X-Access-Key: <PUBLIC_KEY>' \
+  --header 'X-Access-Signature: <HMAC SHA256 signature>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "reference": "sngTW201321082886170_557122",
+    "isSuccess": true,
+    "message": "Insufficient funds at provider"
+  }'
+```
+
+### Request Parameters
+
+<ParamField body="reference" type="string" required>
+  The transaction reference of the payout to simulate.
+</ParamField>
+
+<ParamField body="isSuccess" type="boolean" required>
+  Set to `true` to simulate a successful payout, `false` to simulate a failure.
+</ParamField>
+
+<ParamField body="message" type="string">
+  Optional message describing the simulated outcome (e.g., `"Insufficient funds at provider"`).
+</ParamField>
+
+### Response
+
+```json Success Response
+{
+  "status": true,
+  "message": "Payout notification simulated successfully"
+}
+```
